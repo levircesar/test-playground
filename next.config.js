@@ -16,6 +16,33 @@ const nextConfig = {
   // Headers for better SEO and security
   async headers() {
     return [
+      // Headers for embed routes - allow iframe embedding
+      {
+        source: '/embeds/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          // Evite usar DENY. SAMEORIGIN permite iframes do mesmo domínio.
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          // Em CSP, use frame-ancestors para whitelistar quem pode embeber.
+          {
+            key: 'Content-Security-Policy',
+            value:
+              "frame-ancestors 'self' https://test-playground-theta.vercel.app https://*.vercel.app http://localhost:3000; default-src 'self';"
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
+          },
+        ],
+      },
+      // Headers for all other routes - maintain security
       {
         source: '/(.*)',
         headers: [
