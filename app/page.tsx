@@ -31,6 +31,7 @@ export default function LandingPage() {
   const { locale } = useLocale();
   const t = getTranslations(locale);
   const [isMobile, setIsMobile] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -47,10 +48,14 @@ export default function LandingPage() {
     return () => window.removeEventListener('resize', checkIsMobile);
   }, []);
 
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Playwright Playground",
+    "name": "Test Playground",
     "description": t.home.description,
     "url": "https://playwright-playground.vercel.app/",
     "potentialAction": {
@@ -60,7 +65,7 @@ export default function LandingPage() {
     },
     "mainEntity": {
       "@type": "EducationalOrganization",
-      "name": "Playwright Playground",
+      "name": "Test Playground",
       "description": t.home.description,
       "url": "https://playwright-playground.vercel.app/",
       "founder": {
@@ -72,7 +77,7 @@ export default function LandingPage() {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "BRL",
-        "description": "Plataforma 100% gratuita para aprendizado de automação de testes"
+        "description": "Plataforma 100% gratuita para aprendizado de testes web e API"
       }
     }
   };
@@ -195,7 +200,7 @@ export default function LandingPage() {
             <Col xs={24} sm={8}>
               <Statistic
                 title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t.home.stats.tools}</span>}
-                value="Playwright + Cypress"
+                value="Web + API"
                 valueStyle={{ color: '#fff', fontSize: '1.2rem' }}
                 prefix={<ThunderboltOutlined />}
                 data-testid="pp:landing|stat|ferramentas"
@@ -204,7 +209,7 @@ export default function LandingPage() {
             <Col xs={24} sm={8}>
               <Statistic
                 title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t.home.stats.levels}</span>}
-                value={locale === 'pt-BR' ? 'Fácil → Difícil' : locale === 'en-US' ? 'Easy → Hard' : 'Facile → Difficile'}
+                value={isHydrated ? (locale === 'pt-BR' ? 'Fácil → Difícil' : locale === 'en-US' ? 'Easy → Hard' : 'Facile → Difficile') : 'Fácil → Difícil'}
                 valueStyle={{ color: '#fff', fontSize: '1.2rem' }}
                 prefix={<StarOutlined />}
                 data-testid="pp:landing|stat|niveis"

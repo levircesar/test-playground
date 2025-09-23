@@ -13,7 +13,7 @@ const { Title, Paragraph } = Typography;
 export default function DesafiosPage() {
   const { locale } = useLocale();
   const t = getTranslations(locale);
-  const challenges = getChallenges();
+  const challenges = getChallenges(locale);
 
   const structuredData = {
     "@context": "https://schema.org",

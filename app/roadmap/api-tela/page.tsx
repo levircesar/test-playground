@@ -26,6 +26,8 @@ import XPathTester from '@/components/XPathTester';
 import BackButton from '@/components/BackButton';
 import RoadmapChallengesButton from '@/components/RoadmapChallengesButton';
 import { getJSON, setJSON, STORAGE_KEYS } from '@/lib/storage';
+import { useLocale } from '@/lib/locale-context';
+import { getTranslations } from '@/lib/translations';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -44,6 +46,8 @@ interface ApiResponse {
 }
 
 export default function ApiTelaPage() {
+  const { locale } = useLocale();
+  const t = getTranslations(locale);
   const [newTodo, setNewTodo] = useState('');
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState(false);
@@ -183,13 +187,13 @@ export default function ApiTelaPage() {
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <BackButton href="/desafios" testId="pp:api-tela|btn|voltar" />
-          <RoadmapChallengesButton level="API+Tela" testId="pp:api-tela|btn|desafios" />
+          <RoadmapChallengesButton level={t.roadmap.levels.apiScreen} testId="pp:api-tela|btn|desafios" />
         </div>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <Title level={1}>API + Tela - App de TODOs</Title>
+          <Title level={1}>{t.roadmap.apiScreen.title} - App de TODOs</Title>
           <Paragraph style={{ fontSize: '18px', color: '#666' }}>
-            Aplicação completa que integra interface com API, com fallback para localStorage.
+            {t.roadmap.apiScreen.description}
           </Paragraph>
         </div>
 
@@ -202,9 +206,9 @@ export default function ApiTelaPage() {
             <Col xs={24} sm={12}>
               <Space>
                 <Tag color={apiStatus === 'online' ? 'green' : 'red'} data-testid="pp:api-tela|tag|status">
-                  {apiStatus === 'online' ? 'Online' : 'Offline'}
+                  {apiStatus === 'online' ? t.roadmap.apiScreen.online : t.roadmap.apiScreen.offline}
                 </Tag>
-                <Text strong>Status da API</Text>
+                <Text strong>{t.roadmap.apiScreen.apiStatus}</Text>
               </Space>
             </Col>
             <Col xs={24} sm={12}>
@@ -216,11 +220,11 @@ export default function ApiTelaPage() {
                   data-testid="pp:api-tela|btn|sync"
                   size="small"
                 >
-                  Sincronizar
+                  {t.roadmap.apiScreen.sync}
                 </Button>
                 {lastSync && (
                   <Text type="secondary" style={{ fontSize: '12px' }}>
-                    Última sync: {lastSync}
+                    {t.roadmap.apiScreen.lastSync}: {lastSync}
                   </Text>
                 )}
               </Space>

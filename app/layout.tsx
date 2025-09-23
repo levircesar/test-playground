@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#667eea" />
         
         {/* SEO Básico */}
-        <title>Playwright Playground - Aprenda Automação de Testes de Forma Prática</title>
+        <title>Test Playground - Aprenda Automação de Testes de Forma Prática</title>
         <meta name="description" content="Plataforma interativa para aprender automação de testes web com Playwright através de desafios práticos e exemplos reais. 100% gratuito para a comunidade QA." />
         <meta name="keywords" content="playwright, automação de testes, testes web, QA, cypress, selenium, testes e2e, testes de API, qualidade de software" />
         <meta name="author" content="Levir Lemos" />
@@ -26,16 +26,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://playwright-playground.vercel.app/" />
-        <meta property="og:title" content="Playwright Playground - Aprenda Automação de Testes" />
+        <meta property="og:title" content="Test Playground - Aprenda Automação de Testes" />
         <meta property="og:description" content="Plataforma interativa para aprender automação de testes web com Playwright através de desafios práticos e exemplos reais." />
         <meta property="og:image" content="https://playwright-playground.vercel.app/og-image.png" />
-        <meta property="og:site_name" content="Playwright Playground" />
+        <meta property="og:site_name" content="Test Playground" />
         <meta property="og:locale" content="pt_BR" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://playwright-playground.vercel.app/" />
-        <meta property="twitter:title" content="Playwright Playground - Aprenda Automação de Testes" />
+        <meta property="twitter:title" content="Test Playground - Aprenda Automação de Testes" />
         <meta property="twitter:description" content="Plataforma interativa para aprender automação de testes web com Playwright através de desafios práticos e exemplos reais." />
         <meta property="twitter:image" content="https://playwright-playground.vercel.app/og-image.png" />
         <meta property="twitter:creator" content="@levircesar" />
@@ -57,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "EducationalOrganization",
-              "name": "Playwright Playground",
+              "name": "Test Playground",
               "description": "Plataforma interativa para aprender automação de testes web com Playwright através de desafios práticos e exemplos reais.",
               "url": "https://playwright-playground.vercel.app/",
               "logo": "https://playwright-playground.vercel.app/logo.png",

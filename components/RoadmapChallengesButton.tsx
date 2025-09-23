@@ -8,7 +8,7 @@ import { getChallenges, Challenge } from '@/lib/challenges';
 import ChallengeTable from './ChallengeTable';
 
 interface RoadmapChallengesButtonProps {
-  level: 'Fácil' | 'Médio' | 'Difícil' | 'API' | 'API+Tela';
+  level: string;
   testId?: string;
 }
 
@@ -17,8 +17,29 @@ export default function RoadmapChallengesButton({ level, testId }: RoadmapChalle
   const t = getTranslations(locale);
   const [modalVisible, setModalVisible] = useState(false);
   
-  const allChallenges = getChallenges();
-  const filteredChallenges = allChallenges.filter(challenge => challenge.nivel === level);
+  // Mapeamento entre níveis traduzidos e níveis originais do JSON
+  const levelMapping: Record<string, string> = {
+    // PT-BR
+    'Fácil': 'Fácil',
+    'Médio': 'Médio', 
+    'Difícil': 'Difícil',
+    'API': 'API',
+    'API+Tela': 'API+Tela',
+    // EN-US
+    'Easy': 'Fácil',
+    'Medium': 'Médio',
+    'Hard': 'Difícil', 
+    'API+Screen': 'API+Tela',
+    // FR-FR
+    'Facile': 'Fácil',
+    'Moyen': 'Médio',
+    'Difficile': 'Difícil',
+    'API+Écran': 'API+Tela'
+  };
+  
+  const allChallenges = getChallenges(locale);
+  const originalLevel = levelMapping[level] || level;
+  const filteredChallenges = allChallenges.filter(challenge => challenge.nivel === originalLevel);
 
   const showModal = () => {
     setModalVisible(true);

@@ -102,12 +102,27 @@ export interface Translations {
     noChallenges: string;
     filterBy: string;
     allLevels: string;
+    // Challenge descriptions
+    challengeList?: {
+      [key: string]: {
+        titulo: string;
+        descricao: string;
+        resultadoEsperado: string;
+      };
+    };
   };
   
   // Roadmap pages
   roadmap: {
     challenges: string;
     viewChallenges: string;
+    levels: {
+      easy: string;
+      medium: string;
+      hard: string;
+      api: string;
+      apiScreen: string;
+    };
     easy: {
       title: string;
       subtitle: string;
@@ -117,11 +132,21 @@ export interface Translations {
       title: string;
       subtitle: string;
       description: string;
+      uploadSimple: string;
+      uploadMultiple: string;
+      validations: string;
+      challengesToPractice: string;
+      csvExample: string;
     };
     hard: {
       title: string;
       subtitle: string;
       description: string;
+      iframeCommunication: string;
+      nestedIframes: string;
+      formInIframe: string;
+      postMessage: string;
+      challengesToPractice: string;
     };
     api: {
       title: string;
@@ -132,6 +157,18 @@ export interface Translations {
       title: string;
       subtitle: string;
       description: string;
+      apiStatus: string;
+      online: string;
+      offline: string;
+      sync: string;
+      lastSync: string;
+      statistics: string;
+      total: string;
+      completed: string;
+      pending: string;
+      addTodo: string;
+      clearCompleted: string;
+      challengesToPractice: string;
     };
   };
   
@@ -147,6 +184,40 @@ export interface Translations {
       subtitle: string;
       description: string;
     };
+  };
+
+  // API Docs page
+  apiDocs: {
+    title: string;
+    subtitle: string;
+    description: string;
+    aboutApis: string;
+    aboutApisDesc: string;
+    dataStructures: string;
+    suggestedChallenges: string;
+    endpoints: string;
+    method: string;
+    endpoint: string;
+    title_: string;
+    tags: string;
+    actions: string;
+    test: string;
+    details: string;
+    examples: string;
+    request: string;
+    response: string;
+    copy: string;
+    makeCall: string;
+    callMade: string;
+    callError: string;
+    users: string;
+    usersDesc: string;
+    products: string;
+    productsDesc: string;
+    analytics: string;
+    analyticsDesc: string;
+    challenges: string[];
+    viewApis: string;
   };
   
   // Donation page
@@ -242,7 +313,7 @@ export interface Translations {
 export const translations: Record<string, Translations> = {
   'pt-BR': {
     header: {
-      title: 'Playground',
+      title: 'Test Playground',
       start: 'Começar',
       challenges: 'Desafios',
       support: 'Apoiar',
@@ -254,18 +325,18 @@ export const translations: Record<string, Translations> = {
       community: 'comunidade',
     },
     home: {
-      title: 'Playwright Playground',
-      subtitle: 'Aprenda Playwright de forma prática e divertida',
-      description: 'Uma plataforma interativa para aprender automação de testes web com Playwright através de desafios práticos e exemplos reais.',
+      title: 'Test Playground',
+      subtitle: 'Ambiente de testes para aprendizado web e API',
+      description: 'Uma plataforma interativa para aprender automação de testes web e API através de desafios práticos, com dicas de Playwright e Cypress.',
       startButton: 'Começar Agora',
       challengesButton: 'Ver Desafios',
       freeBadge: '100% Gratuito',
       howItWorks: 'Como Funciona',
-      howItWorksDesc: 'Aprenda através de cenários práticos com Playwright, Cypress e outras ferramentas de automação',
+      howItWorksDesc: 'Aprenda através de cenários práticos de testes web e API, com dicas e exemplos de Playwright, Cypress e outras ferramentas',
       forWho: 'Para Quem É?',
-      forWhoDesc: 'Desenvolvido para todos os níveis de conhecimento em automação de testes com Playwright, Cypress e mais',
+      forWhoDesc: 'Desenvolvido para todos os níveis de conhecimento em automação de testes web e API, com foco em Playwright e Cypress',
       readyToStart: 'Pronto para Começar?',
-      readyToStartDesc: 'Junte-se a milhares de desenvolvedores que já dominam automação de testes com Playwright, Cypress e outras ferramentas',
+      readyToStartDesc: 'Junte-se a milhares de desenvolvedores que já dominam testes web e API com Playwright, Cypress e outras ferramentas',
       aboutCreator: 'Sobre o Criador',
       aboutCreatorDesc: 'Conheça quem desenvolveu esta plataforma para a comunidade de QA',
       stats: {
@@ -274,20 +345,20 @@ export const translations: Record<string, Translations> = {
         levels: 'Níveis',
       },
       features: {
-        playwright: 'Playwright',
-        playwrightDesc: 'Pratique com botões, formulários, tabelas usando a ferramenta mais moderna para automação de testes.',
-        cypress: 'Cypress',
-        cypressDesc: 'Teste uploads, validações de arquivo e cenários complexos com a ferramenta mais popular do mercado.',
-        e2e: 'E2E & APIs',
-        e2eDesc: 'Domine iframes, comunicação entre elementos e testes de API completos com ambas as ferramentas.',
+        playwright: 'Testes Web',
+        playwrightDesc: 'Pratique testes de interface com botões, formulários e tabelas usando Playwright e Cypress.',
+        cypress: 'Testes de API',
+        cypressDesc: 'Teste APIs REST, validações de dados e cenários de integração com exemplos práticos.',
+        e2e: 'Ambiente Completo',
+        e2eDesc: 'Domine testes end-to-end, iframes e comunicação entre elementos com ambas as ferramentas.',
       },
       audience: {
         qaBeginner: 'QA Iniciante',
-        qaBeginnerDesc: 'Aprenda os conceitos básicos de automação',
+        qaBeginnerDesc: 'Aprenda os conceitos básicos de testes web e API',
         automation: 'Automação',
-        automationDesc: 'Pratique cenários complexos de teste',
+        automationDesc: 'Pratique cenários complexos de teste com Playwright e Cypress',
         apiTesting: 'Testes de API',
-        apiTestingDesc: 'Integre testes de API com interface',
+        apiTestingDesc: 'Integre testes de API com testes de interface',
         e2e: 'E2E',
         e2eDesc: 'Fluxos completos de ponta a ponta',
       },
@@ -335,10 +406,139 @@ export const translations: Record<string, Translations> = {
       noChallenges: 'Nenhum desafio encontrado',
       filterBy: 'Filtrar por',
       allLevels: 'Todos os níveis',
+      challengeList: {
+        '1': {
+          titulo: 'Clicar e validar contador',
+          descricao: 'Clique no botão de incrementar e valide se o contador aumenta corretamente',
+          resultadoEsperado: 'O contador deve incrementar de 0 para 1, 2, 3... a cada clique no botão'
+        },
+        '2': {
+          titulo: 'Interagir com modal',
+          descricao: 'Abra um modal, interaja com seus elementos e feche-o',
+          resultadoEsperado: 'O modal deve abrir, permitir interação e fechar corretamente'
+        },
+        '3': {
+          titulo: 'Navegar entre tabs',
+          descricao: 'Navegue entre as diferentes abas e valide o conteúdo de cada uma',
+          resultadoEsperado: 'Cada aba deve exibir seu conteúdo específico quando selecionada'
+        },
+        '4': {
+          titulo: 'Expandir e contrair painéis',
+          descricao: 'Expanda e contraia os painéis do componente Collapse',
+          resultadoEsperado: 'Os painéis devem expandir e contrair corretamente ao clicar nos cabeçalhos'
+        },
+        '5': {
+          titulo: 'Ordenar tabela por colunas',
+          descricao: 'Ordene a tabela clicando nos cabeçalhos das colunas',
+          resultadoEsperado: 'A tabela deve ser ordenada corretamente por nome e idade'
+        },
+        '6': {
+          titulo: 'Upload CSV e pré-visualização',
+          descricao: 'Faça upload de um arquivo CSV e valide a pré-visualização dos dados',
+          resultadoEsperado: 'O arquivo deve ser carregado e os dados devem ser exibidos em uma tabela de pré-visualização'
+        },
+        '7': {
+          titulo: 'Upload com validação de tipo',
+          descricao: 'Tente fazer upload de um arquivo não-CSV e valide a mensagem de erro',
+          resultadoEsperado: 'Deve aparecer uma mensagem de erro informando que apenas arquivos CSV são permitidos'
+        },
+        '8': {
+          titulo: 'Upload com validação de tamanho',
+          descricao: 'Tente fazer upload de um arquivo maior que 5MB e valide a validação',
+          resultadoEsperado: 'Deve aparecer uma mensagem de erro informando que o arquivo deve ser menor que 5MB'
+        },
+        '9': {
+          titulo: 'Drag and Drop de arquivo',
+          descricao: 'Use a área de drag and drop para fazer upload de um arquivo CSV',
+          resultadoEsperado: 'O arquivo deve ser carregado corretamente quando arrastado para a área'
+        },
+        '10': {
+          titulo: 'Download de CSV processado',
+          descricao: 'Após fazer upload de um CSV, baixe o arquivo processado',
+          resultadoEsperado: 'O arquivo CSV processado deve ser baixado com o nome \'processed_data.csv\''
+        },
+        '11': {
+          titulo: 'Formulário dentro de iframe',
+          descricao: 'Preencha e envie o formulário que está dentro do iframe',
+          resultadoEsperado: 'O formulário deve ser preenchido e enviado corretamente, aparecendo no histórico'
+        },
+        '12': {
+          titulo: 'Tabela dentro de iframe',
+          descricao: 'Adicione, edite ou remova produtos na tabela dentro do iframe',
+          resultadoEsperado: 'As operações na tabela devem funcionar corretamente e aparecer no histórico'
+        },
+        '13': {
+          titulo: 'Comunicação com iframe via PostMessage',
+          descricao: 'Use os botões de controle para enviar mensagens aos iframes',
+          resultadoEsperado: 'As mensagens devem ser enviadas e recebidas corretamente entre pai e iframe'
+        },
+        '14': {
+          titulo: 'Iframe aninhado',
+          descricao: 'Interaja com o iframe aninhado (iframe dentro de iframe)',
+          resultadoEsperado: 'Deve ser possível interagir com o conteúdo do iframe aninhado'
+        },
+        '15': {
+          titulo: 'GET /api/ping',
+          descricao: 'Faça uma requisição GET para /api/ping e valide a resposta',
+          resultadoEsperado: 'A API deve retornar status OK e timestamp do servidor'
+        },
+        '16': {
+          titulo: 'POST /api/echo com texto',
+          descricao: 'Envie um texto simples via POST para /api/echo',
+          resultadoEsperado: 'A API deve retornar o texto enviado junto com timestamp do servidor'
+        },
+        '17': {
+          titulo: 'POST /api/echo com JSON',
+          descricao: 'Envie um objeto JSON via POST para /api/echo',
+          resultadoEsperado: 'A API deve retornar o objeto JSON enviado junto com timestamp do servidor'
+        },
+        '18': {
+          titulo: 'Histórico de chamadas API',
+          descricao: 'Verifique se as chamadas de API são salvas no histórico do localStorage',
+          resultadoEsperado: 'Todas as chamadas devem aparecer no histórico e persistir após recarregar a página'
+        },
+        '19': {
+          titulo: 'Criar TODO via interface',
+          descricao: 'Crie um novo TODO usando o formulário da interface',
+          resultadoEsperado: 'O TODO deve aparecer na lista e ser salvo no localStorage'
+        },
+        '20': {
+          titulo: 'Marcar TODO como concluído',
+          descricao: 'Use o checkbox para marcar um TODO como concluído',
+          resultadoEsperado: 'O TODO deve ser marcado como concluído e atualizar as estatísticas'
+        },
+        '21': {
+          titulo: 'Excluir TODO',
+          descricao: 'Exclua um TODO usando o botão de exclusão',
+          resultadoEsperado: 'O TODO deve ser removido da lista e das estatísticas'
+        },
+        '22': {
+          titulo: 'Sincronizar com API',
+          descricao: 'Use o botão sincronizar para atualizar os dados com a API',
+          resultadoEsperado: 'Os dados devem ser sincronizados com a API e o status deve mostrar \'Online\''
+        },
+        '23': {
+          titulo: 'Limpar TODOs concluídos',
+          descricao: 'Use o botão \'Limpar Concluídos\' para remover todos os TODOs marcados',
+          resultadoEsperado: 'Apenas os TODOs pendentes devem permanecer na lista'
+        },
+        '24': {
+          titulo: 'Persistência de dados',
+          descricao: 'Recarregue a página e verifique se os TODOs persistem',
+          resultadoEsperado: 'Todos os TODOs devem continuar na lista após recarregar a página'
+        }
+      }
     },
     roadmap: {
       challenges: 'Desafios',
       viewChallenges: 'Ver Desafios',
+      levels: {
+        easy: 'Fácil',
+        medium: 'Médio',
+        hard: 'Difícil',
+        api: 'API',
+        apiScreen: 'API+Tela',
+      },
       easy: {
         title: 'Desafios Fáceis',
         subtitle: 'Comece com conceitos básicos de Playwright',
@@ -348,11 +548,21 @@ export const translations: Record<string, Translations> = {
         title: 'Desafios Médios',
         subtitle: 'Evolua para cenários mais complexos',
         description: 'Desafios intermediários que testam conhecimentos mais avançados de automação.',
+        uploadSimple: 'Upload Simples',
+        uploadMultiple: 'Upload Múltiplo',
+        validations: 'Validações',
+        challengesToPractice: 'Desafios para Praticar',
+        csvExample: 'Exemplo de CSV para Teste',
       },
       hard: {
         title: 'Desafios Difíceis',
         subtitle: 'Domine cenários avançados e complexos',
         description: 'Desafios para especialistas que querem testar conhecimentos avançados.',
+        iframeCommunication: 'Comunicação com Iframe',
+        nestedIframes: 'Iframes Aninhados',
+        formInIframe: 'Formulário em Iframe',
+        postMessage: 'PostMessage',
+        challengesToPractice: 'Desafios para Praticar',
       },
       api: {
         title: 'Testes de API',
@@ -363,6 +573,18 @@ export const translations: Record<string, Translations> = {
         title: 'API + Tela',
         subtitle: 'Integre testes de API com testes de interface',
         description: 'Desafios que combinam testes de API com testes de interface para cenários completos.',
+        apiStatus: 'Status da API',
+        online: 'Online',
+        offline: 'Offline',
+        sync: 'Sincronizar',
+        lastSync: 'Última sync',
+        statistics: 'Estatísticas',
+        total: 'Total',
+        completed: 'Concluídos',
+        pending: 'Pendentes',
+        addTodo: 'Adicionar TODO',
+        clearCompleted: 'Limpar Concluídos',
+        challengesToPractice: 'Desafios para Praticar',
       },
     },
     embeds: {
@@ -376,6 +598,45 @@ export const translations: Record<string, Translations> = {
         subtitle: 'Teste manipulação de tabelas',
         description: 'Tabela interativa para testar ordenação, filtros e paginação.',
       },
+    },
+    apiDocs: {
+      title: 'Documentação da API',
+      subtitle: 'Documentação completa das APIs disponíveis no Test Playground',
+      description: 'Documentação completa das APIs disponíveis no Test Playground. Teste os endpoints diretamente e veja exemplos de uso.',
+      aboutApis: 'Sobre as APIs',
+      aboutApisDesc: 'Estas APIs foram criadas para demonstração e prática de testes automatizados. Elas simulam diferentes estruturas de dados e cenários comuns em aplicações reais.',
+      dataStructures: 'Estruturas de Dados',
+      suggestedChallenges: 'Desafios Sugeridos',
+      endpoints: 'Endpoints Disponíveis',
+      method: 'Método',
+      endpoint: 'Endpoint',
+      title_: 'Título',
+      tags: 'Tags',
+      actions: 'Ações',
+      test: 'Testar',
+      details: 'Detalhes',
+      examples: 'Exemplos',
+      request: 'Request:',
+      response: 'Response:',
+      copy: 'Copiar',
+      makeCall: 'Fazer Chamada',
+      callMade: 'Chamada realizada com sucesso!',
+      callError: 'Erro na chamada da API',
+      users: 'Usuários',
+      usersDesc: 'Objetos complexos com perfis e habilidades',
+      products: 'Produtos',
+      productsDesc: 'Catálogo com inventário e avaliações',
+      analytics: 'Analytics',
+      analyticsDesc: 'Métricas e dados de performance',
+      challenges: [
+        'Teste todos os endpoints GET',
+        'Valide estruturas de resposta',
+        'Teste filtros e parâmetros',
+        'Valide criação de dados via POST',
+        'Teste cenários de erro',
+        'Verifique códigos de status HTTP'
+      ],
+      viewApis: 'Ver APIs'
     },
     donation: {
       title: 'Apoie o Projeto',
@@ -463,7 +724,7 @@ export const translations: Record<string, Translations> = {
   },
   'en-US': {
     header: {
-      title: 'Playground',
+      title: 'Test Playground',
       start: 'Start',
       challenges: 'Challenges',
       support: 'Support',
@@ -475,18 +736,18 @@ export const translations: Record<string, Translations> = {
       community: 'community',
     },
     home: {
-      title: 'Playwright Playground',
-      subtitle: 'Learn Playwright in a practical and fun way',
-      description: 'An interactive platform to learn web test automation with Playwright through practical challenges and real examples.',
+      title: 'Test Playground',
+      subtitle: 'Testing environment for web and API learning',
+      description: 'An interactive platform to learn web and API test automation through practical challenges, with tips for Playwright and Cypress.',
       startButton: 'Start Now',
       challengesButton: 'View Challenges',
       freeBadge: '100% Free',
       howItWorks: 'How It Works',
-      howItWorksDesc: 'Learn through practical scenarios with Playwright, Cypress and other automation tools',
+      howItWorksDesc: 'Learn through practical web and API testing scenarios, with tips and examples for Playwright, Cypress and other tools',
       forWho: 'Who Is It For?',
-      forWhoDesc: 'Developed for all levels of knowledge in test automation with Playwright, Cypress and more',
+      forWhoDesc: 'Developed for all levels of knowledge in web and API test automation, focusing on Playwright and Cypress',
       readyToStart: 'Ready to Start?',
-      readyToStartDesc: 'Join thousands of developers who already master test automation with Playwright, Cypress and other tools',
+      readyToStartDesc: 'Join thousands of developers who already master web and API testing with Playwright, Cypress and other tools',
       aboutCreator: 'About the Creator',
       aboutCreatorDesc: 'Meet who developed this platform for the QA community',
       stats: {
@@ -495,20 +756,20 @@ export const translations: Record<string, Translations> = {
         levels: 'Levels',
       },
       features: {
-        playwright: 'Playwright',
-        playwrightDesc: 'Practice with buttons, forms, tables using the most modern tool for test automation.',
-        cypress: 'Cypress',
-        cypressDesc: 'Test uploads, file validations and complex scenarios with the most popular tool in the market.',
-        e2e: 'E2E & APIs',
-        e2eDesc: 'Master iframes, communication between elements and complete API tests with both tools.',
+        playwright: 'Web Testing',
+        playwrightDesc: 'Practice interface testing with buttons, forms and tables using Playwright and Cypress.',
+        cypress: 'API Testing',
+        cypressDesc: 'Test REST APIs, data validation and integration scenarios with practical examples.',
+        e2e: 'Complete Environment',
+        e2eDesc: 'Master end-to-end testing, iframes and element communication with both tools.',
       },
       audience: {
         qaBeginner: 'QA Beginner',
-        qaBeginnerDesc: 'Learn the basics of automation',
+        qaBeginnerDesc: 'Learn the basics of web and API testing',
         automation: 'Automation',
-        automationDesc: 'Practice complex test scenarios',
+        automationDesc: 'Practice complex test scenarios with Playwright and Cypress',
         apiTesting: 'API Testing',
-        apiTestingDesc: 'Integrate API tests with interface',
+        apiTestingDesc: 'Integrate API tests with interface tests',
         e2e: 'E2E',
         e2eDesc: 'Complete end-to-end flows',
       },
@@ -556,10 +817,59 @@ export const translations: Record<string, Translations> = {
       noChallenges: 'No challenges found',
       filterBy: 'Filter by',
       allLevels: 'All levels',
+      challengeList: {
+        '1': {
+          titulo: 'Click and validate counter',
+          descricao: 'Click the increment button and validate if the counter increases correctly',
+          resultadoEsperado: 'The counter should increment from 0 to 1, 2, 3... with each button click'
+        },
+        '2': {
+          titulo: 'Interact with modal',
+          descricao: 'Open a modal, interact with its elements and close it',
+          resultadoEsperado: 'The modal should open, allow interaction and close correctly'
+        },
+        '3': {
+          titulo: 'Navigate between tabs',
+          descricao: 'Navigate between different tabs and validate the content of each one',
+          resultadoEsperado: 'Each tab should display its specific content when selected'
+        },
+        '4': {
+          titulo: 'Expand and collapse panels',
+          descricao: 'Expand and collapse the Collapse component panels',
+          resultadoEsperado: 'The panels should expand and collapse correctly when clicking on headers'
+        },
+        '5': {
+          titulo: 'Sort table by columns',
+          descricao: 'Sort the table by clicking on column headers',
+          resultadoEsperado: 'The table should be sorted correctly by name and age'
+        },
+        '15': {
+          titulo: 'GET /api/ping',
+          descricao: 'Make a GET request to /api/ping and validate the response',
+          resultadoEsperado: 'The API should return OK status and server timestamp'
+        },
+        '16': {
+          titulo: 'POST /api/echo with text',
+          descricao: 'Send a simple text via POST to /api/echo',
+          resultadoEsperado: 'The API should return the sent text along with server timestamp'
+        },
+        '17': {
+          titulo: 'POST /api/echo with JSON',
+          descricao: 'Send a JSON object via POST to /api/echo',
+          resultadoEsperado: 'The API should return the sent JSON object along with server timestamp'
+        }
+      }
     },
     roadmap: {
       challenges: 'Challenges',
       viewChallenges: 'View Challenges',
+      levels: {
+        easy: 'Easy',
+        medium: 'Medium',
+        hard: 'Hard',
+        api: 'API',
+        apiScreen: 'API+Screen',
+      },
       easy: {
         title: 'Easy Challenges',
         subtitle: 'Start with basic Playwright concepts',
@@ -569,11 +879,21 @@ export const translations: Record<string, Translations> = {
         title: 'Medium Challenges',
         subtitle: 'Evolve to more complex scenarios',
         description: 'Intermediate challenges that test more advanced automation knowledge.',
+        uploadSimple: 'Simple Upload',
+        uploadMultiple: 'Multiple Upload',
+        validations: 'Validations',
+        challengesToPractice: 'Challenges to Practice',
+        csvExample: 'CSV Example for Testing',
       },
       hard: {
         title: 'Hard Challenges',
         subtitle: 'Master advanced and complex scenarios',
         description: 'Challenges for specialists who want to test advanced knowledge.',
+        iframeCommunication: 'Iframe Communication',
+        nestedIframes: 'Nested Iframes',
+        formInIframe: 'Form in Iframe',
+        postMessage: 'PostMessage',
+        challengesToPractice: 'Challenges to Practice',
       },
       api: {
         title: 'API Testing',
@@ -584,6 +904,18 @@ export const translations: Record<string, Translations> = {
         title: 'API + Screen',
         subtitle: 'Integrate API tests with interface tests',
         description: 'Challenges that combine API tests with interface tests for complete scenarios.',
+        apiStatus: 'API Status',
+        online: 'Online',
+        offline: 'Offline',
+        sync: 'Sync',
+        lastSync: 'Last sync',
+        statistics: 'Statistics',
+        total: 'Total',
+        completed: 'Completed',
+        pending: 'Pending',
+        addTodo: 'Add TODO',
+        clearCompleted: 'Clear Completed',
+        challengesToPractice: 'Challenges to Practice',
       },
     },
     embeds: {
@@ -597,6 +929,45 @@ export const translations: Record<string, Translations> = {
         subtitle: 'Test table manipulation',
         description: 'Interactive table to test sorting, filters and pagination.',
       },
+    },
+    apiDocs: {
+      title: 'API Documentation',
+      subtitle: 'Complete documentation of APIs available in Test Playground',
+      description: 'Complete documentation of APIs available in Test Playground. Test endpoints directly and see usage examples.',
+      aboutApis: 'About the APIs',
+      aboutApisDesc: 'These APIs were created for demonstration and automated testing practice. They simulate different data structures and common scenarios in real applications.',
+      dataStructures: 'Data Structures',
+      suggestedChallenges: 'Suggested Challenges',
+      endpoints: 'Available Endpoints',
+      method: 'Method',
+      endpoint: 'Endpoint',
+      title_: 'Title',
+      tags: 'Tags',
+      actions: 'Actions',
+      test: 'Test',
+      details: 'Details',
+      examples: 'Examples',
+      request: 'Request:',
+      response: 'Response:',
+      copy: 'Copy',
+      makeCall: 'Make Call',
+      callMade: 'API call made successfully!',
+      callError: 'Error in API call',
+      users: 'Users',
+      usersDesc: 'Complex objects with profiles and skills',
+      products: 'Products',
+      productsDesc: 'Catalog with inventory and ratings',
+      analytics: 'Analytics',
+      analyticsDesc: 'Metrics and performance data',
+      challenges: [
+        'Test all GET endpoints',
+        'Validate response structures',
+        'Test filters and parameters',
+        'Validate data creation via POST',
+        'Test error scenarios',
+        'Check HTTP status codes'
+      ],
+      viewApis: 'View APIs'
     },
     donation: {
       title: 'Support the Project',
@@ -684,7 +1055,7 @@ export const translations: Record<string, Translations> = {
   },
   'fr-FR': {
     header: {
-      title: 'Playground',
+      title: 'Test Playground',
       start: 'Commencer',
       challenges: 'Défis',
       support: 'Soutenir',
@@ -696,18 +1067,18 @@ export const translations: Record<string, Translations> = {
       community: 'communauté',
     },
     home: {
-      title: 'Playwright Playground',
-      subtitle: 'Apprenez Playwright de manière pratique et amusante',
-      description: 'Une plateforme interactive pour apprendre l\'automatisation des tests web avec Playwright à travers des défis pratiques et des exemples réels.',
+      title: 'Test Playground',
+      subtitle: 'Environnement de tests pour l\'apprentissage web et API',
+      description: 'Une plateforme interactive pour apprendre l\'automatisation des tests web et API à travers des défis pratiques, avec des conseils pour Playwright et Cypress.',
       startButton: 'Commencer Maintenant',
       challengesButton: 'Voir les Défis',
       freeBadge: '100% Gratuit',
       howItWorks: 'Comment ça Marche',
-      howItWorksDesc: 'Apprenez à travers des scénarios pratiques avec Playwright, Cypress et d\'autres outils d\'automatisation',
+      howItWorksDesc: 'Apprenez à travers des scénarios pratiques de tests web et API, avec des conseils et exemples pour Playwright, Cypress et d\'autres outils',
       forWho: 'Pour Qui?',
-      forWhoDesc: 'Développé pour tous les niveaux de connaissance en automatisation de tests avec Playwright, Cypress et plus',
+      forWhoDesc: 'Développé pour tous les niveaux de connaissance en automatisation de tests web et API, en se concentrant sur Playwright et Cypress',
       readyToStart: 'Prêt à Commencer?',
-      readyToStartDesc: 'Rejoignez des milliers de développeurs qui maîtrisent déjà l\'automatisation de tests avec Playwright, Cypress et d\'autres outils',
+      readyToStartDesc: 'Rejoignez des milliers de développeurs qui maîtrisent déjà les tests web et API avec Playwright, Cypress et d\'autres outils',
       aboutCreator: 'À Propos du Créateur',
       aboutCreatorDesc: 'Rencontrez qui a développé cette plateforme pour la communauté QA',
       stats: {
@@ -716,20 +1087,20 @@ export const translations: Record<string, Translations> = {
         levels: 'Niveaux',
       },
       features: {
-        playwright: 'Playwright',
-        playwrightDesc: 'Pratiquez avec des boutons, formulaires, tableaux en utilisant l\'outil le plus moderne pour l\'automatisation de tests.',
-        cypress: 'Cypress',
-        cypressDesc: 'Testez les téléchargements, validations de fichiers et scénarios complexes avec l\'outil le plus populaire du marché.',
-        e2e: 'E2E & APIs',
-        e2eDesc: 'Maîtrisez les iframes, la communication entre éléments et les tests d\'API complets avec les deux outils.',
+        playwright: 'Tests Web',
+        playwrightDesc: 'Pratiquez les tests d\'interface avec des boutons, formulaires et tableaux en utilisant Playwright et Cypress.',
+        cypress: 'Tests d\'API',
+        cypressDesc: 'Testez les APIs REST, validations de données et scénarios d\'intégration avec des exemples pratiques.',
+        e2e: 'Environnement Complet',
+        e2eDesc: 'Maîtrisez les tests end-to-end, iframes et communication entre éléments avec les deux outils.',
       },
       audience: {
         qaBeginner: 'QA Débutant',
-        qaBeginnerDesc: 'Apprenez les bases de l\'automatisation',
+        qaBeginnerDesc: 'Apprenez les bases des tests web et API',
         automation: 'Automatisation',
-        automationDesc: 'Pratiquez des scénarios de test complexes',
+        automationDesc: 'Pratiquez des scénarios de test complexes avec Playwright et Cypress',
         apiTesting: 'Tests d\'API',
-        apiTestingDesc: 'Intégrez les tests d\'API avec l\'interface',
+        apiTestingDesc: 'Intégrez les tests d\'API avec les tests d\'interface',
         e2e: 'E2E',
         e2eDesc: 'Flux complets de bout en bout',
       },
@@ -777,10 +1148,44 @@ export const translations: Record<string, Translations> = {
       noChallenges: 'Aucun défi trouvé',
       filterBy: 'Filtrer par',
       allLevels: 'Tous les niveaux',
+      challengeList: {
+        '1': {
+          titulo: 'Cliquer et valider le compteur',
+          descricao: 'Cliquez sur le bouton d\'incrémentation et validez si le compteur augmente correctement',
+          resultadoEsperado: 'Le compteur devrait s\'incrémenter de 0 à 1, 2, 3... à chaque clic sur le bouton'
+        },
+        '2': {
+          titulo: 'Interagir avec le modal',
+          descricao: 'Ouvrez un modal, interagissez avec ses éléments et fermez-le',
+          resultadoEsperado: 'Le modal devrait s\'ouvrir, permettre l\'interaction et se fermer correctement'
+        },
+        '3': {
+          titulo: 'Naviguer entre les onglets',
+          descricao: 'Naviguez entre les différents onglets et validez le contenu de chacun',
+          resultadoEsperado: 'Chaque onglet devrait afficher son contenu spécifique lorsqu\'il est sélectionné'
+        },
+        '15': {
+          titulo: 'GET /api/ping',
+          descricao: 'Faites une requête GET vers /api/ping et validez la réponse',
+          resultadoEsperado: 'L\'API devrait retourner un statut OK et le timestamp du serveur'
+        },
+        '16': {
+          titulo: 'POST /api/echo avec texte',
+          descricao: 'Envoyez un texte simple via POST vers /api/echo',
+          resultadoEsperado: 'L\'API devrait retourner le texte envoyé avec le timestamp du serveur'
+        }
+      }
     },
     roadmap: {
       challenges: 'Défis',
       viewChallenges: 'Voir les Défis',
+      levels: {
+        easy: 'Facile',
+        medium: 'Moyen',
+        hard: 'Difficile',
+        api: 'API',
+        apiScreen: 'API+Écran',
+      },
       easy: {
         title: 'Défis Faciles',
         subtitle: 'Commencez avec les concepts de base de Playwright',
@@ -790,11 +1195,21 @@ export const translations: Record<string, Translations> = {
         title: 'Défis Moyens',
         subtitle: 'Évoluez vers des scénarios plus complexes',
         description: 'Défis intermédiaires qui testent des connaissances d\'automatisation plus avancées.',
+        uploadSimple: 'Upload Simple',
+        uploadMultiple: 'Upload Multiple',
+        validations: 'Validations',
+        challengesToPractice: 'Défis à Pratiquer',
+        csvExample: 'Exemple CSV pour Test',
       },
       hard: {
         title: 'Défis Difficiles',
         subtitle: 'Maîtrisez des scénarios avancés et complexes',
         description: 'Défis pour les spécialistes qui veulent tester des connaissances avancées.',
+        iframeCommunication: 'Communication avec Iframe',
+        nestedIframes: 'Iframes Imbriqués',
+        formInIframe: 'Formulaire en Iframe',
+        postMessage: 'PostMessage',
+        challengesToPractice: 'Défis à Pratiquer',
       },
       api: {
         title: 'Tests d\'API',
@@ -805,6 +1220,18 @@ export const translations: Record<string, Translations> = {
         title: 'API + Écran',
         subtitle: 'Intégrez les tests d\'API avec les tests d\'interface',
         description: 'Défis qui combinent les tests d\'API avec les tests d\'interface pour des scénarios complets.',
+        apiStatus: 'Statut API',
+        online: 'En ligne',
+        offline: 'Hors ligne',
+        sync: 'Synchroniser',
+        lastSync: 'Dernière sync',
+        statistics: 'Statistiques',
+        total: 'Total',
+        completed: 'Terminés',
+        pending: 'En attente',
+        addTodo: 'Ajouter TODO',
+        clearCompleted: 'Effacer Terminés',
+        challengesToPractice: 'Défis à Pratiquer',
       },
     },
     embeds: {
@@ -818,6 +1245,45 @@ export const translations: Record<string, Translations> = {
         subtitle: 'Testez la manipulation de tableaux',
         description: 'Tableau interactif pour tester le tri, les filtres et la pagination.',
       },
+    },
+    apiDocs: {
+      title: 'Documentation API',
+      subtitle: 'Documentation complète des APIs disponibles dans Test Playground',
+      description: 'Documentation complète des APIs disponibles dans Test Playground. Testez les endpoints directement et voyez des exemples d\'utilisation.',
+      aboutApis: 'À propos des APIs',
+      aboutApisDesc: 'Ces APIs ont été créées pour la démonstration et la pratique des tests automatisés. Elles simulent différentes structures de données et scénarios courants dans les applications réelles.',
+      dataStructures: 'Structures de Données',
+      suggestedChallenges: 'Défis Suggérés',
+      endpoints: 'Endpoints Disponibles',
+      method: 'Méthode',
+      endpoint: 'Endpoint',
+      title_: 'Titre',
+      tags: 'Étiquettes',
+      actions: 'Actions',
+      test: 'Tester',
+      details: 'Détails',
+      examples: 'Exemples',
+      request: 'Requête:',
+      response: 'Réponse:',
+      copy: 'Copier',
+      makeCall: 'Faire Appel',
+      callMade: 'Appel API effectué avec succès!',
+      callError: 'Erreur dans l\'appel API',
+      users: 'Utilisateurs',
+      usersDesc: 'Objets complexes avec profils et compétences',
+      products: 'Produits',
+      productsDesc: 'Catalogue avec inventaire et évaluations',
+      analytics: 'Analytics',
+      analyticsDesc: 'Métriques et données de performance',
+      challenges: [
+        'Tester tous les endpoints GET',
+        'Valider les structures de réponse',
+        'Tester les filtres et paramètres',
+        'Valider la création de données via POST',
+        'Tester les scénarios d\'erreur',
+        'Vérifier les codes de statut HTTP'
+      ],
+      viewApis: 'Voir APIs'
     },
     donation: {
       title: 'Soutenir le Projet',

@@ -112,7 +112,7 @@ export default function FacilPage() {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <BackButton href="/desafios" testId="pp:facil|btn|voltar" />
-          <RoadmapChallengesButton level="Fácil" testId="pp:facil|btn|desafios" />
+          <RoadmapChallengesButton level={t.roadmap.levels.easy} testId="pp:facil|btn|desafios" />
         </div>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>

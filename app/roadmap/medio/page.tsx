@@ -22,6 +22,8 @@ import { useState } from 'react';
 import XPathTester from '@/components/XPathTester';
 import BackButton from '@/components/BackButton';
 import RoadmapChallengesButton from '@/components/RoadmapChallengesButton';
+import { useLocale } from '@/lib/locale-context';
+import { getTranslations } from '@/lib/translations';
 
 const { Title, Paragraph, Text } = Typography;
 const { Dragger } = Upload;
@@ -32,6 +34,8 @@ interface CSVData {
 }
 
 export default function MedioPage() {
+  const { locale } = useLocale();
+  const t = getTranslations(locale);
   const [fileList, setFileList] = useState<any[]>([]);
   const [csvData, setCsvData] = useState<CSVData | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -114,13 +118,13 @@ export default function MedioPage() {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <BackButton href="/desafios" testId="pp:medio|btn|voltar" />
-          <RoadmapChallengesButton level="Médio" testId="pp:medio|btn|desafios" />
+          <RoadmapChallengesButton level={t.roadmap.levels.medium} testId="pp:medio|btn|desafios" />
         </div>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <Title level={1}>Roadmap Médio</Title>
+          <Title level={1}>{t.roadmap.medium.title}</Title>
           <Paragraph style={{ fontSize: '18px', color: '#666' }}>
-            Pratique uploads de arquivos, validações e pré-visualização de conteúdo CSV.
+            {t.roadmap.medium.description}
           </Paragraph>
         </div>
 
@@ -129,7 +133,7 @@ export default function MedioPage() {
           <Col xs={24} lg={12}>
             <Card 
               data-testid="pp:medio|section|card|upload-simples"
-              title="Upload Simples"
+              title={t.roadmap.medium.uploadSimple}
               style={{ height: '100%' }}
             >
               <Space direction="vertical" size="middle" style={{ width: '100%' }}>
@@ -160,7 +164,7 @@ export default function MedioPage() {
                 )}
 
                 <Alert
-                  message="Validações"
+                  message={t.roadmap.medium.validations}
                   description="Arquivo deve ser CSV e menor que 5MB"
                   type="info"
                   showIcon
@@ -203,7 +207,7 @@ export default function MedioPage() {
           <Col xs={24}>
             <Card 
               data-testid="pp:medio|section|card|upload-multiplo"
-              title="Upload Múltiplo"
+              title={t.roadmap.medium.uploadMultiple}
             >
               <Space direction="vertical" size="middle" style={{ width: '100%' }}>
                 <Upload
@@ -286,7 +290,7 @@ export default function MedioPage() {
         <div style={{ marginTop: '60px' }}>
           <Card 
             data-testid="pp:medio|desafios|card|root"
-            title="Desafios para Praticar"
+            title={t.roadmap.medium.challengesToPractice}
           >
             <Row gutter={[16, 16]}>
               <Col xs={24} sm={12}>
@@ -333,7 +337,7 @@ export default function MedioPage() {
         <div style={{ marginTop: '40px' }}>
           <Card 
             data-testid="pp:medio|exemplo|csv"
-            title="Exemplo de CSV para Teste"
+            title={t.roadmap.medium.csvExample}
           >
             <Space direction="vertical" size="middle">
               <Text strong>Arquivo de exemplo (salve como .csv):</Text>

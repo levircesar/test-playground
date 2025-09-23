@@ -20,6 +20,8 @@ import { useState, useEffect } from 'react';
 import XPathTester from '@/components/XPathTester';
 import BackButton from '@/components/BackButton';
 import RoadmapChallengesButton from '@/components/RoadmapChallengesButton';
+import { useLocale } from '@/lib/locale-context';
+import { getTranslations } from '@/lib/translations';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -29,6 +31,8 @@ interface PostMessageData {
 }
 
 export default function DificilPage() {
+  const { locale } = useLocale();
+  const t = getTranslations(locale);
   const [formMessages, setFormMessages] = useState<any[]>([]);
   const [tableMessages, setTableMessages] = useState<any[]>([]);
   const [lastMessage, setLastMessage] = useState<string>('');
@@ -75,13 +79,13 @@ export default function DificilPage() {
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <BackButton href="/desafios" testId="pp:dificil|btn|voltar" />
-          <RoadmapChallengesButton level="Difícil" testId="pp:dificil|btn|desafios" />
+          <RoadmapChallengesButton level={t.roadmap.levels.hard} testId="pp:dificil|btn|desafios" />
         </div>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <Title level={1}>Roadmap Difícil</Title>
+          <Title level={1}>{t.roadmap.hard.title}</Title>
           <Paragraph style={{ fontSize: '18px', color: '#666' }}>
-            Domine interações com iframes, comunicação entre elementos e cenários complexos.
+            {t.roadmap.hard.description}
           </Paragraph>
         </div>
 
