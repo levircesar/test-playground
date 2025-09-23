@@ -172,7 +172,7 @@ export default function ComecarPage() {
                   <div data-testid="pp:comecar|dicas|item|data-testid">
                     <Title level={5}>🏷️ Data-testid</Title>
                     <Paragraph style={{ fontSize: '14px', margin: 0 }}>
-                      Todos os elementos têm <code>data-testid</code> únicos para facilitar os testes
+                      Quase todos os elementos têm <code>data-testid</code> únicos para facilitar os testes
                     </Paragraph>
                   </div>
                 </Col>

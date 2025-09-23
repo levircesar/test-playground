@@ -1,8 +1,17 @@
-import { test, expect } from '@playwright/test';
+import test, { expect } from "playwright/test";
+
+// Função helper para aguardar carregamento completo da página
+const waitForPageReady = async (page: any) => {
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(500); // Aguarda hidratação do React
+};
 
 test.describe('API + Tela - TODOs', () => {
   test('should add a new TODO', async ({ page }) => {
     await page.goto('/roadmap/api-tela');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Adicionar um novo TODO
     await page.getByTestId('pp:api-tela|input|new-todo').fill('Teste Playwright');
@@ -15,6 +24,9 @@ test.describe('API + Tela - TODOs', () => {
 
   test('should toggle TODO completion', async ({ page }) => {
     await page.goto('/roadmap/api-tela');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Marcar primeiro TODO como concluído
     await page.getByTestId('pp:api-tela|checkbox|done#1').check();
@@ -26,6 +38,9 @@ test.describe('API + Tela - TODOs', () => {
 
   test('should delete a TODO', async ({ page }) => {
     await page.goto('/roadmap/api-tela');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Contar TODOs iniciais
     await expect(page.getByTestId('pp:api-tela|stat|total')).toContainText('2');
@@ -39,6 +54,9 @@ test.describe('API + Tela - TODOs', () => {
 
   test('should clear completed TODOs', async ({ page }) => {
     await page.goto('/roadmap/api-tela');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Marcar um TODO como concluído
     await page.getByTestId('pp:api-tela|checkbox|done#2').check();
@@ -52,6 +70,9 @@ test.describe('API + Tela - TODOs', () => {
 
   test('should clear all TODOs', async ({ page }) => {
     await page.goto('/roadmap/api-tela');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Verificar que há TODOs
     await expect(page.getByTestId('pp:api-tela|stat|total')).toContainText('2');
@@ -66,6 +87,9 @@ test.describe('API + Tela - TODOs', () => {
 
   test('should sync with API', async ({ page }) => {
     await page.goto('/roadmap/api-tela');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Clicar no botão sincronizar
     await page.getByTestId('pp:api-tela|btn|sync').click();
@@ -76,6 +100,9 @@ test.describe('API + Tela - TODOs', () => {
 
   test('should persist TODOs in localStorage', async ({ page }) => {
     await page.goto('/roadmap/api-tela');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Adicionar um TODO
     await page.getByTestId('pp:api-tela|input|new-todo').fill('TODO Persistente');
@@ -93,6 +120,9 @@ test.describe('API + Tela - TODOs', () => {
 
   test('should test XPath functionality', async ({ page }) => {
     await page.goto('/roadmap/api-tela');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Testar XPath para encontrar o input de novo TODO
     await page.getByTestId('pp:api-tela|xpath|input|expr').fill('//*[@data-testid="pp:api-tela|input|new-todo"]');
@@ -104,6 +134,9 @@ test.describe('API + Tela - TODOs', () => {
 
   test('should handle empty TODO input', async ({ page }) => {
     await page.goto('/roadmap/api-tela');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Tentar adicionar TODO vazio
     await page.getByTestId('pp:api-tela|btn|add').click();

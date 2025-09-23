@@ -1,8 +1,17 @@
-import { test, expect } from '@playwright/test';
+import test, { expect } from "playwright/test";
+
+// Função helper para aguardar carregamento completo da página
+const waitForPageReady = async (page: any) => {
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(500); // Aguarda hidratação do React
+};
 
 test.describe('Home Page', () => {
   test('should navigate to home page and interact with buttons', async ({ page }) => {
     await page.goto('/home');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Verificar se a página carregou
     await expect(page.getByTestId('pp:home|page|container|root')).toBeVisible();
@@ -16,6 +25,9 @@ test.describe('Home Page', () => {
 
     // Voltar para home
     await page.goto('/home');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Testar navegação para Começar
     await page.getByTestId('pp:home|main|btn|comecar').click();
@@ -24,6 +36,9 @@ test.describe('Home Page', () => {
 
   test('should navigate to desafios and back', async ({ page }) => {
     await page.goto('/home');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Navegar para desafios
     await page.getByTestId('pp:home|main|btn|desafios').click();
@@ -39,6 +54,9 @@ test.describe('Home Page', () => {
 
   test('should navigate to comecar and back', async ({ page }) => {
     await page.goto('/home');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Navegar para começar
     await page.getByTestId('pp:home|main|btn|comecar').click();
@@ -54,6 +72,9 @@ test.describe('Home Page', () => {
 
   test('should verify theme switching persists', async ({ page }) => {
     await page.goto('/home');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Trocar tema para escuro
     await page.getByTestId('pp:layout|header|switch|tema').click();

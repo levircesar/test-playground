@@ -1,8 +1,17 @@
-import { test, expect } from '@playwright/test';
+import test, { expect } from "playwright/test";
+
+// Função helper para aguardar carregamento completo da página
+const waitForPageReady = async (page: any) => {
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(500); // Aguarda hidratação do React
+};
 
 test.describe('API Tests', () => {
   test('should test ping API', async ({ page }) => {
     await page.goto('/roadmap/api');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Fazer ping
     await page.getByTestId('pp:api|btn|ping').click();
@@ -15,6 +24,9 @@ test.describe('API Tests', () => {
 
   test('should test echo API with text', async ({ page }) => {
     await page.goto('/roadmap/api');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Enviar texto simples
     await page.getByTestId('pp:api|input|echo').fill('Hello World');
@@ -27,6 +39,9 @@ test.describe('API Tests', () => {
 
   test('should test echo API with JSON', async ({ page }) => {
     await page.goto('/roadmap/api');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Enviar JSON
     await page.getByTestId('pp:api|input|echo').fill('{"nome": "João", "idade": 30}');
@@ -40,6 +55,9 @@ test.describe('API Tests', () => {
 
   test('should verify API history is saved in localStorage', async ({ page }) => {
     await page.goto('/roadmap/api');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Fazer algumas chamadas de API
     await page.getByTestId('pp:api|btn|ping').click();
@@ -56,6 +74,9 @@ test.describe('API Tests', () => {
 
   test('should clear API responses', async ({ page }) => {
     await page.goto('/roadmap/api');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Fazer uma chamada
     await page.getByTestId('pp:api|btn|ping').click();
@@ -73,6 +94,9 @@ test.describe('API Tests', () => {
 
   test('should clear API history', async ({ page }) => {
     await page.goto('/roadmap/api');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Fazer uma chamada
     await page.getByTestId('pp:api|btn|ping').click();
@@ -90,6 +114,9 @@ test.describe('API Tests', () => {
 
   test('should test XPath functionality', async ({ page }) => {
     await page.goto('/roadmap/api');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Testar XPath para encontrar o botão ping
     await page.getByTestId('pp:api|xpath|input|expr').fill('//*[@data-testid="pp:api|btn|ping"]');

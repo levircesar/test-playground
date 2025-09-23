@@ -1,4 +1,18 @@
-import { test, expect } from '@playwright/test';
+import test, { expect } from "playwright/test";
+
+// Função helper para aguardar carregamento completo da página
+const waitForPageReady = async (page: any) => {
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(500); // Aguarda hidratação do React
+};
+
+// Função helper para aguardar atualização do contador
+const waitForCounterUpdate = async (page: any, expectedValue: number) => {
+  await page.waitForFunction((value: number) => {
+    const counterElement = document.querySelector('[data-testid="pp:facil|btn|incrementar"]')?.parentElement;
+    return counterElement?.textContent?.includes(`Contador: ${value}`);
+  }, expectedValue, { timeout: 5000 });
+};
 
 // Função helper para criar arquivo CSV de teste
 const createTestCSV = (filename: string = 'test.csv') => {
@@ -35,27 +49,39 @@ test.describe('Todos os Desafios', () => {
     test('1. Clicar e validar contador', async ({ page }) => {
       await page.goto('/roadmap/facil');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+      
+      // Aguardar que o botão esteja disponível e clicável
+      await page.waitForSelector('[data-testid="pp:facil|btn|incrementar"]', { state: 'visible' });
+      
       // Verificar contador inicial
       await expect(page.getByText('Contador: 0')).toBeVisible();
       
       // Clicar no botão incrementar várias vezes
       await page.getByTestId('pp:facil|btn|incrementar').click();
+      await waitForCounterUpdate(page, 1);
       await expect(page.getByText('Contador: 1')).toBeVisible();
       
       await page.getByTestId('pp:facil|btn|incrementar').click();
+      await waitForCounterUpdate(page, 2);
       await expect(page.getByText('Contador: 2')).toBeVisible();
       
       await page.getByTestId('pp:facil|btn|incrementar').click();
+      await waitForCounterUpdate(page, 3);
       await expect(page.getByText('Contador: 3')).toBeVisible();
     });
 
-    test.only('2. Interagir com modal', async ({ page }) => {
+    test('2. Interagir com modal', async ({ page }) => {
       await page.goto('/roadmap/facil');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+       
       // Abrir modal
       await page.getByTestId('pp:facil|btn|modal').click();
       
-      // Verificar se o modal está visível
+      // Verificar se o modal está visível (sem espera adicional desnecessária)
       await expect(page.getByTestId('pp:facil|modal|root')).toBeVisible();
       await expect(page.getByTestId('pp:facil|modal|content')).toBeVisible();
       
@@ -68,6 +94,9 @@ test.describe('Todos os Desafios', () => {
 
     test('3. Navegar entre tabs', async ({ page }) => {
       await page.goto('/roadmap/facil');
+      
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
       
       // Clicar na segunda tab
       await page.getByTestId('pp:facil|tab|2').click();
@@ -85,6 +114,9 @@ test.describe('Todos os Desafios', () => {
     test('4. Expandir e contrair painéis', async ({ page }) => {
       await page.goto('/roadmap/facil');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+      
       // Expandir primeiro painel
       await page.getByTestId('pp:facil|panel|1').click();
       await expect(page.getByText('Conteúdo do primeiro painel')).toBeVisible();
@@ -100,6 +132,9 @@ test.describe('Todos os Desafios', () => {
 
     test('5. Ordenar tabela por colunas', async ({ page }) => {
       await page.goto('/roadmap/facil');
+      
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
       
       // Clicar no cabeçalho da coluna Nome para ordenar
       await page.getByRole('columnheader', { name: 'Nome' }).click();
@@ -120,6 +155,9 @@ test.describe('Todos os Desafios', () => {
     test('6. Upload CSV e pré-visualização', async ({ page }) => {
       await page.goto('/roadmap/medio');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+      
       // Fazer upload do arquivo usando helper
       const fileInput = page.getByTestId('pp:medio|upload|simples').locator('input[type="file"]');
       await fileInput.setInputFiles(createTestCSV());
@@ -135,6 +173,9 @@ test.describe('Todos os Desafios', () => {
     test('7. Upload com validação de tipo', async ({ page }) => {
       await page.goto('/roadmap/medio');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+      
       // Tentar fazer upload de arquivo não-CSV usando helper
       const fileInput = page.getByTestId('pp:medio|upload|simples').locator('input[type="file"]');
       await fileInput.setInputFiles(createInvalidFile());
@@ -145,6 +186,9 @@ test.describe('Todos os Desafios', () => {
 
     test('8. Upload com validação de tamanho', async ({ page }) => {
       await page.goto('/roadmap/medio');
+      
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
       
       // Tentar fazer upload de arquivo grande usando helper
       const fileInput = page.getByTestId('pp:medio|upload|simples').locator('input[type="file"]');
@@ -157,6 +201,9 @@ test.describe('Todos os Desafios', () => {
     test('9. Drag and Drop de arquivo', async ({ page }) => {
       await page.goto('/roadmap/medio');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+      
       // Simular drag and drop usando helper
       const dragArea = page.getByTestId('pp:medio|upload|drag');
       await dragArea.setInputFiles(createTestCSV('drag-test.csv'));
@@ -168,6 +215,9 @@ test.describe('Todos os Desafios', () => {
 
     test('10. Download de CSV processado', async ({ page }) => {
       await page.goto('/roadmap/medio');
+      
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
       
       // Primeiro fazer upload de um CSV usando helper
       const fileInput = page.getByTestId('pp:medio|upload|simples').locator('input[type="file"]');
@@ -191,6 +241,9 @@ test.describe('Todos os Desafios', () => {
     test('11. Formulário dentro de iframe', async ({ page }) => {
       await page.goto('/roadmap/dificil');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+      
       // Aguardar iframe carregar
       const iframe = page.frameLocator('iframe[data-testid="pp:dificil|iframe|form"]');
       
@@ -209,6 +262,9 @@ test.describe('Todos os Desafios', () => {
     test('12. Tabela dentro de iframe', async ({ page }) => {
       await page.goto('/roadmap/dificil');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+      
       // Aguardar iframe carregar
       const iframe = page.frameLocator('iframe[data-testid="pp:dificil|iframe|table"]');
       
@@ -223,6 +279,9 @@ test.describe('Todos os Desafios', () => {
 
     test('13. Comunicação com iframe via PostMessage', async ({ page }) => {
       await page.goto('/roadmap/dificil');
+      
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
       
       // Enviar mensagem para focar no formulário
       await page.getByTestId('pp:dificil|btn|focus-form').click();
@@ -242,6 +301,9 @@ test.describe('Todos os Desafios', () => {
 
     test('14. Iframe aninhado', async ({ page }) => {
       await page.goto('/roadmap/dificil');
+      
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
       
       // Aguardar iframe aninhado carregar
       const nestedIframe = page.frameLocator('iframe[data-testid="pp:dificil|iframe|nested"]');
@@ -309,6 +371,9 @@ test.describe('Todos os Desafios', () => {
     test('18. Histórico de chamadas API', async ({ page, request }) => {
       await page.goto('/roadmap/api');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+      
       // Fazer chamadas diretas via API
       const pingResponse = await request.get('/api/ping');
       expect(pingResponse.status()).toBe(200);
@@ -373,6 +438,9 @@ test.describe('Todos os Desafios', () => {
     test('19. Criar TODO via interface', async ({ page, request }) => {
       await page.goto('/roadmap/api-tela');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+      
       // Criar novo TODO via interface
       await page.getByTestId('pp:api-tela|input|new-todo').fill('TODO de teste');
       await page.getByTestId('pp:api-tela|btn|add').click();
@@ -396,6 +464,9 @@ test.describe('Todos os Desafios', () => {
     test('20. Marcar TODO como concluído', async ({ page }) => {
       await page.goto('/roadmap/api-tela');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+      
       // Criar TODO primeiro
       await page.getByTestId('pp:api-tela|input|new-todo').fill('TODO para marcar');
       await page.getByTestId('pp:api-tela|btn|add').click();
@@ -415,6 +486,9 @@ test.describe('Todos os Desafios', () => {
 
     test('21. Excluir TODO', async ({ page, request }) => {
       await page.goto('/roadmap/api-tela');
+      
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
       
       // Criar TODO primeiro via API
       const createResponse = await request.post('/api/todos', {
@@ -445,6 +519,9 @@ test.describe('Todos os Desafios', () => {
     test('22. Sincronizar com API', async ({ page, request }) => {
       await page.goto('/roadmap/api-tela');
       
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
+      
       // Criar alguns TODOs via API primeiro
       await request.post('/api/todos', {
         data: { text: 'TODO via API 1' }
@@ -469,6 +546,9 @@ test.describe('Todos os Desafios', () => {
 
     test('23. Limpar TODOs concluídos', async ({ page }) => {
       await page.goto('/roadmap/api-tela');
+      
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
       
       // Criar alguns TODOs
       await page.getByTestId('pp:api-tela|input|new-todo').fill('TODO 1');
@@ -495,6 +575,9 @@ test.describe('Todos os Desafios', () => {
 
     test('24. Persistência de dados', async ({ page }) => {
       await page.goto('/roadmap/api-tela');
+      
+      // Aguardar carregamento completo da página
+      await waitForPageReady(page);
       
       // Criar alguns TODOs
       await page.getByTestId('pp:api-tela|input|new-todo').fill('TODO Persistente 1');

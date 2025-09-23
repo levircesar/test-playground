@@ -659,7 +659,8 @@ test('24. Persistência de dados', async ({ page }) => {
           >
             Info
           </Button>
-          <Button
+          {/**
+            <Button
             type="default"
             size="small"
             icon={<CodeOutlined />}
@@ -668,6 +669,8 @@ test('24. Persistência de dados', async ({ page }) => {
           >
             Solução
           </Button>
+           */}
+         
         </Space>
       ),
     },

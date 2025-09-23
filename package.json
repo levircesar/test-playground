@@ -9,6 +9,8 @@
     "lint": "eslint .",
     "test:e2e": "playwright test",
     "test:ui": "playwright test --ui",
+    "test:fast": "playwright test --workers=1",
+    "test:debug": "playwright test --headed=true --workers=1",
     "codegen": "playwright codegen http://localhost:3000"
   },
   "dependencies": {
@@ -16,12 +18,12 @@
     "@types/qrcode": "^1.5.5",
     "antd": "^5.12.0",
     "next": "14.0.0",
+    "playwright": "^1.55.1",
     "qrcode": "^1.5.4",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

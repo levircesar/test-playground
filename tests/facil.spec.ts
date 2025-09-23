@@ -1,8 +1,17 @@
-import { test, expect } from '@playwright/test';
+import test, { expect } from "playwright/test";
+
+// Função helper para aguardar carregamento completo da página
+const waitForPageReady = async (page: any) => {
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(500); // Aguarda hidratação do React
+};
 
 test.describe('Roadmap Fácil', () => {
   test('should interact with counter button', async ({ page }) => {
     await page.goto('/roadmap/facil');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Verificar contador inicial
     await expect(page.getByText('Contador: 0')).toBeVisible();
@@ -23,6 +32,9 @@ test.describe('Roadmap Fácil', () => {
 
   test('should interact with loading button', async ({ page }) => {
     await page.goto('/roadmap/facil');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Clicar no botão loading
     await page.getByTestId('pp:facil|btn|loading').click();
@@ -36,6 +48,9 @@ test.describe('Roadmap Fácil', () => {
 
   test('should interact with modal', async ({ page }) => {
     await page.goto('/roadmap/facil');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Abrir modal
     await page.getByTestId('pp:facil|btn|modal').click();
@@ -53,6 +68,9 @@ test.describe('Roadmap Fácil', () => {
 
   test('should interact with form inputs', async ({ page }) => {
     await page.goto('/roadmap/facil');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Preencher input de texto
     await page.getByTestId('pp:facil|input|texto').fill('Teste de input');
@@ -73,6 +91,9 @@ test.describe('Roadmap Fácil', () => {
 
   test('should interact with tabs', async ({ page }) => {
     await page.goto('/roadmap/facil');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Clicar na segunda tab
     await page.getByTestId('pp:facil|tab|2').click();
@@ -89,6 +110,9 @@ test.describe('Roadmap Fácil', () => {
 
   test('should interact with collapse panels', async ({ page }) => {
     await page.goto('/roadmap/facil');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Expandir primeiro painel
     await page.getByTestId('pp:facil|panel|1').click();
@@ -105,6 +129,9 @@ test.describe('Roadmap Fácil', () => {
 
   test('should interact with table sorting', async ({ page }) => {
     await page.goto('/roadmap/facil');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Clicar no cabeçalho da coluna Nome para ordenar
     await page.getByRole('columnheader', { name: 'Nome' }).click();
@@ -115,6 +142,9 @@ test.describe('Roadmap Fácil', () => {
 
   test('should test XPath functionality', async ({ page }) => {
     await page.goto('/roadmap/facil');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Testar XPath para encontrar o botão incrementar
     await page.getByTestId('pp:facil|xpath|input|expr').fill('//*[@data-testid="pp:facil|btn|incrementar"]');
@@ -126,6 +156,9 @@ test.describe('Roadmap Fácil', () => {
 
   test('should have back button and navigate back', async ({ page }) => {
     await page.goto('/roadmap/facil');
+    
+    // Aguardar carregamento completo da página
+    await waitForPageReady(page);
 
     // Verificar se há botão de voltar
     await expect(page.getByTestId('pp:facil|btn|voltar')).toBeVisible();
