@@ -57,7 +57,7 @@ export default function Footer() {
         </Space>
         
         <Text type="secondary" style={{ fontSize: '12px' }}>
-          © 2024 Playwright Playground. MIT License.
+          © 2025 Test Playground - Levir Lemos
         </Text>
       </Space>
     </AntFooter>
