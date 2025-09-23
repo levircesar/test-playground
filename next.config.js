@@ -16,22 +16,30 @@ const nextConfig = {
   // Headers for better SEO and security
   async headers() {
     return [
-      // Headers for embed routes - allow iframe embedding
+      // Headers for embed routes - allow iframe embedding with proper CSP
       {
         source: '/embeds/:path*',
         headers: [
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          // Evite usar DENY. SAMEORIGIN permite iframes do mesmo domínio.
-          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-          // Em CSP, use frame-ancestors para whitelistar quem pode embeber.
-          {
             key: 'Content-Security-Policy',
-            value:
-              "frame-ancestors 'self' https://test-playground-theta.vercel.app https://*.vercel.app http://localhost:3000; default-src 'self';"
+            value: [
+              "default-src 'self'",
+              // permita scripts do próprio site + inline (rápido; depois pode trocar por nonce)
+              "script-src 'self' 'unsafe-inline'",
+              // permita estilos inline (Next, Tailwind e libs costumam injetar)
+              "style-src 'self' 'unsafe-inline'",
+              // imagens e fontes comuns
+              "img-src 'self' data: blob:",
+              "font-src 'self' data:",
+              // chamadas XHR/fetch
+              "connect-src 'self' https://*.vercel.app https://vitals.vercel-insights.com",
+              // quem pode colocar este conteúdo em iframe
+              "frame-ancestors 'self' https://test-playground-theta.vercel.app https://*.vercel.app http://localhost:3000",
+            ].join('; ')
           },
+          // Evite DENY aqui
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
           {
             key: 'X-XSS-Protection',
             value: '1; mode=block',
