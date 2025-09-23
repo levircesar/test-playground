@@ -185,7 +185,7 @@ export async function GET(request: NextRequest) {
     totalProducts: filteredProducts.length,
     averagePrice: filteredProducts.reduce((sum, p) => sum + p.price, 0) / filteredProducts.length,
     totalStock: filteredProducts.reduce((sum, p) => sum + p.inventory.available, 0),
-    categories: [...new Set(filteredProducts.map(p => p.category))],
+    categories: Array.from(new Set(filteredProducts.map(p => p.category))),
     priceRange: {
       min: Math.min(...filteredProducts.map(p => p.price)),
       max: Math.max(...filteredProducts.map(p => p.price))
