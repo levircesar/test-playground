@@ -3,6 +3,7 @@ import { Typography, Space } from 'antd';
 import { TrophyOutlined } from '@ant-design/icons';
 import ChallengeTable from '@/components/ChallengeTable';
 import BackButton from '@/components/BackButton';
+import SEOHead from '@/components/SEOHead';
 import { getChallenges } from '@/lib/challenges';
 import { useLocale } from '@/lib/locale-context';
 import { getTranslations } from '@/lib/translations';
@@ -14,8 +15,42 @@ export default function DesafiosPage() {
   const t = getTranslations(locale);
   const challenges = getChallenges();
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": t.challenges.title,
+    "description": t.challenges.subtitle,
+    "url": "https://playwright-playground.vercel.app/desafios",
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "Desafios de Automação de Testes",
+      "description": "Lista completa de desafios práticos para aprender Playwright e automação de testes",
+      "numberOfItems": challenges.length,
+      "itemListElement": challenges.map((challenge, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "LearningResource",
+          "name": challenge.titulo,
+          "description": challenge.descricao,
+          "educationalLevel": challenge.nivel,
+          "learningResourceType": "Challenge",
+          "teaches": challenge.tags || ["Test Automation", "Playwright"]
+        }
+      }))
+    }
+  };
+
   return (
-    <div data-testid="pp:desafios|page|container|root" style={{ padding: '40px 24px' }}>
+    <>
+      <SEOHead
+        title={t.challenges.title}
+        description={`${t.challenges.subtitle}. Explore ${challenges.length} desafios práticos organizados por nível de dificuldade para aprender automação de testes com Playwright.`}
+        keywords="desafios playwright, exercícios automação testes, prática playwright, testes web, QA challenges, aprendizado prático"
+        canonicalUrl="/desafios"
+        structuredData={structuredData}
+      />
+      <div data-testid="pp:desafios|page|container|root" style={{ padding: '40px 24px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <BackButton href="/" testId="pp:desafios|btn|voltar" />
         
@@ -88,6 +123,7 @@ export default function DesafiosPage() {
           </Space>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

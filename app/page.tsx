@@ -21,6 +21,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import ContactForm from '@/components/ContactForm';
 import Donation from '@/components/Donation';
+import SEOHead from '@/components/SEOHead';
 import { useLocale } from '@/lib/locale-context';
 import { getTranslations } from '@/lib/translations';
 
@@ -46,8 +47,46 @@ export default function LandingPage() {
     return () => window.removeEventListener('resize', checkIsMobile);
   }, []);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Playwright Playground",
+    "description": t.home.description,
+    "url": "https://playwright-playground.vercel.app/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://playwright-playground.vercel.app/desafios?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "mainEntity": {
+      "@type": "EducationalOrganization",
+      "name": "Playwright Playground",
+      "description": t.home.description,
+      "url": "https://playwright-playground.vercel.app/",
+      "founder": {
+        "@type": "Person",
+        "name": "Levir Lemos",
+        "jobTitle": "Quality Assurance Analyst & Test Automation Specialist"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "BRL",
+        "description": "Plataforma 100% gratuita para aprendizado de automação de testes"
+      }
+    }
+  };
+
   return (
-    <div data-testid="pp:landing|page|container|root">
+    <>
+      <SEOHead
+        title={t.home.title}
+        description={t.home.description}
+        keywords="playwright, automação de testes, testes web, QA, cypress, selenium, testes e2e, testes de API, qualidade de software, aprendizado prático, desafios de teste"
+        canonicalUrl="/"
+        structuredData={structuredData}
+      />
+      <div data-testid="pp:landing|page|container|root">
       {/* Hero Section */}
       <section 
         data-testid="pp:landing|hero|section|root"
@@ -699,6 +738,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-    </div>
+      </div>
+    </>
   );
 }
