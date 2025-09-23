@@ -2,7 +2,7 @@
 import { Table, Button, Tag, Space, Modal, Typography, message } from 'antd';
 import { InfoCircleOutlined, CodeOutlined, CopyOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Challenge } from '@/lib/challenges';
 import { useLocale } from '@/lib/locale-context';
 import { getTranslations } from '@/lib/translations';
@@ -21,6 +21,22 @@ export default function ChallengeTable({ challenges }: ChallengeTableProps) {
   const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null);
   const [solutionModalVisible, setSolutionModalVisible] = useState(false);
   const [selectedSolutionChallenge, setSelectedSolutionChallenge] = useState<Challenge | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Verificar no mount
+    checkIsMobile();
+
+    // Adicionar listener para mudanças de tamanho
+    window.addEventListener('resize', checkIsMobile);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   const showModal = (challenge: Challenge) => {
     setSelectedChallenge(challenge);
@@ -585,7 +601,7 @@ test('24. Persistência de dados', async ({ page }) => {
       title: 'ID',
       dataIndex: 'id',
       key: 'id',
-      width: 80,
+      width: isMobile ? 60 : 80,
       sorter: (a: Challenge, b: Challenge) => a.id - b.id,
     },
     {
@@ -593,50 +609,51 @@ test('24. Persistência de dados', async ({ page }) => {
       dataIndex: 'titulo',
       key: 'titulo',
       sorter: (a: Challenge, b: Challenge) => a.titulo.localeCompare(b.titulo),
+      ellipsis: isMobile,
     },
     {
       title: t.components.challengeTable.difficulty,
       dataIndex: 'nivel',
       key: 'nivel',
-      width: 120,
+      width: isMobile ? 80 : 120,
       render: (nivel: string) => {
         const color = nivel === 'Fácil' ? 'green' : 
                      nivel === 'Médio' ? 'orange' : 
                      nivel === 'Difícil' ? 'red' : 
                      nivel === 'API' ? 'blue' : 'purple';
-        return <Tag color={color}>{nivel}</Tag>;
+        return <Tag color={color} style={{ fontSize: isMobile ? '10px' : '12px' }}>{nivel}</Tag>;
       },
-      filters: [
+      filters: isMobile ? undefined : [
         { text: 'Fácil', value: 'Fácil' },
         { text: 'Médio', value: 'Médio' },
         { text: 'Difícil', value: 'Difícil' },
         { text: 'API', value: 'API' },
         { text: 'API+Tela', value: 'API+Tela' },
       ],
-      onFilter: (value: boolean | React.Key, record: Challenge) => record.nivel === value,
+      onFilter: isMobile ? undefined : (value: boolean | React.Key, record: Challenge) => record.nivel === value,
     },
     {
       title: t.components.challengeTable.modal.type,
       dataIndex: 'tipo',
       key: 'tipo',
-      width: 120,
+      width: isMobile ? 80 : 120,
       render: (tipo: string) => {
         const color = tipo === 'UI' ? 'cyan' : 
                      tipo === 'Upload' ? 'green' : 
                      tipo === 'Iframe' ? 'orange' : 
                      tipo === 'API' ? 'blue' : 'purple';
-        return <Tag color={color}>{tipo}</Tag>;
+        return <Tag color={color} style={{ fontSize: isMobile ? '10px' : '12px' }}>{tipo}</Tag>;
       },
-      filters: [
+      filters: isMobile ? undefined : [
         { text: 'UI', value: 'UI' },
         { text: 'Upload', value: 'Upload' },
         { text: 'Iframe', value: 'Iframe' },
         { text: 'API', value: 'API' },
         { text: 'E2E', value: 'E2E' },
       ],
-      onFilter: (value: boolean | React.Key, record: Challenge) => record.tipo === value,
+      onFilter: isMobile ? undefined : (value: boolean | React.Key, record: Challenge) => record.tipo === value,
     },
-    {
+    ...(isMobile ? [] : [{
       title: t.components.challengeTable.modal.tags,
       dataIndex: 'tags',
       key: 'tags',
@@ -647,21 +664,22 @@ test('24. Persistência de dados', async ({ page }) => {
           ))}
         </Space>
       ),
-    },
+    }]),
     {
       title: t.components.challengeTable.actions,
       key: 'action',
-      width: 180,
+      width: isMobile ? 100 : 180,
       render: (_: any, record: Challenge) => (
         <Space>
           <Button
             type="primary"
-            size="small"
+            size={isMobile ? 'small' : 'small'}
             icon={<InfoCircleOutlined />}
             data-testid={`pp:desafios|table|btn|info#${record.id}`}
             onClick={() => showModal(record)}
+            style={{ fontSize: isMobile ? '10px' : '12px' }}
           >
-            {t.components.challengeTable.modal.info}
+            {isMobile ? 'Info' : t.components.challengeTable.modal.info}
           </Button>
           {/**
             <Button
@@ -692,13 +710,15 @@ test('24. Persistência de dados', async ({ page }) => {
         columns={columns}
         dataSource={challenges}
         pagination={{
-          pageSize: 10,
-          showSizeChanger: true,
-          showQuickJumper: true,
+          pageSize: isMobile ? 5 : 10,
+          showSizeChanger: !isMobile,
+          showQuickJumper: !isMobile,
           showTotal: (total, range) => 
             `${range[0]}-${range[1]} de ${total} desafios`,
+          simple: isMobile,
         }}
-        scroll={{ x: 800 }}
+        scroll={{ x: isMobile ? 600 : 800 }}
+        size={isMobile ? 'small' : 'middle'}
       />
       
       <Modal
@@ -722,7 +742,8 @@ test('24. Persistência de dados', async ({ page }) => {
             {t.components.challengeTable.modal.goToChallenge}
           </Button>
         ]}
-        width={600}
+        width={isMobile ? '100%' : 600}
+        style={isMobile ? { top: 0, paddingBottom: 0 } : {}}
         data-testid="pp:desafios|modal|root"
       >
         {selectedChallenge && (
@@ -774,7 +795,8 @@ test('24. Persistência de dados', async ({ page }) => {
             {t.components.challengeTable.modal.copyCode}
           </Button>
         ]}
-        width={800}
+        width={isMobile ? '100%' : 800}
+        style={isMobile ? { top: 0, paddingBottom: 0 } : {}}
         data-testid="pp:desafios|solution-modal|root"
       >
         {selectedSolutionChallenge && (
@@ -788,15 +810,15 @@ test('24. Persistência de dados', async ({ page }) => {
             
             <div style={{ 
               background: '#f5f5f5', 
-              padding: '16px', 
+              padding: isMobile ? '12px' : '16px', 
               borderRadius: '8px',
               border: '1px solid #d9d9d9',
               fontFamily: 'monospace',
-              fontSize: '14px',
+              fontSize: isMobile ? '11px' : '14px',
               overflow: 'auto',
-              maxHeight: '400px'
+              maxHeight: isMobile ? '300px' : '400px'
             }}>
-              <pre style={{ margin: 0, whiteSpace: 'pre-wrap' }}>
+              <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
                 {generateTestCode(selectedSolutionChallenge)}
               </pre>
             </div>

@@ -484,6 +484,8 @@ export default function FacilPage() {
         open={modalVisible}
         onOk={handleModalOk}
         onCancel={handleModalCancel}
+        width="100%"
+        style={{ top: 0, paddingBottom: 0 }}
         data-testid="pp:facil|modal|root"
       >
         <p data-testid="pp:facil|modal|content">

@@ -18,6 +18,7 @@ import {
   MailOutlined
 } from '@ant-design/icons';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import ContactForm from '@/components/ContactForm';
 import Donation from '@/components/Donation';
 import { useLocale } from '@/lib/locale-context';
@@ -28,6 +29,22 @@ const { Title, Paragraph, Text } = Typography;
 export default function LandingPage() {
   const { locale } = useLocale();
   const t = getTranslations(locale);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Verificar no mount
+    checkIsMobile();
+
+    // Adicionar listener para mudanças de tamanho
+    window.addEventListener('resize', checkIsMobile);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   return (
     <div data-testid="pp:landing|page|container|root">
@@ -73,47 +90,57 @@ export default function LandingPage() {
             {t.home.description}
           </Paragraph>
           
-          <Space size="large" style={{ marginTop: '40px' }}>
-            <Link href="/comecar">
-              <Button
-                type="primary"
-                size="large"
-                icon={<ThunderboltOutlined />}
-                data-testid="pp:landing|hero|btn|comecar"
-                style={{ 
-                  height: '60px', 
-                  fontSize: '18px',
-                  padding: '0 40px',
-                  borderRadius: '30px',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
-                  background: 'linear-gradient(45deg, #ff6b6b, #ff8e53)',
-                  border: 'none'
-                }}
-              >
-                🚀 {t.home.startButton}
-              </Button>
-            </Link>
-            
-            <Link href="/desafios">
-              <Button
-                size="large"
-                icon={<TrophyOutlined />}
-                data-testid="pp:landing|hero|btn|desafios"
-                style={{ 
-                  height: '60px', 
-                  fontSize: '18px',
-                  padding: '0 40px',
-                  borderRadius: '30px',
-                  background: 'rgba(255,255,255,0.2)', 
-                  border: '2px solid rgba(255,255,255,0.5)', 
-                  color: 'white',
-                  backdropFilter: 'blur(10px)'
-                }}
-              >
-                🏆 {t.home.challengesButton}
-              </Button>
-            </Link>
-          </Space>
+          <div className="hero-buttons" style={{ marginTop: '40px' }}>
+            <Space 
+              size="large" 
+              direction={isMobile ? 'vertical' : 'horizontal'}
+              style={{ width: '100%', justifyContent: 'center' }}
+            >
+              <Link href="/comecar">
+                <Button
+                  type="primary"
+                  size="large"
+                  icon={<ThunderboltOutlined />}
+                  data-testid="pp:landing|hero|btn|comecar"
+                  style={{ 
+                    height: '60px', 
+                    fontSize: '18px',
+                    padding: '0 40px',
+                    borderRadius: '30px',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+                    background: 'linear-gradient(45deg, #ff6b6b, #ff8e53)',
+                    border: 'none',
+                    width: isMobile ? '100%' : 'auto',
+                    maxWidth: isMobile ? '300px' : 'none'
+                  }}
+                >
+                  🚀 {t.home.startButton}
+                </Button>
+              </Link>
+              
+              <Link href="/desafios">
+                <Button
+                  size="large"
+                  icon={<TrophyOutlined />}
+                  data-testid="pp:landing|hero|btn|desafios"
+                  style={{ 
+                    height: '60px', 
+                    fontSize: '18px',
+                    padding: '0 40px',
+                    borderRadius: '30px',
+                    background: 'rgba(255,255,255,0.2)', 
+                    border: '2px solid rgba(255,255,255,0.5)', 
+                    color: 'white',
+                    backdropFilter: 'blur(10px)',
+                    width: isMobile ? '100%' : 'auto',
+                    maxWidth: isMobile ? '300px' : 'none'
+                  }}
+                >
+                  🏆 {t.home.challengesButton}
+                </Button>
+              </Link>
+            </Space>
+          </div>
           
           {/* Stats */}
           <Row gutter={[32, 16]} style={{ marginTop: '60px', maxWidth: '800px', margin: '60px auto 0' }}>
@@ -439,47 +466,57 @@ export default function LandingPage() {
             {t.home.readyToStartDesc}
           </Paragraph>
           
-          <Space size="large">
-            <Link href="/comecar">
-              <Button
-                type="primary"
-                size="large"
-                icon={<ThunderboltOutlined />}
-                data-testid="pp:landing|cta|btn|comecar"
-                style={{ 
-                  height: '60px', 
-                  fontSize: '18px',
-                  padding: '0 40px',
-                  borderRadius: '30px',
-                  background: 'linear-gradient(45deg, #ff6b6b, #ff8e53)',
-                  border: 'none',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
-                }}
-              >
-                🎯 {t.home.startButton}
-              </Button>
-            </Link>
-            
-            <Link href="/desafios">
-              <Button
-                size="large"
-                icon={<TrophyOutlined />}
-                data-testid="pp:landing|cta|btn|desafios"
-                style={{ 
-                  height: '60px', 
-                  fontSize: '18px',
-                  padding: '0 40px',
-                  borderRadius: '30px',
-                  background: 'rgba(255,255,255,0.2)', 
-                  border: '2px solid rgba(255,255,255,0.5)', 
-                  color: 'white',
-                  backdropFilter: 'blur(10px)'
-                }}
-              >
-                🏆 {t.home.challengesButton}
-              </Button>
-            </Link>
-          </Space>
+          <div className="cta-buttons">
+            <Space 
+              size="large" 
+              direction={isMobile ? 'vertical' : 'horizontal'}
+              style={{ width: '100%', justifyContent: 'center' }}
+            >
+              <Link href="/comecar">
+                <Button
+                  type="primary"
+                  size="large"
+                  icon={<ThunderboltOutlined />}
+                  data-testid="pp:landing|cta|btn|comecar"
+                  style={{ 
+                    height: '60px', 
+                    fontSize: '18px',
+                    padding: '0 40px',
+                    borderRadius: '30px',
+                    background: 'linear-gradient(45deg, #ff6b6b, #ff8e53)',
+                    border: 'none',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+                    width: isMobile ? '100%' : 'auto',
+                    maxWidth: isMobile ? '300px' : 'none'
+                  }}
+                >
+                  🎯 {t.home.startButton}
+                </Button>
+              </Link>
+              
+              <Link href="/desafios">
+                <Button
+                  size="large"
+                  icon={<TrophyOutlined />}
+                  data-testid="pp:landing|cta|btn|desafios"
+                  style={{ 
+                    height: '60px', 
+                    fontSize: '18px',
+                    padding: '0 40px',
+                    borderRadius: '30px',
+                    background: 'rgba(255,255,255,0.2)', 
+                    border: '2px solid rgba(255,255,255,0.5)', 
+                    color: 'white',
+                    backdropFilter: 'blur(10px)',
+                    width: isMobile ? '100%' : 'auto',
+                    maxWidth: isMobile ? '300px' : 'none'
+                  }}
+                >
+                  🏆 {t.home.challengesButton}
+                </Button>
+              </Link>
+            </Space>
+          </div>
         </div>
       </section>
 
@@ -502,10 +539,10 @@ export default function LandingPage() {
           </div>
           
           <Row gutter={[48, 48]} align="middle">
-            <Col xs={24} md={8} style={{ textAlign: 'center' }}>
-              <div style={{
-                width: '200px',
-                height: '200px',
+            <Col xs={24} md={8} style={{ textAlign: 'center', marginBottom: isMobile ? '20px' : '0' }}>
+              <div className="profile-photo" style={{
+                width: isMobile ? '150px' : '200px',
+                height: isMobile ? '150px' : '200px',
                 borderRadius: '50%',
                 background: 'linear-gradient(135deg, #667eea, #764ba2)',
                 display: 'flex',
@@ -517,8 +554,8 @@ export default function LandingPage() {
                 overflow: 'hidden'
               }}>
                 <div style={{
-                  width: '180px',
-                  height: '180px',
+                  width: isMobile ? '130px' : '180px',
+                  height: isMobile ? '130px' : '180px',
                   borderRadius: '50%',
                   background: 'url("https://media.licdn.com/dms/image/v2/D4D03AQExiACxG47WFA/profile-displayphoto-scale_200_200/B4DZlxAjheIEAc-/0/1758537596850?e=1761782400&v=beta&t=aOSMi0pMyXNslCGh-acuQ-RI2Z_L4hVNR9Kz8j9p1X0") center/cover',
                   border: '4px solid white'
@@ -581,50 +618,71 @@ export default function LandingPage() {
                   </Col>
                 </Row>
                 
-                <Space size="large">
-                  <Link 
-                    href="https://github.com/levircesar" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    data-testid="pp:landing|about|link|github"
+                <div className="social-buttons">
+                  <Space 
+                    size="large" 
+                    wrap
+                    style={{ 
+                      width: '100%', 
+                      justifyContent: isMobile ? 'center' : 'flex-start' 
+                    }}
                   >
-                    <Button 
-                      icon={<GithubOutlined />} 
-                      size="large"
-                      style={{ borderRadius: '25px' }}
+                    <Link 
+                      href="https://github.com/levircesar" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      data-testid="pp:landing|about|link|github"
                     >
-                      GitHub
-                    </Button>
-                  </Link>
-                  
-                  <Link 
-                    href="https://www.linkedin.com/in/levirlemos/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    data-testid="pp:landing|about|link|linkedin"
-                  >
-                    <Button 
-                      icon={<LinkedinOutlined />} 
-                      size="large"
-                      style={{ borderRadius: '25px' }}
+                      <Button 
+                        icon={<GithubOutlined />} 
+                        size={isMobile ? 'middle' : 'large'}
+                        style={{ 
+                          borderRadius: '25px',
+                          width: typeof window !== 'undefined' && window.innerWidth <= 480 ? '100%' : 'auto',
+                          minWidth: typeof window !== 'undefined' && window.innerWidth <= 480 ? '120px' : 'auto'
+                        }}
+                      >
+                        GitHub
+                      </Button>
+                    </Link>
+                    
+                    <Link 
+                      href="https://www.linkedin.com/in/levirlemos/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      data-testid="pp:landing|about|link|linkedin"
                     >
-                      LinkedIn
-                    </Button>
-                  </Link>
-                  
-                  <Link 
-                    href="mailto:levirlemos@gmail.com"
-                    data-testid="pp:landing|about|link|email"
-                  >
-                    <Button 
-                      icon={<MailOutlined />} 
-                      size="large"
-                      style={{ borderRadius: '25px' }}
+                      <Button 
+                        icon={<LinkedinOutlined />} 
+                        size={isMobile ? 'middle' : 'large'}
+                        style={{ 
+                          borderRadius: '25px',
+                          width: typeof window !== 'undefined' && window.innerWidth <= 480 ? '100%' : 'auto',
+                          minWidth: typeof window !== 'undefined' && window.innerWidth <= 480 ? '120px' : 'auto'
+                        }}
+                      >
+                        LinkedIn
+                      </Button>
+                    </Link>
+                    
+                    <Link 
+                      href="mailto:levirlemos@gmail.com"
+                      data-testid="pp:landing|about|link|email"
                     >
-                      Email
-                    </Button>
-                  </Link>
-                </Space>
+                      <Button 
+                        icon={<MailOutlined />} 
+                        size={isMobile ? 'middle' : 'large'}
+                        style={{ 
+                          borderRadius: '25px',
+                          width: typeof window !== 'undefined' && window.innerWidth <= 480 ? '100%' : 'auto',
+                          minWidth: typeof window !== 'undefined' && window.innerWidth <= 480 ? '120px' : 'auto'
+                        }}
+                      >
+                        Email
+                      </Button>
+                    </Link>
+                  </Space>
+                </div>
               </Space>
             </Col>
           </Row>

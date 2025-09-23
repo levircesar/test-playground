@@ -1,7 +1,7 @@
 'use client';
+import { useState, useEffect } from 'react';
 import { Table, Button, Space, Typography, Card, message } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { useState } from 'react';
 
 const { Title } = Typography;
 
@@ -120,11 +120,23 @@ export default function EmbedTablePage() {
     }
   };
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
   return (
     <div 
       data-testid="pp:embed-table|page|container|root"
       style={{ 
-        padding: '20px',
+        padding: isMobile ? '12px' : '20px',
         background: '#f0f0f0',
         minHeight: '100vh'
       }}
@@ -133,7 +145,14 @@ export default function EmbedTablePage() {
         data-testid="pp:embed-table|card|root"
         style={{ maxWidth: '800px', margin: '0 auto' }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: isMobile ? 'flex-start' : 'center', 
+          marginBottom: '16px',
+          flexDirection: isMobile ? 'column' : 'row',
+          gap: isMobile ? '12px' : '0'
+        }}>
           <Title level={3} style={{ margin: 0 }}>
             Tabela no Iframe
           </Title>
@@ -142,8 +161,9 @@ export default function EmbedTablePage() {
             icon={<PlusOutlined />}
             onClick={addProduct}
             data-testid="pp:embed-table|btn|add"
+            size={isMobile ? 'small' : 'middle'}
           >
-            Adicionar Produto
+            {isMobile ? 'Adicionar' : 'Adicionar Produto'}
           </Button>
         </div>
         
@@ -153,12 +173,13 @@ export default function EmbedTablePage() {
           dataSource={products}
           rowKey="id"
           pagination={{
-            pageSize: 5,
-            showSizeChanger: true,
-            showQuickJumper: true,
+            pageSize: isMobile ? 3 : 5,
+            showSizeChanger: !isMobile,
+            showQuickJumper: !isMobile,
+            simple: isMobile,
           }}
-          scroll={{ x: 600 }}
-          size="small"
+          scroll={{ x: isMobile ? 400 : 600 }}
+          size={isMobile ? 'small' : 'small'}
         />
       </Card>
     </div>
