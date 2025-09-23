@@ -2,6 +2,8 @@
 import { Form, Input, Button, message, Space } from 'antd';
 import { UserOutlined, MailOutlined, MessageOutlined } from '@ant-design/icons';
 import { setJSON, getJSON, STORAGE_KEYS } from '@/lib/storage';
+import { useLocale } from '@/lib/locale-context';
+import { getTranslations } from '@/lib/translations';
 
 interface ContactFormData {
   nome: string;
@@ -10,6 +12,8 @@ interface ContactFormData {
 }
 
 export default function ContactForm() {
+  const { locale } = useLocale();
+  const t = getTranslations(locale);
   const [form] = Form.useForm();
 
   const onFinish = (values: ContactFormData) => {
@@ -24,10 +28,10 @@ export default function ContactForm() {
       const updatedMessages = [...existingMessages, newMessage];
       setJSON(STORAGE_KEYS.CONTACT_MSGS, updatedMessages);
       
-      message.success('Mensagem enviada com sucesso!');
+      message.success(t.components.contactForm.success);
       form.resetFields();
     } catch (error) {
-      message.error('Erro ao enviar mensagem. Tente novamente.');
+      message.error(t.components.contactForm.error);
     }
   };
 
@@ -42,22 +46,30 @@ export default function ContactForm() {
       >
         <Form.Item
           name="nome"
-          label="Nome"
-          rules={[{ required: true, message: 'Por favor, insira seu nome!' }]}
+          label={t.components.contactForm.name}
+          rules={[{ required: true, message: locale === 'pt-BR' ? 'Por favor, insira seu nome!' : 
+                                   locale === 'en-US' ? 'Please enter your name!' : 
+                                   'Veuillez entrer votre nom!' }]}
         >
           <Input
             data-testid="pp:landing|contact|input|nome"
             prefix={<UserOutlined />}
-            placeholder="Seu nome completo"
+            placeholder={locale === 'pt-BR' ? 'Seu nome completo' : 
+                        locale === 'en-US' ? 'Your full name' : 
+                        'Votre nom complet'}
           />
         </Form.Item>
 
         <Form.Item
           name="email"
-          label="E-mail"
+          label={t.components.contactForm.email}
           rules={[
-            { required: true, message: 'Por favor, insira seu e-mail!' },
-            { type: 'email', message: 'E-mail inválido!' }
+            { required: true, message: locale === 'pt-BR' ? 'Por favor, insira seu e-mail!' : 
+                             locale === 'en-US' ? 'Please enter your email!' : 
+                             'Veuillez entrer votre email!' },
+            { type: 'email', message: locale === 'pt-BR' ? 'E-mail inválido!' : 
+                             locale === 'en-US' ? 'Invalid email!' : 
+                             'Email invalide!' }
           ]}
         >
           <Input
@@ -69,12 +81,16 @@ export default function ContactForm() {
 
         <Form.Item
           name="mensagem"
-          label="Mensagem"
-          rules={[{ required: true, message: 'Por favor, insira sua mensagem!' }]}
+          label={t.components.contactForm.message}
+          rules={[{ required: true, message: locale === 'pt-BR' ? 'Por favor, insira sua mensagem!' : 
+                                   locale === 'en-US' ? 'Please enter your message!' : 
+                                   'Veuillez entrer votre message!' }]}
         >
           <Input.TextArea
             data-testid="pp:landing|contact|input|mensagem"
-            placeholder="Sua mensagem aqui..."
+            placeholder={locale === 'pt-BR' ? 'Sua mensagem aqui...' : 
+                        locale === 'en-US' ? 'Your message here...' : 
+                        'Votre message ici...'}
             rows={4}
           />
         </Form.Item>
@@ -87,7 +103,7 @@ export default function ContactForm() {
             data-testid="pp:landing|contact|btn|enviar"
             style={{ width: '100%' }}
           >
-            Enviar Mensagem
+            {t.components.contactForm.send}
           </Button>
         </Form.Item>
       </Form>

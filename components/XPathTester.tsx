@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { Button, Form, Input, Space, Typography, Alert } from 'antd';
+import { useLocale } from '@/lib/locale-context';
+import { getTranslations } from '@/lib/translations';
 
 const HIGHLIGHT_CLASS = 'pp-xpath-highlight';
 
@@ -23,6 +25,8 @@ function highlight(nodes: Node[]) {
 }
 
 export default function XPathTester({ pageId }: { pageId: string }) {
+  const { locale } = useLocale();
+  const t = getTranslations(locale);
   const [xpath, setXpath] = useState('');
   const [count, setCount] = useState<number | null>(null);
   const liveRef = useRef<HTMLDivElement>(null);
@@ -69,12 +73,14 @@ export default function XPathTester({ pageId }: { pageId: string }) {
       style={{ margin: '12px 0' }}
     >
       <Space direction="vertical" style={{ width: '100%' }}>
-        <Typography.Text strong>Testar XPath nesta página</Typography.Text>
+        <Typography.Text strong>{t.components.xpathTester.title}</Typography.Text>
         <Form layout="inline" onFinish={onTest}>
           <Form.Item style={{ flex: 1 }}>
             <Input
               data-testid={`pp:${pageId}|xpath|input|expr`}
-              placeholder='Ex.: //*[@data-testid="pp:home|main|btn|comecar"]'
+              placeholder={locale === 'pt-BR' ? 'Ex.: //*[@data-testid="pp:home|main|btn|comecar"]' : 
+                           locale === 'en-US' ? 'Ex.: //*[@data-testid="pp:home|main|btn|comecar"]' : 
+                           'Ex.: //*[@data-testid="pp:home|main|btn|comecar"]'}
               value={xpath}
               onChange={(e) => setXpath(e.target.value)}
               allowClear
@@ -82,12 +88,12 @@ export default function XPathTester({ pageId }: { pageId: string }) {
           </Form.Item>
           <Form.Item>
             <Button htmlType="submit" type="primary" data-testid={`pp:${pageId}|xpath|btn|testar`}>
-              Testar XPath
+              {t.components.xpathTester.test}
             </Button>
           </Form.Item>
           <Form.Item>
             <Button onClick={onClear} data-testid={`pp:${pageId}|xpath|btn|limpar`}>
-              Limpar
+              {t.common.clear}
             </Button>
           </Form.Item>
         </Form>
@@ -97,7 +103,9 @@ export default function XPathTester({ pageId }: { pageId: string }) {
             data-testid={`pp:${pageId}|xpath|alert|resultado`}
             showIcon
             type={count > 0 ? 'success' : 'warning'}
-            message={`Resultados: ${count} elemento(s).`}
+            message={locale === 'pt-BR' ? `Resultados: ${count} elemento(s).` : 
+                     locale === 'en-US' ? `Results: ${count} element(s).` : 
+                     `Résultats: ${count} élément(s).`}
           />
         )}
       </Space>

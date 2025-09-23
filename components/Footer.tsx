@@ -1,11 +1,16 @@
 'use client';
 import { Layout, Typography, Space, Divider } from 'antd';
 import { GithubOutlined, HeartOutlined, LinkedinOutlined, MailOutlined } from '@ant-design/icons';
+import { useLocale } from '@/lib/locale-context';
+import { getTranslations } from '@/lib/translations';
 
 const { Footer: AntFooter } = Layout;
 const { Text, Link } = Typography;
 
 export default function Footer() {
+  const { locale } = useLocale();
+  const t = getTranslations(locale);
+
   return (
     <AntFooter 
       data-testid="pp:layout|footer|footer|root"
@@ -17,7 +22,7 @@ export default function Footer() {
     >
       <Space direction="vertical" size="small">
         <Text>
-          Feito com <HeartOutlined style={{ color: '#ff4d4f' }} /> para a comunidade de QA
+          {t.footer.madeWith} <HeartOutlined style={{ color: '#ff4d4f' }} /> {t.footer.by} {t.footer.for} QA {t.footer.community}
         </Text>
         
         <Space>

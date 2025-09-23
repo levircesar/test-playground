@@ -34,12 +34,17 @@ import {
 import { useState } from 'react';
 import XPathTester from '@/components/XPathTester';
 import BackButton from '@/components/BackButton';
+import RoadmapChallengesButton from '@/components/RoadmapChallengesButton';
+import { useLocale } from '@/lib/locale-context';
+import { getTranslations } from '@/lib/translations';
 
 const { Title, Paragraph, Text } = Typography;
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 
 export default function FacilPage() {
+  const { locale } = useLocale();
+  const t = getTranslations(locale);
   const [counter, setCounter] = useState(0);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -105,12 +110,15 @@ export default function FacilPage() {
   return (
     <div data-testid="pp:facil|page|container|root" style={{ padding: '40px 24px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <BackButton href="/desafios" testId="pp:facil|btn|voltar" />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <BackButton href="/desafios" testId="pp:facil|btn|voltar" />
+          <RoadmapChallengesButton level="Fácil" testId="pp:facil|btn|desafios" />
+        </div>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <Title level={1}>Roadmap Fácil</Title>
+          <Title level={1}>{t.roadmap.easy.title}</Title>
           <Paragraph style={{ fontSize: '18px', color: '#666' }}>
-            Pratique com componentes básicos do Ant Design. Todos os elementos têm data-testid únicos.
+            {t.roadmap.easy.subtitle}
           </Paragraph>
         </div>
 
@@ -119,12 +127,14 @@ export default function FacilPage() {
           <Col xs={24} lg={12}>
             <Card 
               data-testid="pp:facil|section|card|botoes"
-              title="Botões"
+              title={locale === 'pt-BR' ? 'Botões' : locale === 'en-US' ? 'Buttons' : 'Boutons'}
               style={{ height: '100%' }}
             >
               <Space direction="vertical" size="middle" style={{ width: '100%' }}>
                 <div>
-                  <Text strong>Contador: {counter}</Text>
+                  <Text strong>
+                    {locale === 'pt-BR' ? 'Contador:' : locale === 'en-US' ? 'Counter:' : 'Compteur:'} {counter}
+                  </Text>
                   <Button
                     type="primary"
                     icon={<PlusOutlined />}
@@ -132,7 +142,7 @@ export default function FacilPage() {
                     data-testid="pp:facil|btn|incrementar"
                     style={{ marginLeft: '16px' }}
                   >
-                    Incrementar
+                    {locale === 'pt-BR' ? 'Incrementar' : locale === 'en-US' ? 'Increment' : 'Incrémenter'}
                   </Button>
                 </div>
 
@@ -142,7 +152,7 @@ export default function FacilPage() {
                     onClick={handleLoadingClick}
                     data-testid="pp:facil|btn|loading"
                   >
-                    Clique para Loading
+                    {locale === 'pt-BR' ? 'Clique para Loading' : locale === 'en-US' ? 'Click for Loading' : 'Cliquez pour Chargement'}
                   </Button>
                 </div>
 
@@ -151,7 +161,7 @@ export default function FacilPage() {
                     disabled
                     data-testid="pp:facil|btn|disabled"
                   >
-                    Botão Desabilitado
+                    {locale === 'pt-BR' ? 'Botão Desabilitado' : locale === 'en-US' ? 'Disabled Button' : 'Bouton Désactivé'}
                   </Button>
                 </div>
 
@@ -162,7 +172,7 @@ export default function FacilPage() {
                     onClick={showModal}
                     data-testid="pp:facil|btn|modal"
                   >
-                    Abrir Modal
+                    {locale === 'pt-BR' ? 'Abrir Modal' : locale === 'en-US' ? 'Open Modal' : 'Ouvrir Modal'}
                   </Button>
                 </div>
               </Space>
@@ -173,7 +183,7 @@ export default function FacilPage() {
           <Col xs={24} lg={12}>
             <Card 
               data-testid="pp:facil|section|card|inputs"
-              title="Inputs"
+              title={locale === 'pt-BR' ? 'Inputs' : locale === 'en-US' ? 'Inputs' : 'Entrées'}
               style={{ height: '100%' }}
             >
               <Space direction="vertical" size="middle" style={{ width: '100%' }}>
@@ -228,7 +238,7 @@ export default function FacilPage() {
           <Col xs={24} lg={12}>
             <Card 
               data-testid="pp:facil|section|card|checkboxes"
-              title="Checkboxes e Radios"
+              title={locale === 'pt-BR' ? 'Checkboxes e Radios' : locale === 'en-US' ? 'Checkboxes and Radios' : 'Cases à cocher et Radios'}
               style={{ height: '100%' }}
             >
               <Space direction="vertical" size="middle" style={{ width: '100%' }}>
@@ -264,7 +274,7 @@ export default function FacilPage() {
           <Col xs={24} lg={12}>
             <Card 
               data-testid="pp:facil|section|card|pickers"
-              title="Date e Time Pickers"
+              title={locale === 'pt-BR' ? 'Date e Time Pickers' : locale === 'en-US' ? 'Date and Time Pickers' : 'Sélecteurs de Date et Heure'}
               style={{ height: '100%' }}
             >
               <Space direction="vertical" size="middle" style={{ width: '100%' }}>
@@ -291,7 +301,7 @@ export default function FacilPage() {
           <Col xs={24} lg={12}>
             <Card 
               data-testid="pp:facil|section|card|slider-rate"
-              title="Slider e Rate"
+              title={locale === 'pt-BR' ? 'Slider e Rate' : locale === 'en-US' ? 'Slider and Rate' : 'Curseur et Note'}
               style={{ height: '100%' }}
             >
               <Space direction="vertical" size="middle" style={{ width: '100%' }}>
@@ -324,7 +334,7 @@ export default function FacilPage() {
           <Col xs={24} lg={12}>
             <Card 
               data-testid="pp:facil|section|card|switch"
-              title="Switch"
+              title={locale === 'pt-BR' ? 'Switch' : locale === 'en-US' ? 'Switch' : 'Interrupteur'}
               style={{ height: '100%' }}
             >
               <Space direction="vertical" size="middle" style={{ width: '100%' }}>
@@ -345,7 +355,7 @@ export default function FacilPage() {
           <Col xs={24}>
             <Card 
               data-testid="pp:facil|section|card|tabs"
-              title="Tabs"
+              title={locale === 'pt-BR' ? 'Tabs' : locale === 'en-US' ? 'Tabs' : 'Onglets'}
             >
               <Tabs defaultActiveKey="1" data-testid="pp:facil|tabs|container">
                 <TabPane tab="Tab 1" key="1" data-testid="pp:facil|tab|1">
@@ -365,7 +375,7 @@ export default function FacilPage() {
           <Col xs={24}>
             <Card 
               data-testid="pp:facil|section|card|collapse"
-              title="Collapse"
+              title={locale === 'pt-BR' ? 'Collapse' : locale === 'en-US' ? 'Collapse' : 'Réduction'}
             >
               <Collapse data-testid="pp:facil|collapse|container">
                 <Panel header="Painel 1" key="1" data-testid="pp:facil|panel|1">
@@ -385,7 +395,7 @@ export default function FacilPage() {
           <Col xs={24}>
             <Card 
               data-testid="pp:facil|section|card|tooltip"
-              title="Tooltip"
+              title={locale === 'pt-BR' ? 'Tooltip' : locale === 'en-US' ? 'Tooltip' : 'Info-bulle'}
             >
               <Space>
                 <Tooltip title="Este é um tooltip">
@@ -406,7 +416,7 @@ export default function FacilPage() {
           <Col xs={24}>
             <Card 
               data-testid="pp:facil|section|card|tabela"
-              title="Tabela"
+              title={locale === 'pt-BR' ? 'Tabela' : locale === 'en-US' ? 'Table' : 'Tableau'}
             >
               <Table
                 data-testid="pp:facil|table|dados"
@@ -424,7 +434,7 @@ export default function FacilPage() {
         <div style={{ marginTop: '60px' }}>
           <Card 
             data-testid="pp:facil|desafios|card|root"
-            title="Desafios para Praticar"
+            title={locale === 'pt-BR' ? 'Desafios para Praticar' : locale === 'en-US' ? 'Challenges to Practice' : 'Défis à Pratiquer'}
           >
             <Row gutter={[16, 16]}>
               <Col xs={24} sm={12}>
@@ -470,21 +480,23 @@ export default function FacilPage() {
 
       {/* Modal */}
       <Modal
-        title="Modal de Exemplo"
+        title={locale === 'pt-BR' ? 'Modal de Exemplo' : locale === 'en-US' ? 'Example Modal' : 'Modal d\'Exemple'}
         open={modalVisible}
         onOk={handleModalOk}
         onCancel={handleModalCancel}
         data-testid="pp:facil|modal|root"
       >
         <p data-testid="pp:facil|modal|content">
-          Este é um modal de exemplo. Você pode interagir com ele e depois fechar.
+          {locale === 'pt-BR' ? 'Este é um modal de exemplo. Você pode interagir com ele e depois fechar.' : 
+           locale === 'en-US' ? 'This is an example modal. You can interact with it and then close.' : 
+           'Ceci est un modal d\'exemple. Vous pouvez interagir avec lui puis le fermer.'}
         </p>
         <Button 
           type="primary" 
           onClick={handleModalOk}
           data-testid="pp:facil|modal|btn|ok"
         >
-          Fechar Modal
+          {locale === 'pt-BR' ? 'Fechar Modal' : locale === 'en-US' ? 'Close Modal' : 'Fermer Modal'}
         </Button>
       </Modal>
       

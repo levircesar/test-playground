@@ -23,6 +23,7 @@ import {
 import { useState, useEffect } from 'react';
 import XPathTester from '@/components/XPathTester';
 import BackButton from '@/components/BackButton';
+import RoadmapChallengesButton from '@/components/RoadmapChallengesButton';
 import { getJSON, setJSON, STORAGE_KEYS } from '@/lib/storage';
 
 const { Title, Paragraph, Text } = Typography;
@@ -147,7 +148,10 @@ export default function ApiPage() {
   return (
     <div data-testid="pp:api|page|container|root" style={{ padding: '40px 24px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <BackButton href="/desafios" testId="pp:api|btn|voltar" />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <BackButton href="/desafios" testId="pp:api|btn|voltar" />
+          <RoadmapChallengesButton level="API" testId="pp:api|btn|desafios" />
+        </div>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <Title level={1}>Testes de API</Title>

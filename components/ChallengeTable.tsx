@@ -4,6 +4,8 @@ import { InfoCircleOutlined, CodeOutlined, CopyOutlined } from '@ant-design/icon
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Challenge } from '@/lib/challenges';
+import { useLocale } from '@/lib/locale-context';
+import { getTranslations } from '@/lib/translations';
 
 const { Title, Paragraph } = Typography;
 
@@ -12,6 +14,8 @@ interface ChallengeTableProps {
 }
 
 export default function ChallengeTable({ challenges }: ChallengeTableProps) {
+  const { locale } = useLocale();
+  const t = getTranslations(locale);
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null);
@@ -30,10 +34,10 @@ export default function ChallengeTable({ challenges }: ChallengeTableProps) {
 
   const showSolutionModal = (challenge: Challenge) => {
     Modal.confirm({
-      title: 'Ver Solução',
-      content: 'Tem certeza que deseja ver a solução deste desafio? Isso pode reduzir o aprendizado.',
-      okText: 'Sim, mostrar solução',
-      cancelText: 'Cancelar',
+      title: t.components.challengeTable.modal.viewSolution,
+      content: t.components.challengeTable.modal.confirmViewSolution,
+      okText: t.components.challengeTable.modal.confirmYes,
+      cancelText: t.common.cancel,
       onOk: () => {
         setSelectedSolutionChallenge(challenge);
         setSolutionModalVisible(true);
@@ -585,13 +589,13 @@ test('24. Persistência de dados', async ({ page }) => {
       sorter: (a: Challenge, b: Challenge) => a.id - b.id,
     },
     {
-      title: 'Título',
+      title: t.components.challengeTable.challenge,
       dataIndex: 'titulo',
       key: 'titulo',
       sorter: (a: Challenge, b: Challenge) => a.titulo.localeCompare(b.titulo),
     },
     {
-      title: 'Nível',
+      title: t.components.challengeTable.difficulty,
       dataIndex: 'nivel',
       key: 'nivel',
       width: 120,
@@ -612,7 +616,7 @@ test('24. Persistência de dados', async ({ page }) => {
       onFilter: (value: boolean | React.Key, record: Challenge) => record.nivel === value,
     },
     {
-      title: 'Tipo',
+      title: t.components.challengeTable.modal.type,
       dataIndex: 'tipo',
       key: 'tipo',
       width: 120,
@@ -633,7 +637,7 @@ test('24. Persistência de dados', async ({ page }) => {
       onFilter: (value: boolean | React.Key, record: Challenge) => record.tipo === value,
     },
     {
-      title: 'Tags',
+      title: t.components.challengeTable.modal.tags,
       dataIndex: 'tags',
       key: 'tags',
       render: (tags: string[]) => (
@@ -645,7 +649,7 @@ test('24. Persistência de dados', async ({ page }) => {
       ),
     },
     {
-      title: 'Ação',
+      title: t.components.challengeTable.actions,
       key: 'action',
       width: 180,
       render: (_: any, record: Challenge) => (
@@ -657,7 +661,7 @@ test('24. Persistência de dados', async ({ page }) => {
             data-testid={`pp:desafios|table|btn|info#${record.id}`}
             onClick={() => showModal(record)}
           >
-            Info
+            {t.components.challengeTable.modal.info}
           </Button>
           {/**
             <Button
@@ -698,12 +702,12 @@ test('24. Persistência de dados', async ({ page }) => {
       />
       
       <Modal
-        title={`Detalhes do Desafio: ${selectedChallenge?.titulo}`}
+        title={`${t.components.challengeTable.modal.challengeDetails}: ${selectedChallenge?.titulo}`}
         open={modalVisible}
         onCancel={hideModal}
         footer={[
           <Button key="close" onClick={hideModal}>
-            Fechar
+            {t.common.close}
           </Button>,
           <Button 
             key="go" 
@@ -715,7 +719,7 @@ test('24. Persistência de dados', async ({ page }) => {
               }
             }}
           >
-            Ir para o Desafio
+            {t.components.challengeTable.modal.goToChallenge}
           </Button>
         ]}
         width={600}
@@ -724,17 +728,17 @@ test('24. Persistência de dados', async ({ page }) => {
         {selectedChallenge && (
           <Space direction="vertical" size="large" style={{ width: '100%' }}>
             <div>
-              <Title level={4}>📋 Descrição do Desafio</Title>
+              <Title level={4}>📋 {t.components.challengeTable.modal.description}</Title>
               <Paragraph>{selectedChallenge.descricao}</Paragraph>
             </div>
             
             <div>
-              <Title level={4}>✅ Resultado Esperado</Title>
+              <Title level={4}>✅ {t.components.challengeTable.modal.expectedResult}</Title>
               <Paragraph>{selectedChallenge.resultadoEsperado}</Paragraph>
             </div>
             
             <div>
-              <Title level={4}>🏷️ Informações</Title>
+              <Title level={4}>🏷️ {t.components.challengeTable.modal.information}</Title>
               <Space wrap>
                 <Tag color="blue">{selectedChallenge.nivel}</Tag>
                 <Tag color="green">{selectedChallenge.tipo}</Tag>
@@ -749,12 +753,12 @@ test('24. Persistência de dados', async ({ page }) => {
 
       {/* Modal de Solução */}
       <Modal
-        title={`Solução: ${selectedSolutionChallenge?.titulo}`}
+        title={`${t.components.challengeTable.modal.solution}: ${selectedSolutionChallenge?.titulo}`}
         open={solutionModalVisible}
         onCancel={hideSolutionModal}
         footer={[
           <Button key="close" onClick={hideSolutionModal}>
-            Fechar
+            {t.common.close}
           </Button>,
           <Button 
             key="copy" 
@@ -767,7 +771,7 @@ test('24. Persistência de dados', async ({ page }) => {
               }
             }}
           >
-            Copiar Código
+            {t.components.challengeTable.modal.copyCode}
           </Button>
         ]}
         width={800}

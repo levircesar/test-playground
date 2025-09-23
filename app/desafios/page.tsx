@@ -4,10 +4,14 @@ import { TrophyOutlined } from '@ant-design/icons';
 import ChallengeTable from '@/components/ChallengeTable';
 import BackButton from '@/components/BackButton';
 import { getChallenges } from '@/lib/challenges';
+import { useLocale } from '@/lib/locale-context';
+import { getTranslations } from '@/lib/translations';
 
 const { Title, Paragraph } = Typography;
 
 export default function DesafiosPage() {
+  const { locale } = useLocale();
+  const t = getTranslations(locale);
   const challenges = getChallenges();
 
   return (
@@ -19,10 +23,9 @@ export default function DesafiosPage() {
           <Space direction="vertical" size="large">
             <TrophyOutlined style={{ fontSize: '64px', color: '#fa8c16' }} />
             <div>
-              <Title level={1}>Desafios de Automação</Title>
+              <Title level={1}>{t.challenges.title}</Title>
               <Paragraph style={{ fontSize: '18px', color: '#666' }}>
-                Explore nossa coleção completa de desafios organizados por nível de dificuldade. 
-                Cada desafio foi criado para testar habilidades específicas em automação de testes.
+                {t.challenges.subtitle}
               </Paragraph>
             </div>
           </Space>
@@ -34,41 +37,53 @@ export default function DesafiosPage() {
 
         {/* Estatísticas */}
         <div style={{ marginTop: '60px', textAlign: 'center' }}>
-          <Title level={3}>Estatísticas dos Desafios</Title>
+          <Title level={3}>
+            {locale === 'pt-BR' ? 'Estatísticas dos Desafios' : 
+             locale === 'en-US' ? 'Challenge Statistics' : 
+             'Statistiques des Défis'}
+          </Title>
           <Space size="large" wrap>
             <div data-testid="pp:desafios|stats|total">
               <Title level={4} style={{ margin: 0, color: '#1890ff' }}>
                 {challenges.length}
               </Title>
-              <Paragraph style={{ margin: 0 }}>Total de Desafios</Paragraph>
+              <Paragraph style={{ margin: 0 }}>
+                {locale === 'pt-BR' ? 'Total de Desafios' : 
+                 locale === 'en-US' ? 'Total Challenges' : 
+                 'Total des Défis'}
+              </Paragraph>
             </div>
             
             <div data-testid="pp:desafios|stats|facil">
               <Title level={4} style={{ margin: 0, color: '#52c41a' }}>
                 {challenges.filter(c => c.nivel === 'Fácil').length}
               </Title>
-              <Paragraph style={{ margin: 0 }}>Fáceis</Paragraph>
+              <Paragraph style={{ margin: 0 }}>{t.challenges.difficulty.easy}</Paragraph>
             </div>
             
             <div data-testid="pp:desafios|stats|medio">
               <Title level={4} style={{ margin: 0, color: '#fa8c16' }}>
                 {challenges.filter(c => c.nivel === 'Médio').length}
               </Title>
-              <Paragraph style={{ margin: 0 }}>Médios</Paragraph>
+              <Paragraph style={{ margin: 0 }}>{t.challenges.difficulty.medium}</Paragraph>
             </div>
             
             <div data-testid="pp:desafios|stats|dificil">
               <Title level={4} style={{ margin: 0, color: '#ff4d4f' }}>
                 {challenges.filter(c => c.nivel === 'Difícil').length}
               </Title>
-              <Paragraph style={{ margin: 0 }}>Difíceis</Paragraph>
+              <Paragraph style={{ margin: 0 }}>{t.challenges.difficulty.hard}</Paragraph>
             </div>
             
             <div data-testid="pp:desafios|stats|api">
               <Title level={4} style={{ margin: 0, color: '#722ed1' }}>
                 {challenges.filter(c => c.nivel.includes('API')).length}
               </Title>
-              <Paragraph style={{ margin: 0 }}>API</Paragraph>
+              <Paragraph style={{ margin: 0 }}>
+                {locale === 'pt-BR' ? 'API' : 
+                 locale === 'en-US' ? 'API' : 
+                 'API'}
+              </Paragraph>
             </div>
           </Space>
         </div>

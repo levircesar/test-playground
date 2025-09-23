@@ -1,18 +1,22 @@
 'use client';
 import { Card, Button, Space, Typography, message, QRCode } from 'antd';
 import { HeartOutlined, CopyOutlined } from '@ant-design/icons';
+import { useLocale } from '@/lib/locale-context';
+import { getTranslations } from '@/lib/translations';
 
 const { Title, Text } = Typography;
 
 export default function Donation() {
+  const { locale } = useLocale();
+  const t = getTranslations(locale);
   const pixKey = '00020126580014BR.GOV.BCB.PIX0136e355a274-c19a-4569-ac2c-e44094a073705204000053039865802BR5925Levir Cesar Ribeiro Lemos6009SAO PAULO62140510IVJQYa4kvf63044324';
 
   const copyPixKey = async () => {
     try {
       await navigator.clipboard.writeText(pixKey);
-      message.success('Chave PIX copiada para a área de transferência!');
+      message.success(t.donation.pixKeyCopied);
     } catch (err) {
-      message.error('Erro ao copiar a chave PIX');
+      message.error(t.common.error);
     }
   };
 
@@ -25,13 +29,12 @@ export default function Donation() {
         <div>
           <HeartOutlined style={{ fontSize: '48px', color: '#ff4d4f' }} />
           <Title level={3} style={{ marginTop: '16px' }}>
-            Apoie o Projeto
+            {t.donation.title}
           </Title>
         </div>
         
         <Text>
-          Olá! Eu sou o Levir, criador deste playground. Se este projeto te ajuda a aprender automação de testes, 
-          ficaria muito feliz com seu apoio 💙
+          {t.donation.description}
         </Text>
         
         <Space direction="vertical" size="middle">
@@ -43,7 +46,7 @@ export default function Donation() {
             onClick={copyPixKey}
             icon={<CopyOutlined />}
           >
-            Copiar Chave PIX
+            {t.donation.copyPixKey}
           </Button>
           
           <div data-testid="pp:landing|donation|qrcode|container">
@@ -53,7 +56,7 @@ export default function Donation() {
               style={{ marginBottom: '16px' }}
             />
             <Text type="secondary" style={{ display: 'block', marginTop: '8px' }}>
-              QR Code PIX
+              {t.donation.qrCodeTitle}
             </Text>
           </div>
         </Space>

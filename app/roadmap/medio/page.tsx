@@ -21,6 +21,7 @@ import {
 import { useState } from 'react';
 import XPathTester from '@/components/XPathTester';
 import BackButton from '@/components/BackButton';
+import RoadmapChallengesButton from '@/components/RoadmapChallengesButton';
 
 const { Title, Paragraph, Text } = Typography;
 const { Dragger } = Upload;
@@ -111,7 +112,10 @@ export default function MedioPage() {
   return (
     <div data-testid="pp:medio|page|container|root" style={{ padding: '40px 24px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <BackButton href="/desafios" testId="pp:medio|btn|voltar" />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <BackButton href="/desafios" testId="pp:medio|btn|voltar" />
+          <RoadmapChallengesButton level="Médio" testId="pp:medio|btn|desafios" />
+        </div>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <Title level={1}>Roadmap Médio</Title>

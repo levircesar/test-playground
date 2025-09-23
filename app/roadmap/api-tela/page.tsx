@@ -24,6 +24,7 @@ import {
 import { useState, useEffect } from 'react';
 import XPathTester from '@/components/XPathTester';
 import BackButton from '@/components/BackButton';
+import RoadmapChallengesButton from '@/components/RoadmapChallengesButton';
 import { getJSON, setJSON, STORAGE_KEYS } from '@/lib/storage';
 
 const { Title, Paragraph, Text } = Typography;
@@ -180,7 +181,10 @@ export default function ApiTelaPage() {
   return (
     <div data-testid="pp:api-tela|page|container|root" style={{ padding: '40px 24px' }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-        <BackButton href="/desafios" testId="pp:api-tela|btn|voltar" />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <BackButton href="/desafios" testId="pp:api-tela|btn|voltar" />
+          <RoadmapChallengesButton level="API+Tela" testId="pp:api-tela|btn|desafios" />
+        </div>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <Title level={1}>API + Tela - App de TODOs</Title>

@@ -20,10 +20,15 @@ import {
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
 import Donation from '@/components/Donation';
+import { useLocale } from '@/lib/locale-context';
+import { getTranslations } from '@/lib/translations';
 
 const { Title, Paragraph, Text } = Typography;
 
 export default function LandingPage() {
+  const { locale } = useLocale();
+  const t = getTranslations(locale);
+
   return (
     <div data-testid="pp:landing|page|container|root">
       {/* Hero Section */}
@@ -50,9 +55,9 @@ export default function LandingPage() {
         }} />
         
         <Space direction="vertical" size="large" style={{ width: '100%', position: 'relative', zIndex: 1 }}>
-          <Badge.Ribbon text="100% Gratuito" color="green" data-testid="pp:landing|badge|gratuito">
+          <Badge.Ribbon text={locale === 'pt-BR' ? '100% Gratuito' : '100% Free'} color="green" data-testid="pp:landing|badge|gratuito">
             <Title level={1} style={{ color: 'white', fontSize: '4rem', margin: '20px 0', fontWeight: 'bold' }}>
-              🧪 Test Automation Playground
+              🧪 {t.home.title}
             </Title>
           </Badge.Ribbon>
           
@@ -63,9 +68,9 @@ export default function LandingPage() {
             margin: '0 auto',
             textShadow: '0 2px 4px rgba(0,0,0,0.3)'
           }}>
-            <strong>A plataforma definitiva</strong> para aprender automação de testes com Playwright, Cypress e outras ferramentas. 
+            <strong>{t.home.subtitle}</strong>
             <br />
-            Domine cenários reais com componentes interativos e desafios práticos.
+            {t.home.description}
           </Paragraph>
           
           <Space size="large" style={{ marginTop: '40px' }}>
@@ -85,7 +90,7 @@ export default function LandingPage() {
                   border: 'none'
                 }}
               >
-                🚀 Começar Agora
+                🚀 {t.home.startButton}
               </Button>
             </Link>
             
@@ -105,7 +110,7 @@ export default function LandingPage() {
                   backdropFilter: 'blur(10px)'
                 }}
               >
-                🏆 Ver Desafios
+                🏆 {t.home.challengesButton}
               </Button>
             </Link>
           </Space>
@@ -114,7 +119,7 @@ export default function LandingPage() {
           <Row gutter={[32, 16]} style={{ marginTop: '60px', maxWidth: '800px', margin: '60px auto 0' }}>
             <Col xs={24} sm={8}>
               <Statistic
-                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>Desafios</span>}
+                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t.home.stats.challenges}</span>}
                 value={20}
                 valueStyle={{ color: '#fff', fontSize: '2rem' }}
                 prefix={<TrophyOutlined />}
@@ -123,7 +128,7 @@ export default function LandingPage() {
             </Col>
             <Col xs={24} sm={8}>
               <Statistic
-                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>Ferramentas</span>}
+                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t.home.stats.tools}</span>}
                 value="Playwright + Cypress"
                 valueStyle={{ color: '#fff', fontSize: '1.2rem' }}
                 prefix={<ThunderboltOutlined />}
@@ -132,8 +137,8 @@ export default function LandingPage() {
             </Col>
             <Col xs={24} sm={8}>
               <Statistic
-                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>Níveis</span>}
-                value="Fácil → Difícil"
+                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t.home.stats.levels}</span>}
+                value={locale === 'pt-BR' ? 'Fácil → Difícil' : locale === 'en-US' ? 'Easy → Hard' : 'Facile → Difficile'}
                 valueStyle={{ color: '#fff', fontSize: '1.2rem' }}
                 prefix={<StarOutlined />}
                 data-testid="pp:landing|stat|niveis"
@@ -151,10 +156,10 @@ export default function LandingPage() {
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
             <Title level={2} style={{ fontSize: '2.5rem', marginBottom: '20px' }}>
-              🎯 Como Funciona
+              🎯 {t.home.howItWorks}
             </Title>
             <Paragraph style={{ fontSize: '1.2rem', color: '#666', maxWidth: '600px', margin: '0 auto' }}>
-              Aprenda através de <strong>cenários práticos</strong> com Playwright, Cypress e outras ferramentas de automação
+              {t.home.howItWorksDesc}
             </Paragraph>
           </div>
           
@@ -185,12 +190,11 @@ export default function LandingPage() {
                   }}>
                     <RocketOutlined style={{ fontSize: '40px', color: 'white' }} />
                   </div>
-                  <Title level={3} style={{ margin: 0 }}>Playwright</Title>
+                  <Title level={3} style={{ margin: 0 }}>{t.home.features.playwright}</Title>
                   <Text style={{ fontSize: '16px', lineHeight: '1.6' }}>
-                    Pratique com <strong>botões, formulários, tabelas</strong> usando a ferramenta mais moderna 
-                    para automação de testes.
+                    {t.home.features.playwrightDesc}
                   </Text>
-                  <Badge count="Fácil" style={{ backgroundColor: '#52c41a' }} />
+                  <Badge count={t.challenges.difficulty.easy} style={{ backgroundColor: '#52c41a' }} />
                 </Space>
               </Card>
             </Col>
@@ -221,12 +225,11 @@ export default function LandingPage() {
                   }}>
                     <UploadOutlined style={{ fontSize: '40px', color: 'white' }} />
                   </div>
-                  <Title level={3} style={{ margin: 0 }}>Cypress</Title>
+                  <Title level={3} style={{ margin: 0 }}>{t.home.features.cypress}</Title>
                   <Text style={{ fontSize: '16px', lineHeight: '1.6' }}>
-                    Teste <strong>uploads, validações</strong> de arquivo e cenários complexos 
-                    com a ferramenta mais popular do mercado.
+                    {t.home.features.cypressDesc}
                   </Text>
-                  <Badge count="Médio" style={{ backgroundColor: '#fa8c16' }} />
+                  <Badge count={t.challenges.difficulty.medium} style={{ backgroundColor: '#fa8c16' }} />
                 </Space>
               </Card>
             </Col>
@@ -257,12 +260,11 @@ export default function LandingPage() {
                   }}>
                     <BorderOutlined style={{ fontSize: '40px', color: 'white' }} />
                   </div>
-                  <Title level={3} style={{ margin: 0 }}>E2E & APIs</Title>
+                  <Title level={3} style={{ margin: 0 }}>{t.home.features.e2e}</Title>
                   <Text style={{ fontSize: '16px', lineHeight: '1.6' }}>
-                    Domine <strong>iframes, comunicação</strong> entre elementos e 
-                    testes de API completos com ambas as ferramentas.
+                    {t.home.features.e2eDesc}
                   </Text>
-                  <Badge count="Difícil" style={{ backgroundColor: '#ff4d4f' }} />
+                  <Badge count={t.challenges.difficulty.hard} style={{ backgroundColor: '#ff4d4f' }} />
                 </Space>
               </Card>
             </Col>
@@ -277,10 +279,10 @@ export default function LandingPage() {
       >
         <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
           <Title level={2} style={{ fontSize: '2.5rem', marginBottom: '20px' }}>
-            👥 Para Quem É?
+            👥 {t.home.forWho}
           </Title>
           <Paragraph style={{ fontSize: '1.2rem', color: '#666', marginBottom: '60px' }}>
-            <strong>Desenvolvido para todos os níveis</strong> de conhecimento em automação de testes com Playwright, Cypress e mais
+            {t.home.forWhoDesc}
           </Paragraph>
           
           <Row gutter={[24, 24]}>
@@ -309,9 +311,9 @@ export default function LandingPage() {
                   }}>
                     <UserOutlined style={{ fontSize: '30px', color: 'white' }} />
                   </div>
-                  <Title level={4} style={{ margin: 0, color: '#52c41a' }}>QA Iniciante</Title>
+                  <Title level={4} style={{ margin: 0, color: '#52c41a' }}>{t.home.audience.qaBeginner}</Title>
                   <Text type="secondary" style={{ fontSize: '14px' }}>
-                    Aprenda os conceitos básicos de automação
+                    {t.home.audience.qaBeginnerDesc}
                   </Text>
                 </Space>
               </Card>
@@ -342,9 +344,9 @@ export default function LandingPage() {
                   }}>
                     <ThunderboltOutlined style={{ fontSize: '30px', color: 'white' }} />
                   </div>
-                  <Title level={4} style={{ margin: 0, color: '#1890ff' }}>Automação</Title>
+                  <Title level={4} style={{ margin: 0, color: '#1890ff' }}>{t.home.audience.automation}</Title>
                   <Text type="secondary" style={{ fontSize: '14px' }}>
-                    Pratique cenários complexos de teste
+                    {t.home.audience.automationDesc}
                   </Text>
                 </Space>
               </Card>
@@ -375,9 +377,9 @@ export default function LandingPage() {
                   }}>
                     <ApiOutlined style={{ fontSize: '30px', color: 'white' }} />
                   </div>
-                  <Title level={4} style={{ margin: 0, color: '#722ed1' }}>Testes de API</Title>
+                  <Title level={4} style={{ margin: 0, color: '#722ed1' }}>{t.home.audience.apiTesting}</Title>
                   <Text type="secondary" style={{ fontSize: '14px' }}>
-                    Integre testes de API com interface
+                    {t.home.audience.apiTestingDesc}
                   </Text>
                 </Space>
               </Card>
@@ -408,9 +410,9 @@ export default function LandingPage() {
                   }}>
                     <CheckCircleOutlined style={{ fontSize: '30px', color: 'white' }} />
                   </div>
-                  <Title level={4} style={{ margin: 0, color: '#fa8c16' }}>E2E</Title>
+                  <Title level={4} style={{ margin: 0, color: '#fa8c16' }}>{t.home.audience.e2e}</Title>
                   <Text type="secondary" style={{ fontSize: '14px' }}>
-                    Fluxos completos de ponta a ponta
+                    {t.home.audience.e2eDesc}
                   </Text>
                 </Space>
               </Card>
@@ -431,10 +433,10 @@ export default function LandingPage() {
       >
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <Title level={2} style={{ color: 'white', fontSize: '2.5rem', marginBottom: '20px' }}>
-            🚀 Pronto para Começar?
+            🚀 {t.home.readyToStart}
           </Title>
           <Paragraph style={{ color: 'white', fontSize: '1.2rem', marginBottom: '40px' }}>
-            Junte-se a milhares de desenvolvedores que já dominam automação de testes com Playwright, Cypress e outras ferramentas
+            {t.home.readyToStartDesc}
           </Paragraph>
           
           <Space size="large">
@@ -454,7 +456,7 @@ export default function LandingPage() {
                   boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
                 }}
               >
-                🎯 Começar Agora
+                🎯 {t.home.startButton}
               </Button>
             </Link>
             
@@ -474,7 +476,7 @@ export default function LandingPage() {
                   backdropFilter: 'blur(10px)'
                 }}
               >
-                🏆 Ver Desafios
+                🏆 {t.home.challengesButton}
               </Button>
             </Link>
           </Space>
@@ -489,11 +491,14 @@ export default function LandingPage() {
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '60px' }}>
             <Title level={2} style={{ fontSize: '2.5rem', marginBottom: '20px' }}>
-              👨‍💻 Sobre o Criador
+              👨‍💻 {t.home.aboutCreator}
             </Title>
+            {/*
             <Paragraph style={{ fontSize: '1.2rem', color: '#666', maxWidth: '600px', margin: '0 auto' }}>
-              Conheça quem desenvolveu esta plataforma para a comunidade de QA
+              {t.home.aboutCreatorDesc}
             </Paragraph>
+            */}
+            
           </div>
           
           <Row gutter={[48, 48]} align="middle">
@@ -525,18 +530,15 @@ export default function LandingPage() {
               <Space direction="vertical" size="large" style={{ width: '100%' }}>
                 <div>
                   <Title level={2} style={{ margin: 0, color: '#2E8B57' }}>
-                    Levir Lemos
+                    {t.home.creator.name}
                   </Title>
                   <Text style={{ fontSize: '1.2rem', color: '#666', fontWeight: '500' }}>
-                    Quality Assurance Analyst & Test Automation Specialist
+                    {t.home.creator.title}
                   </Text>
                 </div>
                 
                 <Paragraph style={{ fontSize: '1.1rem', lineHeight: '1.8', color: '#555' }}>
-                  Apaixonado por automação de testes e qualidade de software, Levir é um especialista em QA 
-                  com experiência em <strong>Playwright, Cypress, Selenium</strong> e outras ferramentas de teste. 
-                  Como SDET (Software Development Engineer in Test), ele criou esta plataforma para democratizar 
-                  o aprendizado de automação de testes.
+                  {t.home.creator.description}
                 </Paragraph>
                 
                 <Row gutter={[16, 16]}>
@@ -552,8 +554,8 @@ export default function LandingPage() {
                       <Space>
                         <BookOutlined style={{ color: '#1890ff', fontSize: '20px' }} />
                         <div>
-                          <Text strong style={{ display: 'block' }}>Formação</Text>
-                          <Text type="secondary">Bacharel em Sistemas de informação</Text>
+                          <Text strong style={{ display: 'block' }}>{t.home.creator.education}</Text>
+                          <Text type="secondary">{t.home.creator.educationDesc}</Text>
                         </div>
                       </Space>
                     </Card>
@@ -571,8 +573,8 @@ export default function LandingPage() {
                       <Space>
                         <ThunderboltOutlined style={{ color: '#52c41a', fontSize: '20px' }} />
                         <div>
-                          <Text strong style={{ display: 'block' }}>Especialidade</Text>
-                          <Text type="secondary">Test Automation & QA</Text>
+                          <Text strong style={{ display: 'block' }}>{t.home.creator.specialty}</Text>
+                          <Text type="secondary">{t.home.creator.specialtyDesc}</Text>
                         </div>
                       </Space>
                     </Card>
