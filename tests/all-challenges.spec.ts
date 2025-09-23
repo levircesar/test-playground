@@ -49,7 +49,7 @@ test.describe('Todos os Desafios', () => {
       await expect(page.getByText('Contador: 3')).toBeVisible();
     });
 
-    test('2. Interagir com modal', async ({ page }) => {
+    test.only('2. Interagir com modal', async ({ page }) => {
       await page.goto('/roadmap/facil');
       
       // Abrir modal

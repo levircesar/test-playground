@@ -292,7 +292,7 @@ export default function ApiPage() {
               <Space direction="vertical" style={{ width: '100%' }}>
                 <div data-testid="pp:api|stats|historico">
                   <Text strong>Total de chamadas: </Text>
-                  <Text type="primary">{apiHistory.length}</Text>
+                  <Text style={{ color: '#1890ff' }}>{apiHistory.length}</Text>
                   <Text style={{ marginLeft: '16px' }}>
                     <Text strong>Sucessos: </Text>
                     <Text type="success">{apiHistory.filter(h => h.status === 'success').length}</Text>

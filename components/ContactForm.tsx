@@ -74,7 +74,6 @@ export default function ContactForm() {
         >
           <Input.TextArea
             data-testid="pp:landing|contact|input|mensagem"
-            prefix={<MessageOutlined />}
             placeholder="Sua mensagem aqui..."
             rows={4}
           />

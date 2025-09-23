@@ -48,7 +48,7 @@ export default function EmbedTablePage() {
         { text: 'Eletrônicos', value: 'Eletrônicos' },
         { text: 'Acessórios', value: 'Acessórios' },
       ],
-      onFilter: (value: string, record: Product) => record.category === value,
+      onFilter: (value: boolean | React.Key, record: Product) => record.category === value,
     },
     {
       title: 'Ações',

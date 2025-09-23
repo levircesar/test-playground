@@ -149,13 +149,13 @@ export default function DificilPage() {
               <Col xs={24} sm={12}>
                 <div data-testid="pp:dificil|stats|form">
                   <Text strong>Mensagens do Formulário: </Text>
-                  <Text type="primary">{formMessages.length}</Text>
+                  <Text style={{ color: '#1890ff' }}>{formMessages.length}</Text>
                 </div>
               </Col>
               <Col xs={24} sm={12}>
                 <div data-testid="pp:dificil|stats|table">
                   <Text strong>Mensagens da Tabela: </Text>
-                  <Text type="primary">{tableMessages.length}</Text>
+                  <Text style={{ color: '#1890ff' }}>{tableMessages.length}</Text>
                 </div>
               </Col>
             </Row>
