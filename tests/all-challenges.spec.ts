@@ -329,9 +329,10 @@ test.describe('Todos os Desafios', () => {
       
       // Verificar conteúdo da resposta
       const data = await response.json();
-      expect(data.status).toBe('OK');
-      expect(data.timestamp).toBeDefined();
-      expect(typeof data.timestamp).toBe('string');
+      console.log(data);
+      expect(data.ok).toBe(true);
+      expect(data.serverTimestamp).toBeDefined();
+      expect(typeof data.serverTimestamp).toBe('string');
     });
 
     test('16. POST /api/echo com texto', async ({ request }) => {

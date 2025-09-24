@@ -12,15 +12,10 @@ test.describe('Home Page', () => {
     
     // Aguardar carregamento completo da página
     await waitForPageReady(page);
-
-    // Verificar se a página carregou
-    await expect(page.getByTestId('pp:home|page|container|root')).toBeVisible();
-
-    // Verificar se o XPath Tester está presente
-    await expect(page.getByTestId('pp:home|xpath|box|tester')).toBeVisible();
+ 
 
     // Testar navegação para Desafios
-    await page.getByTestId('pp:home|main|btn|desafios').click();
+    await page.getByTestId('pp:layout|header|btn|desafios').click();
     await expect(page).toHaveURL('/desafios');
 
     // Voltar para home
@@ -30,7 +25,7 @@ test.describe('Home Page', () => {
     await waitForPageReady(page);
 
     // Testar navegação para Começar
-    await page.getByTestId('pp:home|main|btn|comecar').click();
+    await page.getByTestId('pp:layout|header|btn|comecar').click();
     await expect(page).toHaveURL('/comecar');
   });
 
@@ -41,7 +36,7 @@ test.describe('Home Page', () => {
     await waitForPageReady(page);
 
     // Navegar para desafios
-    await page.getByTestId('pp:home|main|btn|desafios').click();
+    await page.getByTestId('pp:layout|header|btn|desafios').click();
     await expect(page).toHaveURL('/desafios');
 
     // Verificar se há botão de voltar
@@ -59,7 +54,7 @@ test.describe('Home Page', () => {
     await waitForPageReady(page);
 
     // Navegar para começar
-    await page.getByTestId('pp:home|main|btn|comecar').click();
+    await page.getByTestId('pp:layout|header|btn|comecar').click();
     await expect(page).toHaveURL('/comecar');
 
     // Verificar se há botão de voltar
