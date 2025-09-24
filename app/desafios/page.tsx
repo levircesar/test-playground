@@ -1,12 +1,13 @@
 'use client';
-import { Typography, Space } from 'antd';
+import { Typography, Space, Spin, Alert } from 'antd';
 import { TrophyOutlined } from '@ant-design/icons';
-import ChallengeTable from '@/components/ChallengeTable';
+import ChallengeTableWithFirebase from '@/components/ChallengeTableWithFirebase';
 import BackButton from '@/components/BackButton';
 import SEOHead from '@/components/SEOHead';
 import { getChallenges } from '@/lib/challenges';
 import { useLocale } from '@/lib/locale-context';
 import { getTranslations } from '@/lib/translations';
+import { useChallengeStatistics } from '@/lib/hooks/useChallengeStatistics';
 
 const { Title, Paragraph } = Typography;
 
@@ -14,6 +15,7 @@ export default function DesafiosPage() {
   const { locale } = useLocale();
   const t = getTranslations(locale);
   const challenges = getChallenges(locale);
+  const { statistics, loading: statsLoading, error: statsError } = useChallengeStatistics();
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -67,7 +69,7 @@ export default function DesafiosPage() {
         </div>
 
         <div data-testid="pp:desafios|table|container|root">
-          <ChallengeTable challenges={challenges} />
+          <ChallengeTableWithFirebase />
         </div>
 
         {/* Estatísticas */}
@@ -77,50 +79,71 @@ export default function DesafiosPage() {
              locale === 'en-US' ? 'Challenge Statistics' : 
              'Statistiques des Défis'}
           </Title>
-          <Space size="large" wrap>
-            <div data-testid="pp:desafios|stats|total">
-              <Title level={4} style={{ margin: 0, color: '#1890ff' }}>
-                {challenges.length}
-              </Title>
-              <Paragraph style={{ margin: 0 }}>
-                {locale === 'pt-BR' ? 'Total de Desafios' : 
-                 locale === 'en-US' ? 'Total Challenges' : 
-                 'Total des Défis'}
+          
+          {statsLoading ? (
+            <div style={{ padding: '40px' }}>
+              <Spin size="large" />
+              <Paragraph style={{ marginTop: '16px' }}>
+                {locale === 'pt-BR' ? 'Carregando estatísticas...' : 
+                 locale === 'en-US' ? 'Loading statistics...' : 
+                 'Chargement des statistiques...'}
               </Paragraph>
             </div>
-            
-            <div data-testid="pp:desafios|stats|facil">
-              <Title level={4} style={{ margin: 0, color: '#52c41a' }}>
-                {challenges.filter(c => c.nivel === 'Fácil').length}
-              </Title>
-              <Paragraph style={{ margin: 0 }}>{t.challenges.difficulty.easy}</Paragraph>
-            </div>
-            
-            <div data-testid="pp:desafios|stats|medio">
-              <Title level={4} style={{ margin: 0, color: '#fa8c16' }}>
-                {challenges.filter(c => c.nivel === 'Médio').length}
-              </Title>
-              <Paragraph style={{ margin: 0 }}>{t.challenges.difficulty.medium}</Paragraph>
-            </div>
-            
-            <div data-testid="pp:desafios|stats|dificil">
-              <Title level={4} style={{ margin: 0, color: '#ff4d4f' }}>
-                {challenges.filter(c => c.nivel === 'Difícil').length}
-              </Title>
-              <Paragraph style={{ margin: 0 }}>{t.challenges.difficulty.hard}</Paragraph>
-            </div>
-            
-            <div data-testid="pp:desafios|stats|api">
-              <Title level={4} style={{ margin: 0, color: '#722ed1' }}>
-                {challenges.filter(c => c.nivel.includes('API')).length}
-              </Title>
-              <Paragraph style={{ margin: 0 }}>
-                {locale === 'pt-BR' ? 'API' : 
-                 locale === 'en-US' ? 'API' : 
-                 'API'}
-              </Paragraph>
-            </div>
-          </Space>
+          ) : statsError ? (
+            <Alert
+              message={locale === 'pt-BR' ? 'Erro ao carregar estatísticas' : 
+                      locale === 'en-US' ? 'Error loading statistics' : 
+                      'Erreur lors du chargement des statistiques'}
+              description={statsError}
+              type="warning"
+              showIcon
+            />
+          ) : statistics ? (
+            <Space size="large" wrap>
+              <div data-testid="pp:desafios|stats|total">
+                <Title level={4} style={{ margin: 0, color: '#1890ff' }}>
+                  {statistics.total}
+                </Title>
+                <Paragraph style={{ margin: 0 }}>
+                  {locale === 'pt-BR' ? 'Total de Desafios' : 
+                   locale === 'en-US' ? 'Total Challenges' : 
+                   'Total des Défis'}
+                </Paragraph>
+              </div>
+              
+              <div data-testid="pp:desafios|stats|facil">
+                <Title level={4} style={{ margin: 0, color: '#52c41a' }}>
+                  {statistics.byLevel.facil}
+                </Title>
+                <Paragraph style={{ margin: 0 }}>{t.challenges.difficulty.easy}</Paragraph>
+              </div>
+              
+              <div data-testid="pp:desafios|stats|medio">
+                <Title level={4} style={{ margin: 0, color: '#fa8c16' }}>
+                  {statistics.byLevel.medio}
+                </Title>
+                <Paragraph style={{ margin: 0 }}>{t.challenges.difficulty.medium}</Paragraph>
+              </div>
+              
+              <div data-testid="pp:desafios|stats|dificil">
+                <Title level={4} style={{ margin: 0, color: '#ff4d4f' }}>
+                  {statistics.byLevel.dificil}
+                </Title>
+                <Paragraph style={{ margin: 0 }}>{t.challenges.difficulty.hard}</Paragraph>
+              </div>
+              
+              <div data-testid="pp:desafios|stats|api">
+                <Title level={4} style={{ margin: 0, color: '#722ed1' }}>
+                  {statistics.byLevel.api + statistics.byLevel.apiTela}
+                </Title>
+                <Paragraph style={{ margin: 0 }}>
+                  {locale === 'pt-BR' ? 'API' : 
+                   locale === 'en-US' ? 'API' : 
+                   'API'}
+                </Paragraph>
+              </div>
+            </Space>
+          ) : null}
         </div>
       </div>
       </div>

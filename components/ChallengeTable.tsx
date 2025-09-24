@@ -1,9 +1,9 @@
 'use client';
-import { Table, Button, Tag, Space, Modal, Typography, message } from 'antd';
+import { Table, Button, Tag, Space, Modal, Typography, message, Select, Tabs } from 'antd';
 import { InfoCircleOutlined, CodeOutlined, CopyOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Challenge } from '@/lib/challenges';
+import { Challenge, applyTranslationsToChallenge } from '@/lib/challenges';
 import { useLocale } from '@/lib/locale-context';
 import { getTranslations } from '@/lib/translations';
 
@@ -21,6 +21,7 @@ export default function ChallengeTable({ challenges }: ChallengeTableProps) {
   const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null);
   const [solutionModalVisible, setSolutionModalVisible] = useState(false);
   const [selectedSolutionChallenge, setSelectedSolutionChallenge] = useState<Challenge | null>(null);
+  const [selectedFramework, setSelectedFramework] = useState<'playwright' | 'cypress'>('playwright');
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -64,6 +65,15 @@ export default function ChallengeTable({ challenges }: ChallengeTableProps) {
   const hideSolutionModal = () => {
     setSolutionModalVisible(false);
     setSelectedSolutionChallenge(null);
+    setSelectedFramework('playwright');
+  };
+
+  const getSolutionCode = (challenge: Challenge): string => {
+    if (selectedFramework === 'playwright') {
+      return challenge.solucaoPlaywright || generateTestCode(challenge);
+    } else {
+      return challenge.solucaoCypress || generateTestCode(challenge);
+    }
   };
 
   const generateTestCode = (challenge: Challenge): string => {
@@ -681,17 +691,15 @@ test('24. Persistência de dados', async ({ page }) => {
           >
             {isMobile ? 'Info' : t.components.challengeTable.modal.info}
           </Button>
-          {/**
-            <Button
+          <Button
             type="default"
             size="small"
             icon={<CodeOutlined />}
             data-testid={`pp:desafios|table|btn|solucao#${record.id}`}
             onClick={() => showSolutionModal(record)}
           >
-            Solução
+            {isMobile ? 'Solução' : t.components.challengeTable.modal.solution}
           </Button>
-           */}
          
         </Space>
       ),
@@ -787,7 +795,7 @@ test('24. Persistência de dados', async ({ page }) => {
             icon={<CopyOutlined />}
             onClick={() => {
               if (selectedSolutionChallenge) {
-                const code = generateTestCode(selectedSolutionChallenge);
+                const code = getSolutionCode(selectedSolutionChallenge);
                 copyTestCode(code);
               }
             }}
@@ -795,17 +803,29 @@ test('24. Persistência de dados', async ({ page }) => {
             {t.components.challengeTable.modal.copyCode}
           </Button>
         ]}
-        width={isMobile ? '100%' : 800}
+        width={isMobile ? '100%' : 900}
         style={isMobile ? { top: 0, paddingBottom: 0 } : {}}
         data-testid="pp:desafios|solution-modal|root"
       >
         {selectedSolutionChallenge && (
           <Space direction="vertical" size="large" style={{ width: '100%' }}>
             <div>
-              <Title level={4}>🧪 Código de Teste Playwright</Title>
+              <Title level={4}>🧪 {t.components.challengeTable.modal.solutions}</Title>
               <Paragraph>
-                Este é o código de teste que automatiza o desafio "{selectedSolutionChallenge.titulo}":
+                {t.components.challengeTable.modal.chooseFramework} "{selectedSolutionChallenge.titulo}":
               </Paragraph>
+              
+              <Space>
+                <Select
+                  value={selectedFramework}
+                  onChange={setSelectedFramework}
+                  style={{ width: 200 }}
+                  options={[
+                    { value: 'playwright', label: t.components.challengeTable.modal.playwright },
+                    { value: 'cypress', label: t.components.challengeTable.modal.cypress }
+                  ]}
+                />
+              </Space>
             </div>
             
             <div style={{ 
@@ -819,16 +839,18 @@ test('24. Persistência de dados', async ({ page }) => {
               maxHeight: isMobile ? '300px' : '400px'
             }}>
               <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
-                {generateTestCode(selectedSolutionChallenge)}
+                {getSolutionCode(selectedSolutionChallenge)}
               </pre>
             </div>
             
             <div>
-              <Title level={5}>💡 Como usar:</Title>
+              <Title level={5}>{t.components.challengeTable.modal.howToUse}</Title>
               <Paragraph>
-                1. Copie o código acima<br/>
-                2. Cole em um arquivo .spec.ts<br/>
-                3. Execute com: <code>npx playwright test</code>
+                {selectedFramework === 'playwright' ? (
+                  <span dangerouslySetInnerHTML={{ __html: t.components.challengeTable.modal.playwrightInstructions }} />
+                ) : (
+                  <span dangerouslySetInnerHTML={{ __html: t.components.challengeTable.modal.cypressInstructions }} />
+                )}
               </Paragraph>
             </div>
           </Space>

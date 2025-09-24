@@ -1,5 +1,5 @@
 'use client';
-import { Button, Typography, Card, Row, Col, Space, Divider, Statistic, Badge } from 'antd';
+import { Button, Typography, Card, Row, Col, Space, Divider, Statistic, Badge, Spin } from 'antd';
 import { 
   PlayCircleOutlined, 
   TrophyOutlined, 
@@ -18,6 +18,7 @@ import {
   MailOutlined
 } from '@ant-design/icons';
 import Link from 'next/link';
+import { useChallengeStatistics } from '@/lib/hooks/useChallengeStatistics';
 import { useState, useEffect } from 'react';
 import ContactForm from '@/components/ContactForm';
 import Donation from '@/components/Donation';
@@ -32,6 +33,7 @@ export default function LandingPage() {
   const t = getTranslations(locale);
   const [isMobile, setIsMobile] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
+  const { statistics, loading: statsLoading } = useChallengeStatistics();
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -189,13 +191,27 @@ export default function LandingPage() {
           {/* Stats */}
           <Row gutter={[32, 16]} style={{ marginTop: '60px', maxWidth: '800px', margin: '60px auto 0' }}>
             <Col xs={24} sm={8}>
-              <Statistic
-                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t.home.stats.challenges}</span>}
-                value={20}
-                valueStyle={{ color: '#fff', fontSize: '2rem' }}
-                prefix={<TrophyOutlined />}
-                data-testid="pp:landing|stat|desafios"
-              />
+              {statsLoading ? (
+                <div style={{ textAlign: 'center', padding: '20px' }}>
+                  <div style={{ color: 'rgba(255,255,255,0.8)', margin: '10px', fontSize: '14px' }}>
+                    {t.home.stats.challenges}
+                  </div>
+                  <Spin 
+                    size="large" 
+                    style={{ color: 'white' }}
+                    data-testid="pp:landing|stat|desafios|loading"
+                  />
+                  
+                </div>
+              ) : (
+                <Statistic
+                  title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t.home.stats.challenges}</span>}
+                  value={statistics?.total || 0}
+                  valueStyle={{ color: '#fff', fontSize: '2rem' }}
+                  prefix={<TrophyOutlined />}
+                  data-testid="pp:landing|stat|desafios"
+                />
+              )}
             </Col>
             <Col xs={24} sm={8}>
               <Statistic

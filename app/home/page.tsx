@@ -1,11 +1,16 @@
 'use client';
-import { Button, Typography, Card, Space, Row, Col } from 'antd';
+import { Button, Typography, Card, Space, Row, Col, Spin, Statistic } from 'antd';
 import { TrophyOutlined, PlayCircleOutlined, BookOutlined, RocketOutlined } from '@ant-design/icons';
 import Link from 'next/link';
+import { useChallengeStatistics } from '@/lib/hooks/useChallengeStatistics';
+import { useLocale } from '@/lib/locale-context';
 
 const { Title, Paragraph } = Typography;
 
 export default function HomePage() {
+  const { locale } = useLocale();
+  const { statistics, loading: statsLoading } = useChallengeStatistics();
+
   return (
     <div data-testid="pp:home|page|container|root" style={{ padding: '40px 24px' }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
@@ -32,6 +37,17 @@ export default function HomePage() {
                     Explore uma lista completa de desafios organizados por nível de dificuldade. 
                     Cada desafio tem um objetivo específico e te guia através de cenários reais.
                   </Paragraph>
+                  
+                  <div style={{ margin: '16px 0' }}>
+                    <Statistic
+                      title={locale === 'pt-BR' ? 'Total de Desafios' : 
+                             locale === 'en-US' ? 'Total Challenges' : 
+                             'Total des Défis'}
+                      value={statsLoading ? undefined : (statistics?.total || 0)}
+                      valueStyle={{ color: '#fa8c16', fontSize: '24px' }}
+                      loading={statsLoading}
+                    />
+                  </div>
                 </div>
 
                 <Link href="/desafios">
@@ -81,6 +97,67 @@ export default function HomePage() {
             </Card>
           </Col>
         </Row>
+
+        {/* Estatísticas dos Desafios */}
+        <div style={{ marginTop: '60px', textAlign: 'center' }}>
+          <Title level={2} style={{ marginBottom: '40px' }}>
+            {locale === 'pt-BR' ? 'Nossos Desafios' : 
+             locale === 'en-US' ? 'Our Challenges' : 
+             'Nos Défis'}
+          </Title>
+          
+          <Row gutter={[24, 24]} justify="center">
+            <Col xs={12} sm={6}>
+              <Card style={{ textAlign: 'center' }}>
+                <Statistic
+                  title={locale === 'pt-BR' ? 'Fáceis' : 
+                         locale === 'en-US' ? 'Easy' : 
+                         'Faciles'}
+                  value={statsLoading ? undefined : (statistics?.byLevel.facil || 0)}
+                  valueStyle={{ color: '#52c41a' }}
+                  loading={statsLoading}
+                />
+              </Card>
+            </Col>
+            
+            <Col xs={12} sm={6}>
+              <Card style={{ textAlign: 'center' }}>
+                <Statistic
+                  title={locale === 'pt-BR' ? 'Médios' : 
+                         locale === 'en-US' ? 'Medium' : 
+                         'Moyens'}
+                  value={statsLoading ? undefined : (statistics?.byLevel.medio || 0)}
+                  valueStyle={{ color: '#fa8c16' }}
+                  loading={statsLoading}
+                />
+              </Card>
+            </Col>
+            
+            <Col xs={12} sm={6}>
+              <Card style={{ textAlign: 'center' }}>
+                <Statistic
+                  title={locale === 'pt-BR' ? 'Difíceis' : 
+                         locale === 'en-US' ? 'Hard' : 
+                         'Difficiles'}
+                  value={statsLoading ? undefined : (statistics?.byLevel.dificil || 0)}
+                  valueStyle={{ color: '#ff4d4f' }}
+                  loading={statsLoading}
+                />
+              </Card>
+            </Col>
+            
+            <Col xs={12} sm={6}>
+              <Card style={{ textAlign: 'center' }}>
+                <Statistic
+                  title="API"
+                  value={statsLoading ? undefined : ((statistics?.byLevel.api || 0) + (statistics?.byLevel.apiTela || 0))}
+                  valueStyle={{ color: '#722ed1' }}
+                  loading={statsLoading}
+                />
+              </Card>
+            </Col>
+          </Row>
+        </div>
 
         {/* Resumo dos Caminhos */}
         <div style={{ marginTop: '80px' }}>

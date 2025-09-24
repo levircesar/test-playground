@@ -11,7 +11,8 @@
     "test:ui": "playwright test --ui",
     "test:fast": "playwright test --workers=1",
     "test:debug": "playwright test --headed=true --workers=1",
-    "codegen": "playwright codegen http://localhost:3000"
+    "codegen": "playwright codegen http://localhost:3000",
+    "check-env": "node scripts/check-env.js"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.0",
@@ -22,7 +23,8 @@
     "playwright": "^1.55.1",
     "qrcode": "^1.5.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "firebase": "^12.2.1"
   },
   "devDependencies": {
     "@types/node": "^20",

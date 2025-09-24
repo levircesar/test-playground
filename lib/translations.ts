@@ -265,6 +265,13 @@ export interface Translations {
         tags: string;
         info: string;
         challengeDetails: string;
+        solutions: string;
+        chooseFramework: string;
+        playwright: string;
+        cypress: string;
+        howToUse: string;
+        playwrightInstructions: string;
+        cypressInstructions: string;
       };
     };
     xpathTester: {
@@ -680,6 +687,13 @@ export const translations: Record<string, Translations> = {
           tags: 'Tags',
           info: 'Info',
           challengeDetails: 'Detalhes do Desafio',
+          solutions: 'Soluções de Teste',
+          chooseFramework: 'Escolha o framework e veja a solução para o desafio',
+          playwright: '🎭 Playwright',
+          cypress: '🌲 Cypress',
+          howToUse: '💡 Como usar:',
+          playwrightInstructions: '1. Copie o código acima<br/>2. Cole em um arquivo .spec.ts<br/>3. Execute com: npx playwright test',
+          cypressInstructions: '1. Copie o código acima<br/>2. Cole em um arquivo .cy.ts<br/>3. Execute com: npx cypress run',
         },
       },
       xpathTester: {
@@ -1011,6 +1025,13 @@ export const translations: Record<string, Translations> = {
           tags: 'Tags',
           info: 'Info',
           challengeDetails: 'Challenge Details',
+          solutions: 'Test Solutions',
+          chooseFramework: 'Choose the framework and see the solution for the challenge',
+          playwright: '🎭 Playwright',
+          cypress: '🌲 Cypress',
+          howToUse: '💡 How to use:',
+          playwrightInstructions: '1. Copy the code above<br/>2. Paste it in a .spec.ts file<br/>3. Run with: npx playwright test',
+          cypressInstructions: '1. Copy the code above<br/>2. Paste it in a .cy.ts file<br/>3. Run with: npx cypress run',
         },
       },
       xpathTester: {
@@ -1327,6 +1348,13 @@ export const translations: Record<string, Translations> = {
           tags: 'Étiquettes',
           info: 'Info',
           challengeDetails: 'Détails du Défi',
+          solutions: 'Solutions de Test',
+          chooseFramework: 'Choisissez le framework et voyez la solution pour le défi',
+          playwright: '🎭 Playwright',
+          cypress: '🌲 Cypress',
+          howToUse: '💡 Comment utiliser:',
+          playwrightInstructions: '1. Copiez le code ci-dessus<br/>2. Collez-le dans un fichier .spec.ts<br/>3. Exécutez avec: npx playwright test',
+          cypressInstructions: '1. Copiez le code ci-dessus<br/>2. Collez-le dans un fichier .cy.ts<br/>3. Exécutez avec: npx cypress run',
         },
       },
       xpathTester: {

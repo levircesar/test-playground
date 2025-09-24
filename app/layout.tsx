@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LayoutWrapper from '@/components/LayoutWrapper';
 import { LocaleProvider } from '@/lib/locale-context';
+import { AuthProvider } from '@/lib/contexts/AuthContext';
 import './globals.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -85,17 +86,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </Head>
       <body>
         <AntdRegistry>
-          <LocaleProvider>
-            <LayoutWrapper>
-              <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-                <Header />
-                <main style={{ flex: 1 }}>
-                  {children}
-                </main>
-                <Footer />
-              </div>
-            </LayoutWrapper>
-          </LocaleProvider>
+          <AuthProvider>
+            <LocaleProvider>
+              <LayoutWrapper>
+                <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+                  <Header />
+                  <main style={{ flex: 1 }}>
+                    {children}
+                  </main>
+                  <Footer />
+                </div>
+              </LayoutWrapper>
+            </LocaleProvider>
+          </AuthProvider>
         </AntdRegistry>
       </body>
     </html>
