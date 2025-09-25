@@ -15,7 +15,7 @@ export default function Header() {
   const { locale, setLocale } = useLocale();
   const t = getTranslations(locale);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user, userRole, isAuthenticated, signOut } = useAuth();
+  const { user, userRole, isAuthenticated, isAdmin, signOut } = useAuth();
   const router = useRouter();
 
   const handleLocaleChange = (value: string) => {
@@ -41,16 +41,16 @@ export default function Header() {
         </Link>
       ),
     },
-    {
+    // Mostrar botão Admin apenas para usuários com role admin
+    ...(isAdmin ? [{
       key: 'admin',
       icon: <SettingOutlined />,
       label: (
-        <Link href="/admin/login">
+        <Link href="/admin/challenges">
           Painel Admin
         </Link>
       ),
-      disabled: !isAuthenticated,
-    },
+    }] : []),
     {
       type: 'divider' as const,
     },

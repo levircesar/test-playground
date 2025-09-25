@@ -12,15 +12,20 @@ const { Title, Paragraph } = Typography;
 
 export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
-  const { user, loading: authLoading } = useAuth();
+  const { user, userRole, loading: authLoading, isAdmin } = useAuth();
   const router = useRouter();
 
   // Redirecionar se já estiver logado
   useEffect(() => {
-    if (user && !authLoading) {
-      router.push('/admin/challenges');
+    if (user && userRole && !authLoading) {
+      // Usuários admin vão para área admin, outros para perfil
+      if (isAdmin) {
+        router.push('/admin/challenges');
+      } else {
+        router.push('/perfil');
+      }
     }
-  }, [user, authLoading, router]);
+  }, [user, userRole, authLoading, isAdmin, router]);
 
   const handleGoogleLogin = async () => {
     try {
@@ -29,7 +34,7 @@ export default function AdminLogin() {
       
       if (result.user) {
         message.success('Login realizado com sucesso!');
-        router.push('/admin/challenges');
+        // O redirecionamento será feito pelo useEffect que monitora userRole
       }
     } catch (error: any) {
       console.error('Erro no login:', error);
