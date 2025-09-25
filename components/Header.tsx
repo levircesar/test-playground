@@ -204,6 +204,71 @@ export default function Header() {
           style={{ border: 'none', padding: '16px 0' }}
         />
         
+        {/* Seção de Autenticação Mobile */}
+        <div style={{ padding: '16px', borderTop: '1px solid #f0f0f0', marginTop: '16px' }}>
+          <div style={{ marginBottom: '12px', fontWeight: 'bold' }}>Conta:</div>
+          {isAuthenticated && userRole ? (
+            <Space direction="vertical" style={{ width: '100%' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <Avatar 
+                  size="small" 
+                  icon={<UserOutlined />} 
+                  src={user?.photoURL}
+                  style={{ backgroundColor: userRole.role === 'admin' ? '#ff4d4f' : '#1890ff' }}
+                />
+                <span style={{ fontSize: '14px' }}>
+                  {userRole.displayName || user?.email}
+                </span>
+              </div>
+              
+              <Link href="/perfil" onClick={() => setMobileMenuOpen(false)}>
+                <Button 
+                  type="default" 
+                  icon={<UserOutlined />} 
+                  style={{ width: '100%', marginBottom: '8px' }}
+                  data-testid="pp:layout|header|mobile|btn|perfil"
+                >
+                  Meu Perfil
+                </Button>
+              </Link>
+              
+              {isAdmin && (
+                <Link href="/admin/challenges" onClick={() => setMobileMenuOpen(false)}>
+                  <Button 
+                    type="primary" 
+                    icon={<SettingOutlined />} 
+                    style={{ width: '100%', marginBottom: '8px' }}
+                    data-testid="pp:layout|header|mobile|btn|admin"
+                  >
+                    Painel Admin
+                  </Button>
+                </Link>
+              )}
+              
+              <Button 
+                type="default" 
+                icon={<LogoutOutlined />} 
+                onClick={handleLogout}
+                style={{ width: '100%' }}
+                data-testid="pp:layout|header|mobile|btn|logout"
+              >
+                Sair
+              </Button>
+            </Space>
+          ) : (
+            <Link href="/admin/login" onClick={() => setMobileMenuOpen(false)}>
+              <Button 
+                type="primary" 
+                icon={<UserOutlined />} 
+                style={{ width: '100%' }}
+                data-testid="pp:layout|header|mobile|btn|entrar"
+              >
+                Entrar
+              </Button>
+            </Link>
+          )}
+        </div>
+
         <div style={{ padding: '16px', borderTop: '1px solid #f0f0f0', marginTop: '16px' }}>
           <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>Idioma:</div>
           <Select
