@@ -612,7 +612,11 @@ test('24. Persistência de dados', async ({ page }) => {
       dataIndex: 'id',
       key: 'id',
       width: isMobile ? 60 : 80,
-      sorter: (a: Challenge, b: Challenge) => a.id - b.id,
+      sorter: (a: Challenge, b: Challenge) => {
+        const aId = typeof a.id === 'number' ? a.id : parseInt(a.id.toString());
+        const bId = typeof b.id === 'number' ? b.id : parseInt(b.id.toString());
+        return aId - bId;
+      },
     },
     {
       title: t.components.challengeTable.challenge,

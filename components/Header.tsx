@@ -1,10 +1,12 @@
 'use client';
-import { Layout, Typography, Space, Button, Select, Drawer, Menu } from 'antd';
-import { GlobalOutlined, MenuOutlined } from '@ant-design/icons';
+import { Layout, Typography, Space, Button, Select, Drawer, Menu, Avatar, Dropdown } from 'antd';
+import { GlobalOutlined, MenuOutlined, UserOutlined, LogoutOutlined, SettingOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useLocale } from '@/lib/locale-context';
 import { getTranslations } from '@/lib/translations';
+import { useAuth } from '@/lib/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const { Header: AntHeader } = Layout;
 const { Title } = Typography;
@@ -13,10 +15,53 @@ export default function Header() {
   const { locale, setLocale } = useLocale();
   const t = getTranslations(locale);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, userRole, isAuthenticated, signOut } = useAuth();
+  const router = useRouter();
 
   const handleLocaleChange = (value: string) => {
     setLocale(value as 'pt-BR' | 'en-US' | 'fr-FR');
   };
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      router.push('/');
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+    }
+  };
+
+  const userMenuItems = [
+    {
+      key: 'perfil',
+      icon: <UserOutlined />,
+      label: (
+        <Link href="/perfil">
+          Meu Perfil
+        </Link>
+      ),
+    },
+    {
+      key: 'admin',
+      icon: <SettingOutlined />,
+      label: (
+        <Link href="/admin/login">
+          Painel Admin
+        </Link>
+      ),
+      disabled: !isAuthenticated,
+    },
+    {
+      type: 'divider' as const,
+    },
+    {
+      key: 'logout',
+      icon: <LogoutOutlined />,
+      label: 'Sair',
+      onClick: handleLogout,
+      disabled: !isAuthenticated,
+    },
+  ];
 
   const menuItems = [
     {
@@ -63,7 +108,7 @@ export default function Header() {
         {/* Título no canto esquerdo */}
         <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
           <Title level={3} style={{ margin: 0, color: '#2E8B57' }}>
-            {t.header.title}
+            🧪 Test Playground
           </Title>
         </Link>
 
@@ -99,6 +144,35 @@ export default function Header() {
               { value: 'fr-FR', label: '🇫🇷 France' }
             ]}
           />
+
+          {/* Menu do usuário */}
+          <div style={{ marginLeft: 16 }}>
+            {isAuthenticated && userRole ? (
+              <Dropdown
+                menu={{ items: userMenuItems }}
+                placement="bottomRight"
+                arrow
+              >
+                <Space style={{ cursor: 'pointer' }}>
+                  <Avatar 
+                    size="small" 
+                    icon={<UserOutlined />} 
+                    src={user?.photoURL}
+                    style={{ backgroundColor: userRole.role === 'admin' ? '#ff4d4f' : '#1890ff' }}
+                  />
+                  <span style={{ fontSize: '14px' }}>
+                    {userRole.displayName || user?.email}
+                  </span>
+                </Space>
+              </Dropdown>
+            ) : (
+              <Link href="/admin/login">
+                <Button type="default" icon={<UserOutlined />}>
+                  Entrar
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
 
         {/* Mobile Menu Button */}
@@ -115,7 +189,7 @@ export default function Header() {
 
       {/* Mobile Drawer */}
       <Drawer
-        title={t.header.title}
+        title="🧪 Test Playground"
         placement="right"
         onClose={() => setMobileMenuOpen(false)}
         open={mobileMenuOpen}

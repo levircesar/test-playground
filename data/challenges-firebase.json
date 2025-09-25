@@ -1,0 +1,410 @@
+[
+  {
+    "id": 1,
+    "title": {
+      "pt-BR": "Clicar no botão incrementar",
+      "en-US": "Click increment button",
+      "fr-FR": "Cliquer sur le bouton d'incrémentation"
+    },
+    "description": {
+      "pt-BR": "Clique no botão incrementar e valide se o contador aumenta corretamente",
+      "en-US": "Click the increment button and validate that the counter increases correctly",
+      "fr-FR": "Cliquez sur le bouton d'incrémentation et validez que le compteur augmente correctement"
+    },
+    "level": "easy",
+    "type": "ui",
+    "dataTestId": "pp:facil|btn|incrementar",
+    "expectedResult": {
+      "pt-BR": "O contador deve incrementar de 0 para 1, 2, 3... a cada clique",
+      "en-US": "The counter should increment from 0 to 1, 2, 3... with each click",
+      "fr-FR": "Le compteur doit s'incrémenter de 0 à 1, 2, 3... à chaque clic"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Clicar no botão incrementar', async ({ page }) => {\n  await page.goto('/roadmap/facil');\n  await expect(page.getByTestId('pp:facil|page|container|root')).toBeVisible();\n  await expect(page.getByText('Contador: 0')).toBeVisible();\n  await page.getByTestId('pp:facil|btn|incrementar').click();\n  await expect(page.getByText('Contador: 1')).toBeVisible();\n  await page.getByTestId('pp:facil|btn|incrementar').click();\n  await expect(page.getByText('Contador: 2')).toBeVisible();\n});",
+    "cypressSolution": "describe('Clicar no botão incrementar', () => {\n  it('deve incrementar o contador ao clicar no botão', () => {\n    cy.visit('/roadmap/facil');\n    cy.get('[data-testid=\"pp:facil|page|container|root\"]').should('be.visible');\n    cy.contains('Contador: 0').should('be.visible');\n    cy.get('[data-testid=\"pp:facil|btn|incrementar\"]').click();\n    cy.contains('Contador: 1').should('be.visible');\n    cy.get('[data-testid=\"pp:facil|btn|incrementar\"]').click();\n    cy.contains('Contador: 2').should('be.visible');\n  });\n});",
+    "route": "/roadmap/facil"
+  },
+  {
+    "id": 2,
+    "title": {
+      "pt-BR": "Interagir com botão de loading",
+      "en-US": "Interact with loading button",
+      "fr-FR": "Interagir avec le bouton de chargement"
+    },
+    "description": {
+      "pt-BR": "Clique no botão loading e aguarde 2 segundos para ver o estado de carregamento",
+      "en-US": "Click the loading button and wait 2 seconds to see the loading state",
+      "fr-FR": "Cliquez sur le bouton de chargement et attendez 2 secondes pour voir l'état de chargement"
+    },
+    "level": "easy",
+    "type": "ui",
+    "dataTestId": "pp:facil|btn|loading",
+    "expectedResult": {
+      "pt-BR": "O botão deve mostrar estado de loading por 2 segundos",
+      "en-US": "The button should show loading state for 2 seconds",
+      "fr-FR": "Le bouton doit afficher l'état de chargement pendant 2 secondes"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Interagir com botão de loading', async ({ page }) => {\n  await page.goto('/roadmap/facil');\n  await expect(page.getByTestId('pp:facil|page|container|root')).toBeVisible();\n  const loadingButton = page.getByTestId('pp:facil|btn|loading');\n  await expect(loadingButton).toBeVisible();\n  await expect(loadingButton).not.toHaveClass(/loading/);\n  await loadingButton.click();\n  await expect(loadingButton).toHaveClass(/loading/);\n  await page.waitForTimeout(2500);\n  await expect(loadingButton).not.toHaveClass(/loading/);\n});",
+    "cypressSolution": "describe('Interagir com botão de loading', () => {\n  it('deve mostrar estado de loading por 2 segundos', () => {\n    cy.visit('/roadmap/facil');\n    cy.get('[data-testid=\"pp:facil|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:facil|btn|loading\"]')\n      .should('be.visible')\n      .should('not.have.class', 'ant-btn-loading');\n    cy.get('[data-testid=\"pp:facil|btn|loading\"]').click();\n    cy.get('[data-testid=\"pp:facil|btn|loading\"]')\n      .should('have.class', 'ant-btn-loading');\n    cy.wait(2500);\n    cy.get('[data-testid=\"pp:facil|btn|loading\"]')\n      .should('not.have.class', 'ant-btn-loading');\n  });\n});",
+    "route": "/roadmap/facil"
+  },
+  {
+    "id": 3,
+    "title": {
+      "pt-BR": "Validação de formulário",
+      "en-US": "Form validation",
+      "fr-FR": "Validation de formulaire"
+    },
+    "description": {
+      "pt-BR": "Preencha um formulário com campos obrigatórios e valide as mensagens de erro",
+      "en-US": "Fill a form with required fields and validate error messages",
+      "fr-FR": "Remplissez un formulaire avec des champs obligatoires et validez les messages d'erreur"
+    },
+    "level": "easy",
+    "type": "form",
+    "dataTestId": "pp:facil|form|validation",
+    "expectedResult": {
+      "pt-BR": "Campos obrigatórios devem mostrar mensagens de erro quando vazios",
+      "en-US": "Required fields should show error messages when empty",
+      "fr-FR": "Les champs obligatoires doivent afficher des messages d'erreur quand vides"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Validação de formulário', async ({ page }) => {\n  await page.goto('/roadmap/facil');\n  await expect(page.getByTestId('pp:facil|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:facil|form|submit').click();\n  await expect(page.getByText('Este campo é obrigatório')).toBeVisible();\n});",
+    "cypressSolution": "describe('Validação de formulário', () => {\n  it('deve mostrar mensagens de erro para campos obrigatórios', () => {\n    cy.visit('/roadmap/facil');\n    cy.get('[data-testid=\"pp:facil|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:facil|form|submit\"]').click();\n    cy.contains('Este campo é obrigatório').should('be.visible');\n  });\n});",
+    "route": "/roadmap/facil"
+  },
+  {
+    "id": 4,
+    "title": {
+      "pt-BR": "Filtro de busca",
+      "en-US": "Search filter",
+      "fr-FR": "Filtre de recherche"
+    },
+    "description": {
+      "pt-BR": "Use o campo de busca para filtrar uma lista de itens",
+      "en-US": "Use the search field to filter a list of items",
+      "fr-FR": "Utilisez le champ de recherche pour filtrer une liste d'éléments"
+    },
+    "level": "easy",
+    "type": "search",
+    "dataTestId": "pp:facil|search|input",
+    "expectedResult": {
+      "pt-BR": "A lista deve ser filtrada em tempo real conforme você digita",
+      "en-US": "The list should be filtered in real time as you type",
+      "fr-FR": "La liste doit être filtrée en temps réel pendant que vous tapez"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Filtro de busca', async ({ page }) => {\n  await page.goto('/roadmap/facil');\n  await expect(page.getByTestId('pp:facil|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:facil|search|input').fill('test');\n  await expect(page.getByTestId('pp:facil|list|item')).toHaveCount(1);\n});",
+    "cypressSolution": "describe('Filtro de busca', () => {\n  it('deve filtrar a lista em tempo real', () => {\n    cy.visit('/roadmap/facil');\n    cy.get('[data-testid=\"pp:facil|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:facil|search|input\"]').type('test');\n    cy.get('[data-testid=\"pp:facil|list|item\"]').should('have.length', 1);\n  });\n});",
+    "route": "/roadmap/facil"
+  },
+  {
+    "id": 5,
+    "title": {
+      "pt-BR": "Seleção múltipla",
+      "en-US": "Multiple selection",
+      "fr-FR": "Sélection multiple"
+    },
+    "description": {
+      "pt-BR": "Selecione múltiplos itens usando checkboxes e valide a contagem",
+      "en-US": "Select multiple items using checkboxes and validate the count",
+      "fr-FR": "Sélectionnez plusieurs éléments en utilisant des cases à cocher et validez le compte"
+    },
+    "level": "easy",
+    "type": "selection",
+    "dataTestId": "pp:facil|checkbox|item",
+    "expectedResult": {
+      "pt-BR": "O contador deve mostrar quantos itens estão selecionados",
+      "en-US": "The counter should show how many items are selected",
+      "fr-FR": "Le compteur doit montrer combien d'éléments sont sélectionnés"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Seleção múltipla', async ({ page }) => {\n  await page.goto('/roadmap/facil');\n  await expect(page.getByTestId('pp:facil|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:facil|checkbox|item').first().check();\n  await page.getByTestId('pp:facil|checkbox|item').nth(1).check();\n  await expect(page.getByText('2 itens selecionados')).toBeVisible();\n});",
+    "cypressSolution": "describe('Seleção múltipla', () => {\n  it('deve contar itens selecionados', () => {\n    cy.visit('/roadmap/facil');\n    cy.get('[data-testid=\"pp:facil|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:facil|checkbox|item\"]').first().check();\n    cy.get('[data-testid=\"pp:facil|checkbox|item\"]').eq(1).check();\n    cy.contains('2 itens selecionados').should('be.visible');\n  });\n});",
+    "route": "/roadmap/facil"
+  },
+  {
+    "id": 6,
+    "title": {
+      "pt-BR": "Paginação de resultados",
+      "en-US": "Result pagination",
+      "fr-FR": "Pagination des résultats"
+    },
+    "description": {
+      "pt-BR": "Navegue entre páginas de resultados usando os controles de paginação",
+      "en-US": "Navigate between result pages using pagination controls",
+      "fr-FR": "Naviguez entre les pages de résultats en utilisant les contrôles de pagination"
+    },
+    "level": "easy",
+    "type": "pagination",
+    "dataTestId": "pp:facil|pagination|next",
+    "expectedResult": {
+      "pt-BR": "Os resultados devem mudar conforme você navega entre as páginas",
+      "en-US": "Results should change as you navigate between pages",
+      "fr-FR": "Les résultats doivent changer quand vous naviguez entre les pages"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Paginação de resultados', async ({ page }) => {\n  await page.goto('/roadmap/facil');\n  await expect(page.getByTestId('pp:facil|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:facil|pagination|next').click();\n  await expect(page.getByText('Página 2')).toBeVisible();\n});",
+    "cypressSolution": "describe('Paginação de resultados', () => {\n  it('deve navegar entre páginas', () => {\n    cy.visit('/roadmap/facil');\n    cy.get('[data-testid=\"pp:facil|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:facil|pagination|next\"]').click();\n    cy.contains('Página 2').should('be.visible');\n  });\n});",
+    "route": "/roadmap/facil"
+  },
+  {
+    "id": 7,
+    "title": {
+      "pt-BR": "Tooltip interativo",
+      "en-US": "Interactive tooltip",
+      "fr-FR": "Tooltip interactif"
+    },
+    "description": {
+      "pt-BR": "Passe o mouse sobre elementos para ver tooltips informativos",
+      "en-US": "Hover over elements to see informative tooltips",
+      "fr-FR": "Survolez les éléments pour voir des tooltips informatifs"
+    },
+    "level": "easy",
+    "type": "tooltip",
+    "dataTestId": "pp:facil|tooltip|trigger",
+    "expectedResult": {
+      "pt-BR": "Tooltips devem aparecer ao fazer hover e desaparecer ao sair",
+      "en-US": "Tooltips should appear on hover and disappear when leaving",
+      "fr-FR": "Les tooltips doivent apparaître au survol et disparaître en quittant"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Tooltip interativo', async ({ page }) => {\n  await page.goto('/roadmap/facil');\n  await expect(page.getByTestId('pp:facil|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:facil|tooltip|trigger').hover();\n  await expect(page.getByText('Informação útil')).toBeVisible();\n});",
+    "cypressSolution": "describe('Tooltip interativo', () => {\n  it('deve mostrar tooltip ao fazer hover', () => {\n    cy.visit('/roadmap/facil');\n    cy.get('[data-testid=\"pp:facil|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:facil|tooltip|trigger\"]').trigger('mouseover');\n    cy.contains('Informação útil').should('be.visible');\n  });\n});",
+    "route": "/roadmap/facil"
+  },
+  {
+    "id": 8,
+    "title": {
+      "pt-BR": "Validação de email",
+      "en-US": "Email validation",
+      "fr-FR": "Validation d'email"
+    },
+    "description": {
+      "pt-BR": "Teste a validação de email com diferentes formatos válidos e inválidos",
+      "en-US": "Test email validation with different valid and invalid formats",
+      "fr-FR": "Testez la validation d'email avec différents formats valides et invalides"
+    },
+    "level": "medium",
+    "type": "validation",
+    "dataTestId": "pp:medio|email|input",
+    "expectedResult": {
+      "pt-BR": "Emails válidos devem ser aceitos e inválidos devem mostrar erro",
+      "en-US": "Valid emails should be accepted and invalid ones should show error",
+      "fr-FR": "Les emails valides doivent être acceptés et les invalides doivent montrer une erreur"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Validação de email', async ({ page }) => {\n  await page.goto('/roadmap/medio');\n  await expect(page.getByTestId('pp:medio|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:medio|email|input').fill('invalid-email');\n  await page.getByTestId('pp:medio|form|submit').click();\n  await expect(page.getByText('Email inválido')).toBeVisible();\n});",
+    "cypressSolution": "describe('Validação de email', () => {\n  it('deve validar formato de email', () => {\n    cy.visit('/roadmap/medio');\n    cy.get('[data-testid=\"pp:medio|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:medio|email|input\"]').type('invalid-email');\n    cy.get('[data-testid=\"pp:medio|form|submit\"]').click();\n    cy.contains('Email inválido').should('be.visible');\n  });\n});",
+    "route": "/roadmap/medio"
+  },
+  {
+    "id": 9,
+    "title": {
+      "pt-BR": "Autocomplete de endereço",
+      "en-US": "Address autocomplete",
+      "fr-FR": "Autocomplétion d'adresse"
+    },
+    "description": {
+      "pt-BR": "Digite um endereço e selecione uma sugestão do autocomplete",
+      "en-US": "Type an address and select a suggestion from autocomplete",
+      "fr-FR": "Tapez une adresse et sélectionnez une suggestion de l'autocomplétion"
+    },
+    "level": "medium",
+    "type": "autocomplete",
+    "dataTestId": "pp:medio|address|input",
+    "expectedResult": {
+      "pt-BR": "Sugestões devem aparecer e ser selecionáveis conforme você digita",
+      "en-US": "Suggestions should appear and be selectable as you type",
+      "fr-FR": "Les suggestions doivent apparaître et être sélectionnables pendant que vous tapez"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Autocomplete de endereço', async ({ page }) => {\n  await page.goto('/roadmap/medio');\n  await expect(page.getByTestId('pp:medio|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:medio|address|input').fill('São Paulo');\n  await expect(page.getByTestId('pp:medio|suggestion|item')).toBeVisible();\n  await page.getByTestId('pp:medio|suggestion|item').first().click();\n});",
+    "cypressSolution": "describe('Autocomplete de endereço', () => {\n  it('deve mostrar sugestões de endereço', () => {\n    cy.visit('/roadmap/medio');\n    cy.get('[data-testid=\"pp:medio|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:medio|address|input\"]').type('São Paulo');\n    cy.get('[data-testid=\"pp:medio|suggestion|item\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:medio|suggestion|item\"]').first().click();\n  });\n});",
+    "route": "/roadmap/medio"
+  },
+  {
+    "id": 10,
+    "title": {
+      "pt-BR": "Drag and Drop de elementos",
+      "en-US": "Element drag and drop",
+      "fr-FR": "Glisser-déposer d'éléments"
+    },
+    "description": {
+      "pt-BR": "Reordene elementos arrastando e soltando em uma lista",
+      "en-US": "Reorder elements by dragging and dropping in a list",
+      "fr-FR": "Réorganisez les éléments en les glissant et en les déposant dans une liste"
+    },
+    "level": "hard",
+    "type": "dragdrop",
+    "dataTestId": "pp:dificil|drag|item",
+    "expectedResult": {
+      "pt-BR": "Os elementos devem ser reordenados conforme você os arrasta",
+      "en-US": "Elements should be reordered as you drag them",
+      "fr-FR": "Les éléments doivent être réorganisés quand vous les glissez"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Drag and Drop de elementos', async ({ page }) => {\n  await page.goto('/roadmap/dificil');\n  await expect(page.getByTestId('pp:dificil|page|container|root')).toBeVisible();\n  const source = page.getByTestId('pp:dificil|drag|item').first();\n  const target = page.getByTestId('pp:dificil|drag|item').nth(2);\n  await source.dragTo(target);\n  await expect(page.getByText('Elementos reordenados')).toBeVisible();\n});",
+    "cypressSolution": "describe('Drag and Drop de elementos', () => {\n  it('deve reordenar elementos', () => {\n    cy.visit('/roadmap/dificil');\n    cy.get('[data-testid=\"pp:dificil|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:dificil|drag|item\"]').first().trigger('dragstart');\n    cy.get('[data-testid=\"pp:dificil|drag|item\"]').eq(2).trigger('drop');\n    cy.contains('Elementos reordenados').should('be.visible');\n  });\n});",
+    "route": "/roadmap/dificil"
+  },
+  {
+    "id": 11,
+    "title": {
+      "pt-BR": "Canvas interativo",
+      "en-US": "Interactive canvas",
+      "fr-FR": "Canvas interactif"
+    },
+    "description": {
+      "pt-BR": "Desenhe no canvas usando mouse ou touch e valide o desenho",
+      "en-US": "Draw on canvas using mouse or touch and validate the drawing",
+      "fr-FR": "Dessinez sur le canvas en utilisant la souris ou le toucher et validez le dessin"
+    },
+    "level": "hard",
+    "type": "canvas",
+    "dataTestId": "pp:dificil|canvas|drawing",
+    "expectedResult": {
+      "pt-BR": "O desenho deve aparecer no canvas conforme você move o cursor",
+      "en-US": "The drawing should appear on canvas as you move the cursor",
+      "fr-FR": "Le dessin doit apparaître sur le canvas quand vous bougez le curseur"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Canvas interativo', async ({ page }) => {\n  await page.goto('/roadmap/dificil');\n  await expect(page.getByTestId('pp:dificil|page|container|root')).toBeVisible();\n  const canvas = page.getByTestId('pp:dificil|canvas|drawing');\n  await canvas.hover();\n  await page.mouse.down();\n  await page.mouse.move(100, 100);\n  await page.mouse.up();\n  await expect(page.getByText('Desenho criado')).toBeVisible();\n});",
+    "cypressSolution": "describe('Canvas interativo', () => {\n  it('deve permitir desenhar no canvas', () => {\n    cy.visit('/roadmap/dificil');\n    cy.get('[data-testid=\"pp:dificil|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:dificil|canvas|drawing\"]')\n      .trigger('mousedown', { which: 1 })\n      .trigger('mousemove', { clientX: 100, clientY: 100 })\n      .trigger('mouseup');\n    cy.contains('Desenho criado').should('be.visible');\n  });\n});",
+    "route": "/roadmap/dificil"
+  },
+  {
+    "id": 12,
+    "title": {
+      "pt-BR": "WebSocket em tempo real",
+      "en-US": "Real-time WebSocket",
+      "fr-FR": "WebSocket en temps réel"
+    },
+    "description": {
+      "pt-BR": "Conecte-se via WebSocket e envie/receba mensagens em tempo real",
+      "en-US": "Connect via WebSocket and send/receive messages in real time",
+      "fr-FR": "Connectez-vous via WebSocket et envoyez/recevez des messages en temps réel"
+    },
+    "level": "webapi",
+    "type": "websocket",
+    "dataTestId": "pp:api-tela|websocket|connect",
+    "expectedResult": {
+      "pt-BR": "Mensagens devem ser enviadas e recebidas instantaneamente",
+      "en-US": "Messages should be sent and received instantly",
+      "fr-FR": "Les messages doivent être envoyés et reçus instantanément"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('WebSocket em tempo real', async ({ page }) => {\n  await page.goto('/roadmap/api-tela');\n  await expect(page.getByTestId('pp:api-tela|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:api-tela|websocket|connect').click();\n  await expect(page.getByText('Conectado')).toBeVisible();\n  await page.getByTestId('pp:api-tela|websocket|send').click();\n  await expect(page.getByText('Mensagem enviada')).toBeVisible();\n});",
+    "cypressSolution": "describe('WebSocket em tempo real', () => {\n  it('deve conectar e enviar mensagens', () => {\n    cy.visit('/roadmap/api-tela');\n    cy.get('[data-testid=\"pp:api-tela|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:api-tela|websocket|connect\"]').click();\n    cy.contains('Conectado').should('be.visible');\n    cy.get('[data-testid=\"pp:api-tela|websocket|send\"]').click();\n    cy.contains('Mensagem enviada').should('be.visible');\n  });\n});",
+    "route": "/roadmap/api-tela"
+  },
+  {
+    "id": 13,
+    "title": {
+      "pt-BR": "Geolocalização do usuário",
+      "en-US": "User geolocation",
+      "fr-FR": "Géolocalisation de l'utilisateur"
+    },
+    "description": {
+      "pt-BR": "Obtenha a localização atual do usuário usando a API de Geolocalização",
+      "en-US": "Get the current user location using the Geolocation API",
+      "fr-FR": "Obtenez la localisation actuelle de l'utilisateur en utilisant l'API de Géolocalisation"
+    },
+    "level": "webapi",
+    "type": "geolocation",
+    "dataTestId": "pp:api-tela|geolocation|get",
+    "expectedResult": {
+      "pt-BR": "As coordenadas de latitude e longitude devem ser exibidas",
+      "en-US": "Latitude and longitude coordinates should be displayed",
+      "fr-FR": "Les coordonnées de latitude et longitude doivent être affichées"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('Geolocalização do usuário', async ({ page }) => {\n  await page.goto('/roadmap/api-tela');\n  await expect(page.getByTestId('pp:api-tela|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:api-tela|geolocation|get').click();\n  await expect(page.getByText('Latitude:')).toBeVisible();\n  await expect(page.getByText('Longitude:')).toBeVisible();\n});",
+    "cypressSolution": "describe('Geolocalização do usuário', () => {\n  it('deve obter coordenadas de localização', () => {\n    cy.visit('/roadmap/api-tela');\n    cy.get('[data-testid=\"pp:api-tela|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:api-tela|geolocation|get\"]').click();\n    cy.contains('Latitude:').should('be.visible');\n    cy.contains('Longitude:').should('be.visible');\n  });\n});",
+    "route": "/roadmap/api-tela"
+  },
+  {
+    "id": 14,
+    "title": {
+      "pt-BR": "GET /api/users",
+      "en-US": "GET /api/users",
+      "fr-FR": "GET /api/users"
+    },
+    "description": {
+      "pt-BR": "Faça uma requisição GET para /api/users e valide a lista de usuários",
+      "en-US": "Make a GET request to /api/users and validate the user list",
+      "fr-FR": "Faites une requête GET vers /api/users et validez la liste des utilisateurs"
+    },
+    "level": "api",
+    "type": "api",
+    "dataTestId": "pp:api|btn|get-users",
+    "expectedResult": {
+      "pt-BR": "A API deve retornar uma lista de usuários com seus dados",
+      "en-US": "The API should return a list of users with their data",
+      "fr-FR": "L'API doit retourner une liste d'utilisateurs avec leurs données"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('GET /api/users', async ({ page }) => {\n  await page.goto('/roadmap/api');\n  await expect(page.getByTestId('pp:api|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:api|btn|get-users').click();\n  await expect(page.getByText('Usuários carregados')).toBeVisible();\n  await expect(page.getByTestId('pp:api|list|user')).toHaveCount(3);\n});",
+    "cypressSolution": "describe('GET /api/users', () => {\n  it('deve retornar lista de usuários', () => {\n    cy.visit('/roadmap/api');\n    cy.get('[data-testid=\"pp:api|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:api|btn|get-users\"]').click();\n    cy.contains('Usuários carregados').should('be.visible');\n    cy.get('[data-testid=\"pp:api|list|user\"]').should('have.length', 3);\n  });\n});",
+    "route": "/roadmap/api"
+  },
+  {
+    "id": 15,
+    "title": {
+      "pt-BR": "POST /api/users",
+      "en-US": "POST /api/users",
+      "fr-FR": "POST /api/users"
+    },
+    "description": {
+      "pt-BR": "Crie um novo usuário via POST para /api/users",
+      "en-US": "Create a new user via POST to /api/users",
+      "fr-FR": "Créez un nouvel utilisateur via POST vers /api/users"
+    },
+    "level": "api",
+    "type": "api",
+    "dataTestId": "pp:api|btn|create-user",
+    "expectedResult": {
+      "pt-BR": "O usuário deve ser criado e retornado com ID gerado",
+      "en-US": "The user should be created and returned with generated ID",
+      "fr-FR": "L'utilisateur doit être créé et retourné avec un ID généré"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('POST /api/users', async ({ page }) => {\n  await page.goto('/roadmap/api');\n  await expect(page.getByTestId('pp:api|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:api|input|name').fill('João Silva');\n  await page.getByTestId('pp:api|input|email').fill('joao@test.com');\n  await page.getByTestId('pp:api|btn|create-user').click();\n  await expect(page.getByText('Usuário criado')).toBeVisible();\n});",
+    "cypressSolution": "describe('POST /api/users', () => {\n  it('deve criar novo usuário', () => {\n    cy.visit('/roadmap/api');\n    cy.get('[data-testid=\"pp:api|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:api|input|name\"]').type('João Silva');\n    cy.get('[data-testid=\"pp:api|input|email\"]').type('joao@test.com');\n    cy.get('[data-testid=\"pp:api|btn|create-user\"]').click();\n    cy.contains('Usuário criado').should('be.visible');\n  });\n});",
+    "route": "/roadmap/api"
+  },
+  {
+    "id": 16,
+    "title": {
+      "pt-BR": "PUT /api/users/:id",
+      "en-US": "PUT /api/users/:id",
+      "fr-FR": "PUT /api/users/:id"
+    },
+    "description": {
+      "pt-BR": "Atualize um usuário existente via PUT para /api/users/:id",
+      "en-US": "Update an existing user via PUT to /api/users/:id",
+      "fr-FR": "Mettez à jour un utilisateur existant via PUT vers /api/users/:id"
+    },
+    "level": "api",
+    "type": "api",
+    "dataTestId": "pp:api|btn|update-user",
+    "expectedResult": {
+      "pt-BR": "Os dados do usuário devem ser atualizados e retornados",
+      "en-US": "User data should be updated and returned",
+      "fr-FR": "Les données de l'utilisateur doivent être mises à jour et retournées"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('PUT /api/users/:id', async ({ page }) => {\n  await page.goto('/roadmap/api');\n  await expect(page.getByTestId('pp:api|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:api|select|user').click();\n  await page.getByTestId('pp:api|option|user-1').click();\n  await page.getByTestId('pp:api|input|name').fill('João Silva Atualizado');\n  await page.getByTestId('pp:api|btn|update-user').click();\n  await expect(page.getByText('Usuário atualizado')).toBeVisible();\n});",
+    "cypressSolution": "describe('PUT /api/users/:id', () => {\n  it('deve atualizar usuário existente', () => {\n    cy.visit('/roadmap/api');\n    cy.get('[data-testid=\"pp:api|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:api|select|user\"]').click();\n    cy.get('[data-testid=\"pp:api|option|user-1\"]').click();\n    cy.get('[data-testid=\"pp:api|input|name\"]').clear().type('João Silva Atualizado');\n    cy.get('[data-testid=\"pp:api|btn|update-user\"]').click();\n    cy.contains('Usuário atualizado').should('be.visible');\n  });\n});",
+    "route": "/roadmap/api"
+  },
+  {
+    "id": 17,
+    "title": {
+      "pt-BR": "DELETE /api/users/:id",
+      "en-US": "DELETE /api/users/:id",
+      "fr-FR": "DELETE /api/users/:id"
+    },
+    "description": {
+      "pt-BR": "Exclua um usuário via DELETE para /api/users/:id",
+      "en-US": "Delete a user via DELETE to /api/users/:id",
+      "fr-FR": "Supprimez un utilisateur via DELETE vers /api/users/:id"
+    },
+    "level": "api",
+    "type": "api",
+    "dataTestId": "pp:api|btn|delete-user",
+    "expectedResult": {
+      "pt-BR": "O usuário deve ser removido e retornar status de sucesso",
+      "en-US": "The user should be removed and return success status",
+      "fr-FR": "L'utilisateur doit être supprimé et retourner un statut de succès"
+    },
+    "playwrightSolution": "import { test, expect } from '@playwright/test';\n\ntest('DELETE /api/users/:id', async ({ page }) => {\n  await page.goto('/roadmap/api');\n  await expect(page.getByTestId('pp:api|page|container|root')).toBeVisible();\n  await page.getByTestId('pp:api|select|user').click();\n  await page.getByTestId('pp:api|option|user-1').click();\n  await page.getByTestId('pp:api|btn|delete-user').click();\n  await expect(page.getByText('Usuário excluído')).toBeVisible();\n});",
+    "cypressSolution": "describe('DELETE /api/users/:id', () => {\n  it('deve excluir usuário', () => {\n    cy.visit('/roadmap/api');\n    cy.get('[data-testid=\"pp:api|page|container|root\"]').should('be.visible');\n    cy.get('[data-testid=\"pp:api|select|user\"]').click();\n    cy.get('[data-testid=\"pp:api|option|user-1\"]').click();\n    cy.get('[data-testid=\"pp:api|btn|delete-user\"]').click();\n    cy.contains('Usuário excluído').should('be.visible');\n  });\n});",
+    "route": "/roadmap/api"
+  }
+]

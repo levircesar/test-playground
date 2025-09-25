@@ -207,8 +207,8 @@ export default function LandingPage() {
                 <Statistic
                   title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t.home.stats.challenges}</span>}
                   value={statistics?.total || 0}
-                  valueStyle={{ color: '#fff', fontSize: '2rem' }}
-                  prefix={<TrophyOutlined />}
+                  valueStyle={{ color: '#fff', fontSize: '1.2rem' }}
+                  prefix={<TrophyOutlined style={{ fontSize: '24px' }} />}
                   data-testid="pp:landing|stat|desafios"
                 />
               )}
@@ -218,7 +218,7 @@ export default function LandingPage() {
                 title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t.home.stats.tools}</span>}
                 value="Web + API"
                 valueStyle={{ color: '#fff', fontSize: '1.2rem' }}
-                prefix={<ThunderboltOutlined />}
+                prefix={<ThunderboltOutlined style={{ fontSize: '24px' }} />}
                 data-testid="pp:landing|stat|ferramentas"
               />
             </Col>
@@ -227,7 +227,7 @@ export default function LandingPage() {
                 title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t.home.stats.levels}</span>}
                 value={isHydrated ? (locale === 'pt-BR' ? 'Fácil → Difícil' : locale === 'en-US' ? 'Easy → Hard' : 'Facile → Difficile') : 'Fácil → Difícil'}
                 valueStyle={{ color: '#fff', fontSize: '1.2rem' }}
-                prefix={<StarOutlined />}
+                prefix={<StarOutlined style={{ fontSize: '24px' }} />}
                 data-testid="pp:landing|stat|niveis"
               />
             </Col>

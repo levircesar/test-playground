@@ -50,6 +50,20 @@ const nextConfig = {
           },
         ],
       },
+      // Headers for admin routes - allow popup windows for Firebase auth
+      {
+        source: '/admin/:path*',
+        headers: [
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin-allow-popups',
+          },
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'unsafe-none',
+          },
+        ],
+      },
       // Headers for all other routes - maintain security
       {
         source: '/(.*)',

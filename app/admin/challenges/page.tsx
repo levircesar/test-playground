@@ -29,7 +29,8 @@ import {
   EditOutlined, 
   DeleteOutlined, 
   LogoutOutlined,
-  CodeOutlined
+  CodeOutlined,
+  TeamOutlined
 } from '@ant-design/icons';
 
 const { Title, Paragraph } = Typography;
@@ -67,7 +68,7 @@ interface Challenge {
 }
 
 export default function AdminChallenges() {
-  const { user, loading: authLoading, signOut } = useAuth();
+  const { user, userRole, loading: authLoading, isAdmin, signOut } = useAuth();
   const [loading, setLoading] = useState(true);
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -77,13 +78,23 @@ export default function AdminChallenges() {
 
   useEffect(() => {
     if (!authLoading) {
-      if (user) {
+      if (user && userRole) {
+        // Verificar se o usuário tem permissão para acessar a página admin
+        if (userRole.role !== 'admin') {
+          console.log('🔐 Admin: Usuário sem permissão de admin. Role:', userRole.role);
+          message.warning('Você não tem permissão para acessar esta área');
+          router.push('/');
+          return;
+        }
         loadChallenges();
+      } else if (user && !userRole) {
+        // Aguardar o carregamento dos dados do usuário
+        return;
       } else {
         router.push('/admin/login');
       }
     }
-  }, [user, authLoading, router]);
+  }, [user, userRole, authLoading, router]);
 
   const loadChallenges = async () => {
     try {
@@ -118,6 +129,10 @@ export default function AdminChallenges() {
     } catch (error) {
       console.error('Erro ao fazer logout:', error);
     }
+  };
+
+  const handleGoToUsers = () => {
+    router.push('/admin/users');
   };
 
   const handleAddChallenge = () => {
@@ -247,31 +262,40 @@ export default function AdminChallenges() {
       fixed: 'right' as const,
       render: (_: any, record: Challenge) => (
         <Space size="small" style={{ width: '100%', justifyContent: 'center' }}>
-          <Button
-            type="primary"
-            size="small"
-            icon={<EditOutlined />}
-            onClick={() => handleEditChallenge(record)}
-            style={{ minWidth: '60px' }}
-          >
-            Editar
-          </Button>
-          <Popconfirm
-            title="Tem certeza que deseja excluir este desafio?"
-            onConfirm={() => handleDeleteChallenge(record.id)}
-            okText="Sim"
-            cancelText="Não"
-          >
-            <Button
-              type="primary"
-              danger
-              size="small"
-              icon={<DeleteOutlined />}
-              style={{ minWidth: '60px' }}
-            >
-              Excluir
-            </Button>
-          </Popconfirm>
+          {isAdmin && (
+            <>
+              <Button
+                type="primary"
+                size="small"
+                icon={<EditOutlined />}
+                onClick={() => handleEditChallenge(record)}
+                style={{ minWidth: '60px' }}
+              >
+                Editar
+              </Button>
+              <Popconfirm
+                title="Tem certeza que deseja excluir este desafio?"
+                onConfirm={() => handleDeleteChallenge(record.id)}
+                okText="Sim"
+                cancelText="Não"
+              >
+                <Button
+                  type="primary"
+                  danger
+                  size="small"
+                  icon={<DeleteOutlined />}
+                  style={{ minWidth: '60px' }}
+                >
+                  Excluir
+                </Button>
+              </Popconfirm>
+            </>
+          )}
+          {!isAdmin && (
+            <span style={{ color: '#999', fontSize: '12px' }}>
+              Apenas admins podem editar
+            </span>
+          )}
         </Space>
       ),
     },
@@ -284,22 +308,29 @@ export default function AdminChallenges() {
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
           <Row justify="space-between" align="middle">
             <Col>
-              <Title level={2} style={{ margin: 0 }}>
+              <Title level={2} style={{ marginBottom: 20 }}>
                 🎯 Administração de Desafios
-              </Title>
-              <Paragraph style={{ margin: 0, color: '#666' }}>
-                Gerencie os desafios do Test Playground
-              </Paragraph>
+              </Title> 
             </Col>
             <Col>
               <Space>
-                <Button
-                  type="primary"
-                  icon={<PlusOutlined />}
-                  onClick={handleAddChallenge}
-                >
-                  Novo Desafio
-                </Button>
+                {isAdmin && (
+                  <>
+                    <Button
+                      type="primary"
+                      icon={<PlusOutlined />}
+                      onClick={handleAddChallenge}
+                    >
+                      Novo Desafio
+                    </Button>
+                    <Button
+                      icon={<TeamOutlined />}
+                      onClick={handleGoToUsers}
+                    >
+                      Gerenciar Usuários
+                    </Button>
+                  </>
+                )}
                 <Button
                   icon={<LogoutOutlined />}
                   onClick={handleLogout}
@@ -326,13 +357,15 @@ export default function AdminChallenges() {
                 description="Nenhum desafio cadastrado ainda"
                 style={{ margin: '40px 0' }}
               >
-                <Button 
-                  type="primary" 
-                  icon={<PlusOutlined />}
-                  onClick={handleAddChallenge}
-                >
-                  Criar Primeiro Desafio
-                </Button>
+                {isAdmin && (
+                  <Button 
+                    type="primary" 
+                    icon={<PlusOutlined />}
+                    onClick={handleAddChallenge}
+                  >
+                    Criar Primeiro Desafio
+                  </Button>
+                )}
               </Empty>
             </div>
           ) : (

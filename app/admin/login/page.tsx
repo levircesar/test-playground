@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '@/config/firebase';
@@ -16,10 +16,11 @@ export default function AdminLogin() {
   const router = useRouter();
 
   // Redirecionar se já estiver logado
-  if (user && !authLoading) {
-    router.push('/admin/challenges');
-    return null;
-  }
+  useEffect(() => {
+    if (user && !authLoading) {
+      router.push('/admin/challenges');
+    }
+  }, [user, authLoading, router]);
 
   const handleGoogleLogin = async () => {
     try {
@@ -80,9 +81,13 @@ export default function AdminLogin() {
               <Title level={2} style={{ margin: 0, color: '#1890ff' }}>
                 🔐 Admin Login
               </Title>
-              <Paragraph style={{ marginTop: '8px', color: '#666' }}>
-                Faça login para acessar o painel administrativo
-              </Paragraph>
+            <Paragraph style={{ marginTop: '8px', color: '#666' }}>
+              Faça login para acessar o painel administrativo
+            </Paragraph>
+            <Paragraph style={{ fontSize: '12px', color: '#999', margin: '8px 0 0 0' }}>
+              ⚠️ Apenas usuários com role <strong>admin</strong> podem acessar esta área.<br />
+              Usuários comuns recebem role <strong>basic</strong> automaticamente.
+            </Paragraph>
             </div>
 
             <Button
