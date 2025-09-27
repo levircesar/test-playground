@@ -46,8 +46,7 @@ export function useChallenges() {
       const challengesRef = collection(firestore, 'playground', 'challenges', 'data');
       // Removendo ordenação temporariamente para debug
       const querySnapshot = await getDocs(challengesRef);
-      
-      console.log('📊 Documentos encontrados:', querySnapshot.size);
+       
       
       const challengesData: Challenge[] = [];
       querySnapshot.forEach((doc) => {

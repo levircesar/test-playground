@@ -82,8 +82,7 @@ export default function AdminUsers() {
       
       const playgroundRef = collection(firestore, 'playground');
       const querySnapshot = await getDocs(playgroundRef);
-      
-      console.log('📊 Admin: Documentos encontrados:', querySnapshot.size);
+       
       
       const usersData: UserData[] = [];
       querySnapshot.forEach((docSnapshot) => {

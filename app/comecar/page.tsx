@@ -155,6 +155,113 @@ export default function ComecarPage() {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <BackButton href="/" testId="pp:comecar|btn|voltar" />
         
+        
+        {/* Introduções */}
+        <div style={{ textAlign: 'center' }}>
+          <Title level={2} style={{ marginBottom: '40px' }}>
+            {locale === 'pt-BR' ? '📚 Aprenda os Conceitos Básicos' : 
+             locale === 'en-US' ? '📚 Learn the Basic Concepts' : 
+             '📚 Apprenez les Concepts de Base'}
+          </Title>
+          
+          <Row gutter={[24, 24]} style={{ marginBottom: '60px' }}>
+            <Col xs={24} sm={12}>
+              <Card
+                data-testid="pp:comecar|intro|web"
+                style={{ 
+                  height: '100%',
+                  border: '2px solid #1890ff',
+                  borderRadius: '12px',
+                  cursor: 'pointer'
+                }}
+                bodyStyle={{ padding: '32px 24px' }}
+                onClick={() => window.location.href = '/introducao-web'}
+              >
+                <Space direction="vertical" size="large" style={{ width: '100%' }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>🌐</div>
+                    <Title level={3} style={{ color: '#1890ff', margin: 0 }}>
+                      {locale === 'pt-BR' ? 'Introdução aos Testes Web' : 
+                       locale === 'en-US' ? 'Web Testing Introduction' : 
+                       'Introduction aux Tests Web'}
+                    </Title>
+                  </div>
+                  
+                  <Paragraph style={{ textAlign: 'center', fontSize: '16px', margin: 0 }}>
+                    {locale === 'pt-BR' ? 'Aprenda conceitos básicos: clicar em botões, preencher formulários, validar elementos e muito mais com exemplos práticos de Playwright e Cypress.' :
+                     locale === 'en-US' ? 'Learn basic concepts: clicking buttons, filling forms, validating elements and much more with practical examples of Playwright and Cypress.' :
+                     'Apprenez les concepts de base : cliquer sur des boutons, remplir des formulaires, valider des éléments et bien plus avec des exemples pratiques de Playwright et Cypress.'}
+                  </Paragraph>
+                  
+                  <Button
+                    type="primary"
+                    size="large"
+                    style={{ 
+                      width: '100%', 
+                      height: '50px', 
+                      fontSize: '16px',
+                      backgroundColor: '#1890ff',
+                      borderColor: '#1890ff'
+                    }}
+                  >
+                    {locale === 'pt-BR' ? 'Começar Aprendizado Web' : 
+                     locale === 'en-US' ? 'Start Web Learning' : 
+                     'Commencer l\'Apprentissage Web'}
+                  </Button>
+                </Space>
+              </Card>
+            </Col>
+            
+            <Col xs={24} sm={12}>
+              <Card
+                data-testid="pp:comecar|intro|api"
+                style={{ 
+                  height: '100%',
+                  border: '2px solid #722ed1',
+                  borderRadius: '12px',
+                  cursor: 'pointer'
+                }}
+                bodyStyle={{ padding: '32px 24px' }}
+                onClick={() => window.location.href = '/introducao-api'}
+              >
+                <Space direction="vertical" size="large" style={{ width: '100%' }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>🔗</div>
+                    <Title level={3} style={{ color: '#722ed1', margin: 0 }}>
+                      {locale === 'pt-BR' ? 'Introdução aos Testes de API' : 
+                       locale === 'en-US' ? 'API Testing Introduction' : 
+                       'Introduction aux Tests d\'API'}
+                    </Title>
+                  </div>
+                  
+                  <Paragraph style={{ textAlign: 'center', fontSize: '16px', margin: 0 }}>
+                    {locale === 'pt-BR' ? 'Aprenda conceitos fundamentais de APIs REST: requisições GET/POST, validação de respostas, status e muito mais com exemplos práticos.' :
+                     locale === 'en-US' ? 'Learn fundamental concepts of REST APIs: GET/POST requests, response validation, status codes and much more with practical examples.' :
+                     'Apprenez les concepts fondamentaux des APIs REST : requêtes GET/POST, validation des réponses, codes de statut et bien plus avec des exemples pratiques.'}
+                  </Paragraph>
+                  
+                  <Button
+                    type="primary"
+                    size="large"
+                    style={{ 
+                      width: '100%', 
+                      height: '50px', 
+                      fontSize: '16px',
+                      backgroundColor: '#722ed1',
+                      borderColor: '#722ed1'
+                    }}
+                  >
+                    {locale === 'pt-BR' ? 'Começar Aprendizado API' : 
+                     locale === 'en-US' ? 'Start API Learning' : 
+                     'Commencer l\'Apprentissage API'}
+                  </Button>
+                </Space>
+              </Card>
+            </Col>
+          </Row>
+        </div>
+
+        {/* Roadmaps */}
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
           <Title level={1}>{t.start.title}</Title>
           <Paragraph style={{ fontSize: '18px', color: '#666' }}>
@@ -227,6 +334,7 @@ export default function ComecarPage() {
             </Col>
           ))}
         </Row>
+
 
         {/* Dicas */}
         <div style={{ marginTop: '80px', textAlign: 'center' }}>

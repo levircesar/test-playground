@@ -27,8 +27,7 @@ export async function GET(request: NextRequest) {
     // Buscar todos os desafios do Firebase
     const challengesRef = collection(firestore, 'playground', 'challenges', 'data');
     const querySnapshot = await getDocs(challengesRef);
-    
-    console.log('📊 Documentos encontrados:', querySnapshot.size);
+     
     
     const challenges: any[] = [];
     querySnapshot.forEach((doc) => {
@@ -53,8 +52,7 @@ export async function GET(request: NextRequest) {
         e2e: challenges.filter(c => c.tipo === 'E2E').length,
       }
     };
-    
-    console.log('✅ Estatísticas calculadas:', statistics);
+     
     
     return NextResponse.json({
       success: true,

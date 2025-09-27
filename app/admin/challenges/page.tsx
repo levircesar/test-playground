@@ -103,8 +103,7 @@ export default function AdminChallenges() {
       const challengesRef = collection(firestore, 'playground', 'challenges', 'data');
       // Removendo ordenação temporariamente para debug
       const querySnapshot = await getDocs(challengesRef);
-      
-      console.log('📊 Admin: Documentos encontrados:', querySnapshot.size);
+       
       
       const challengesData: Challenge[] = [];
       querySnapshot.forEach((doc) => {

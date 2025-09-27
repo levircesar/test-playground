@@ -24,7 +24,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import XPathTester from '@/components/XPathTester';
 import BackButton from '@/components/BackButton';
-import RoadmapChallengesButton from '@/components/RoadmapChallengesButton';
 import { getJSON, setJSON, STORAGE_KEYS } from '@/lib/storage';
 import { useLocale } from '@/lib/locale-context';
 import { getTranslations } from '@/lib/translations';
@@ -155,18 +154,15 @@ export default function ApiPage() {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <BackButton href="/desafios" testId="pp:api|btn|voltar" />
-          <Space>
-            <Link href="/api-docs">
-              <Button
-                type="default"
-                icon={<ApiOutlined />}
-                data-testid="pp:api|btn|ver-apis"
-              >
-                {t.apiDocs.viewApis}
-              </Button>
-            </Link>
-            <RoadmapChallengesButton level={t.roadmap.levels.api} testId="pp:api|btn|desafios" />
-          </Space>
+          <Link href="/api-docs">
+            <Button
+              type="default"
+              icon={<ApiOutlined />}
+              data-testid="pp:api|btn|ver-apis"
+            >
+              {t.apiDocs.viewApis}
+            </Button>
+          </Link>
         </div>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>

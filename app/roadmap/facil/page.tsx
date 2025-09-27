@@ -34,7 +34,6 @@ import {
 import { useState } from 'react';
 import XPathTester from '@/components/XPathTester';
 import BackButton from '@/components/BackButton';
-import RoadmapChallengesButton from '@/components/RoadmapChallengesButton';
 import { useLocale } from '@/lib/locale-context';
 import { getTranslations } from '@/lib/translations';
 
@@ -110,9 +109,8 @@ export default function FacilPage() {
   return (
     <div data-testid="pp:facil|page|container|root" style={{ padding: '40px 24px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '20px' }}>
           <BackButton href="/desafios" testId="pp:facil|btn|voltar" />
-          <RoadmapChallengesButton level={t.roadmap.levels.easy} testId="pp:facil|btn|desafios" />
         </div>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>

@@ -283,6 +283,154 @@ export interface Translations {
     };
   };
   
+  // Introduction pages
+  webIntro: {
+    title: string;
+    subtitle: string;
+    description: string;
+    concepts: {
+      title: string;
+      basicConcepts: string;
+      basicConceptsDesc: string;
+      selectors: string;
+      selectorsDesc: string;
+      assertions: string;
+      assertionsDesc: string;
+      interactions: string;
+      interactionsDesc: string;
+      waiting: string;
+      waitingDesc: string;
+      details: {
+        basicConcepts: {
+          title: string;
+          explanation: string;
+          concepts: string[];
+          tips: string[];
+        };
+        selectors: {
+          title: string;
+          explanation: string;
+          concepts: string[];
+          tips: string[];
+        };
+        assertions: {
+          title: string;
+          explanation: string;
+          concepts: string[];
+          tips: string[];
+        };
+        interactions: {
+          title: string;
+          explanation: string;
+          concepts: string[];
+          tips: string[];
+        };
+        waiting: {
+          title: string;
+          explanation: string;
+          concepts: string[];
+          tips: string[];
+        };
+      };
+    };
+    commonMethods: {
+      title: string;
+      clickButton: string;
+      clickButtonDesc: string;
+      selectDropdown: string;
+      selectDropdownDesc: string;
+      fillInput: string;
+      fillInputDesc: string;
+      validateVisible: string;
+      validateVisibleDesc: string;
+      validateText: string;
+      validateTextDesc: string;
+      navigate: string;
+      navigateDesc: string;
+    };
+    examples: {
+      title: string;
+      playwright: string;
+      cypress: string;
+    };
+    nextSteps: string;
+    goToApiIntro: string;
+    backToStart: string;
+  };
+  apiIntro: {
+    title: string;
+    subtitle: string;
+    description: string;
+    concepts: {
+      title: string;
+      restBasics: string;
+      restBasicsDesc: string;
+      httpMethods: string;
+      httpMethodsDesc: string;
+      statusCodes: string;
+      statusCodesDesc: string;
+      headers: string;
+      headersDesc: string;
+      authentication: string;
+      authenticationDesc: string;
+      details: {
+        restBasics: {
+          title: string;
+          explanation: string;
+          concepts: string[];
+          tips: string[];
+        };
+        httpMethods: {
+          title: string;
+          explanation: string;
+          concepts: string[];
+          tips: string[];
+        };
+        statusCodes: {
+          title: string;
+          explanation: string;
+          concepts: string[];
+          tips: string[];
+        };
+        headers: {
+          title: string;
+          explanation: string;
+          concepts: string[];
+          tips: string[];
+        };
+        authentication: {
+          title: string;
+          explanation: string;
+          concepts: string[];
+          tips: string[];
+        };
+      };
+    };
+    commonMethods: {
+      title: string;
+      getRequest: string;
+      getRequestDesc: string;
+      postRequest: string;
+      postRequestDesc: string;
+      validateResponse: string;
+      validateResponseDesc: string;
+      validateStatusCode: string;
+      validateStatusCodeDesc: string;
+      validateHeaders: string;
+      validateHeadersDesc: string;
+      validateData: string;
+      validateDataDesc: string;
+    };
+    examples: {
+      title: string;
+      playwright: string;
+      cypress: string;
+    };
+    nextSteps: string;
+    goToWebIntro: string;
+    backToStart: string;
+  };
+
   // Common
   common: {
     loading: string;
@@ -398,7 +546,7 @@ export const translations: Record<string, Translations> = {
     },
     challenges: {
       title: 'Desafios',
-      subtitle: 'Pratique Playwright com desafios práticos',
+      subtitle: 'Pratique com desafios práticos',
       difficulty: {
         easy: 'Fácil',
         medium: 'Médio',
@@ -549,7 +697,7 @@ export const translations: Record<string, Translations> = {
       easy: {
         title: 'Desafios Fáceis',
         subtitle: 'Comece com conceitos básicos de Playwright',
-        description: 'Desafios ideais para iniciantes que querem aprender os fundamentos da automação de testes.',
+        description: 'Desafios para iniciantes que querem aprender os fundamentos da automação de testes.',
       },
       medium: {
         title: 'Desafios Médios',
@@ -654,6 +802,273 @@ export const translations: Record<string, Translations> = {
       copyPixKey: 'Copiar Chave PIX',
       pixKeyCopied: 'Chave PIX copiada!',
       optionalSupport: 'Apoios são opcionais e ajudam a manter o projeto gratuito',
+    },
+    webIntro: {
+      title: 'Introdução aos Testes de Aplicações Web',
+      subtitle: 'Aprenda os conceitos fundamentais de automação de testes web',
+      description: 'Esta página ensina os conceitos básicos e métodos mais comuns para testes de aplicações web usando Playwright e Cypress.',
+      concepts: {
+        title: 'Conceitos Fundamentais',
+        basicConcepts: 'Conceitos Básicos',
+        basicConceptsDesc: 'Entenda o que são testes automatizados e como funcionam',
+        selectors: 'Seletores',
+        selectorsDesc: 'Aprenda a localizar elementos na página (CSS, XPath, data-testid)',
+        assertions: 'Asserções',
+        assertionsDesc: 'Como validar se os elementos estão corretos',
+        interactions: 'Interações',
+        interactionsDesc: 'Como simular ações do usuário (clique, digitação, etc.)',
+      waiting: 'Esperas',
+      waitingDesc: 'Como aguardar elementos carregarem ou condições serem atendidas',
+      details: {
+        basicConcepts: {
+          title: 'Conceitos Básicos de Testes Automatizados',
+          explanation: 'Os testes automatizados são scripts que simulam interações de usuários reais com aplicações web. Eles verificam se a aplicação funciona corretamente sem intervenção manual.',
+          concepts: [
+            'Testes automatizados executam ações programaticamente',
+            'Verificam se a aplicação responde como esperado',
+            'Podem ser executados repetidamente sem falha',
+            'Economizam tempo e reduzem erros humanos',
+            'Permitem detecção precoce de problemas'
+          ],
+          tips: [
+            'Comece com testes simples antes de partir para cenários complexos',
+            'Use seletores estáveis (data-testid) em vez de classes CSS',
+            'Escreva testes independentes que não dependam uns dos outros',
+            'Mantenha os testes organizados e bem documentados',
+            'Execute os testes regularmente durante o desenvolvimento'
+          ]
+        },
+        selectors: {
+          title: 'Seletores de Elementos',
+          explanation: 'Seletores são formas de localizar elementos específicos na página web. São fundamentais para interagir com botões, campos de texto, links e outros componentes.',
+          concepts: [
+            'CSS Selectors: baseados em classes, IDs e hierarquia HTML',
+            'XPath: linguagem poderosa para navegar na estrutura XML/HTML',
+            'data-testid: atributos especiais criados para testes',
+            'Texto visível: localizar elementos pelo texto que contêm',
+            'Hierarquia: usar parent/child para elementos aninhados'
+          ],
+          tips: [
+            'Prefira data-testid sobre classes CSS (mais estáveis)',
+            'Use seletores específicos mas não frágeis',
+            'Evite seletores baseados em posição (primeiro, último)',
+            'Teste seus seletores antes de usar nos testes',
+            'Documente seletores complexos para facilitar manutenção'
+          ]
+        },
+        assertions: {
+          title: 'Asserções e Validações',
+          explanation: 'Asserções são verificações que confirmam se o comportamento da aplicação está correto. Elas comparam o estado atual com o estado esperado.',
+          concepts: [
+            'toBeVisible(): verifica se elemento está visível',
+            'toHaveText(): confirma se texto está correto',
+            'toBeEnabled(): verifica se elemento está habilitado',
+            'toHaveValue(): valida valor em campos de entrada',
+            'toHaveCount(): confirma quantidade de elementos'
+          ],
+          tips: [
+            'Use asserções específicas em vez de genéricas',
+            'Aguarde elementos carregarem antes de validar',
+            'Valide tanto estados positivos quanto negativos',
+            'Combine múltiplas asserções para validações completas',
+            'Use mensagens descritivas nas asserções'
+          ]
+        },
+        interactions: {
+          title: 'Interações com Elementos',
+          explanation: 'Interações simulam ações que um usuário real faria na aplicação, como clicar, digitar, selecionar opções e navegar entre páginas.',
+          concepts: [
+            'click(): simula clique em botões e links',
+            'type(): digita texto em campos de entrada',
+            'selectOption(): seleciona opções em dropdowns',
+            'hover(): simula passar o mouse sobre elementos',
+            'dragAndDrop(): arrasta e solta elementos'
+          ],
+          tips: [
+            'Aguarde elementos estarem interativos antes de clicar',
+            'Use clear() antes de type() em campos com valor existente',
+            'Simule interações realistas (pausas, velocidade)',
+            'Trate elementos dinâmicos que podem aparecer/desaparecer',
+            'Teste interações em diferentes dispositivos e tamanhos de tela'
+          ]
+        },
+        waiting: {
+          title: 'Estratégias de Espera',
+          explanation: 'Esperas são essenciais para lidar com elementos que carregam dinamicamente. Evitam falhas por timing e tornam os testes mais confiáveis.',
+          concepts: [
+            'waitForSelector(): aguarda elemento aparecer',
+            'waitForNavigation(): aguarda navegação completar',
+            'waitForResponse(): aguarda requisições de rede',
+            'waitForFunction(): aguarda condição personalizada',
+            'waitForTimeout(): espera tempo fixo (último recurso)'
+          ],
+          tips: [
+            'Prefira esperas inteligentes sobre timeouts fixos',
+            'Configure timeouts apropriados para cada tipo de espera',
+            'Use waitForSelector antes de interagir com elementos',
+            'Aguarde requisições de rede quando necessário',
+            'Evite timeouts muito longos que tornam testes lentos'
+          ]
+        }
+      }
+    },
+      commonMethods: {
+        title: 'Métodos Mais Comuns',
+        clickButton: 'Clicar em Botão',
+        clickButtonDesc: 'Como clicar em botões e validar o resultado',
+        selectDropdown: 'Selecionar Dropdown',
+        selectDropdownDesc: 'Como selecionar opções em listas suspensas',
+        fillInput: 'Preencher Input',
+        fillInputDesc: 'Como preencher campos de texto',
+        validateVisible: 'Validar Elemento Visível',
+        validateVisibleDesc: 'Como verificar se um elemento está visível',
+        validateText: 'Validar Texto',
+        validateTextDesc: 'Como verificar se o texto está correto',
+        navigate: 'Navegar',
+        navigateDesc: 'Como navegar entre páginas',
+      },
+      examples: {
+        title: 'Exemplos Práticos',
+        playwright: 'Playwright',
+        cypress: 'Cypress',
+      },
+      nextSteps: 'Próximos Passos',
+      goToApiIntro: 'Testes de API',
+      backToStart: 'Voltar ao Início',
+    },
+    apiIntro: {
+      title: 'Introdução aos Testes de API',
+      subtitle: 'Aprenda os conceitos fundamentais de testes de API REST',
+      description: 'Esta página ensina os conceitos básicos e métodos mais comuns para testes de API usando Playwright e Cypress.',
+      concepts: {
+        title: 'Conceitos Fundamentais',
+        restBasics: 'Fundamentos REST',
+        restBasicsDesc: 'Entenda o que é REST e como funcionam as APIs',
+        httpMethods: 'Métodos HTTP',
+        httpMethodsDesc: 'GET, POST, PUT, DELETE e quando usar cada um',
+        statusCodes: 'Códigos de Status',
+        statusCodesDesc: 'Entenda os códigos de resposta HTTP (200, 404, 500, etc.)',
+        headers: 'Headers',
+        headersDesc: 'Como usar e validar headers HTTP',
+      authentication: 'Autenticação',
+      authenticationDesc: 'Como autenticar requisições (Bearer token, API key, etc.)',
+      details: {
+        restBasics: {
+          title: 'Fundamentos de APIs REST',
+          explanation: 'REST (Representational State Transfer) é um estilo arquitetural para desenvolvimento de APIs web. APIs REST usam métodos HTTP padrão para operações CRUD em recursos.',
+          concepts: [
+            'Recursos são identificados por URLs únicas',
+            'Métodos HTTP definem a operação (GET, POST, PUT, DELETE)',
+            'Stateless: cada requisição é independente',
+            'JSON é o formato mais comum para dados',
+            'Códigos de status HTTP indicam resultado da operação'
+          ],
+          tips: [
+            'Use URLs descritivas e consistentes para recursos',
+            'Siga convenções REST para métodos HTTP',
+            'Retorne códigos de status apropriados',
+            'Use JSON para estruturar dados de resposta',
+            'Implemente versionamento da API quando necessário'
+          ]
+        },
+        httpMethods: {
+          title: 'Métodos HTTP e Quando Usar',
+          explanation: 'Os métodos HTTP definem a ação que será executada em um recurso. Cada método tem um propósito específico e deve ser usado corretamente.',
+          concepts: [
+            'GET: recuperar dados (ler) - não modifica estado',
+            'POST: criar novos recursos - pode modificar estado',
+            'PUT: atualizar recurso completo - substitui dados',
+            'PATCH: atualização parcial - modifica apenas campos específicos',
+            'DELETE: remover recurso - pode modificar estado'
+          ],
+          tips: [
+            'Use GET apenas para operações de leitura',
+            'POST é ideal para criar novos recursos',
+            'PUT substitui o recurso inteiro',
+            'PATCH é mais eficiente para atualizações parciais',
+            'DELETE remove o recurso permanentemente'
+          ]
+        },
+        statusCodes: {
+          title: 'Códigos de Status HTTP',
+          explanation: 'Códigos de status HTTP são números de 3 dígitos que indicam o resultado de uma requisição. Eles ajudam a entender se a operação foi bem-sucedida ou se houve erro.',
+          concepts: [
+            '2xx: Sucesso (200 OK, 201 Created, 204 No Content)',
+            '3xx: Redirecionamento (301 Moved, 304 Not Modified)',
+            '4xx: Erro do cliente (400 Bad Request, 401 Unauthorized, 404 Not Found)',
+            '5xx: Erro do servidor (500 Internal Server Error, 503 Service Unavailable)',
+            'Códigos específicos indicam tipos diferentes de problemas'
+          ],
+          tips: [
+            '200: operação bem-sucedida',
+            '201: recurso criado com sucesso',
+            '400: dados inválidos na requisição',
+            '401: autenticação necessária',
+            '404: recurso não encontrado',
+            '500: erro interno do servidor'
+          ]
+        },
+        headers: {
+          title: 'Headers HTTP',
+          explanation: 'Headers são metadados que acompanham requisições e respostas HTTP. Eles fornecem informações sobre o conteúdo, autenticação, cache e outras configurações.',
+          concepts: [
+            'Content-Type: especifica formato dos dados (application/json)',
+            'Authorization: credenciais de autenticação (Bearer token)',
+            'Accept: tipos de conteúdo aceitos pelo cliente',
+            'Cache-Control: diretivas de cache',
+            'Custom headers: informações específicas da aplicação'
+          ],
+          tips: [
+            'Sempre especifique Content-Type nas requisições POST/PUT',
+            'Use Authorization header para autenticação',
+            'Configure Accept para indicar formato esperado',
+            'Implemente headers customizados quando necessário',
+            'Valide headers obrigatórios nos testes'
+          ]
+        },
+        authentication: {
+          title: 'Autenticação em APIs',
+          explanation: 'Autenticação garante que apenas usuários autorizados possam acessar recursos protegidos. Existem várias estratégias para implementar autenticação em APIs.',
+          concepts: [
+            'API Key: chave simples para identificação',
+            'Bearer Token: token de acesso (JWT, OAuth)',
+            'Basic Auth: usuário e senha codificados em Base64',
+            'OAuth 2.0: padrão para autorização de terceiros',
+            'JWT: tokens auto-contidos com informações do usuário'
+          ],
+          tips: [
+            'Use HTTPS para transmitir credenciais com segurança',
+            'Implemente expiração de tokens para segurança',
+            'Valide tokens em todas as requisições protegidas',
+            'Use refresh tokens para renovação de acesso',
+            'Implemente rate limiting para prevenir abuso'
+          ]
+        }
+      }
+    },
+      commonMethods: {
+        title: 'Métodos Mais Comuns',
+        getRequest: 'Requisições GET',
+        getRequestDesc: 'Como fazer requisições GET e validar dados',
+        postRequest: 'Requisições POST',
+        postRequestDesc: 'Como enviar dados via POST',
+        validateResponse: 'Validar Resposta',
+        validateResponseDesc: 'Como validar o corpo da resposta',
+        validateStatusCode: 'Validar Status Code',
+        validateStatusCodeDesc: 'Como verificar códigos de status HTTP',
+        validateHeaders: 'Validar Headers',
+        validateHeadersDesc: 'Como validar headers da resposta',
+        validateData: 'Validar Dados',
+        validateDataDesc: 'Como validar estrutura e conteúdo dos dados',
+      },
+      examples: {
+        title: 'Exemplos Práticos',
+        playwright: 'Playwright',
+        cypress: 'Cypress',
+      },
+      nextSteps: 'Próximos Passos',
+      goToWebIntro: 'Testes Web',
+      backToStart: 'Voltar ao Início',
     },
     components: {
       backButton: 'Voltar',
@@ -816,7 +1231,7 @@ export const translations: Record<string, Translations> = {
     },
     challenges: {
       title: 'Challenges',
-      subtitle: 'Practice Playwright with practical challenges',
+      subtitle: 'Practice with practical challenges',
       difficulty: {
         easy: 'Easy',
         medium: 'Medium',
@@ -993,6 +1408,273 @@ export const translations: Record<string, Translations> = {
       pixKeyCopied: 'PIX Key copied!',
       optionalSupport: 'Support is optional and helps keep the project free',
     },
+    webIntro: {
+      title: 'Introduction to Web Application Testing',
+      subtitle: 'Learn the fundamentals of web test automation',
+      description: 'This page teaches the basic concepts and most common methods for web application testing using Playwright and Cypress.',
+      concepts: {
+        title: 'Fundamental Concepts',
+        basicConcepts: 'Basic Concepts',
+        basicConceptsDesc: 'Understand what automated tests are and how they work',
+        selectors: 'Selectors',
+        selectorsDesc: 'Learn to locate elements on the page (CSS, XPath, data-testid)',
+        assertions: 'Assertions',
+        assertionsDesc: 'How to validate if elements are correct',
+        interactions: 'Interactions',
+        interactionsDesc: 'How to simulate user actions (click, type, etc.)',
+      waiting: 'Waiting',
+      waitingDesc: 'How to wait for elements to load or conditions to be met',
+      details: {
+        basicConcepts: {
+          title: 'Basic Concepts of Automated Testing',
+          explanation: 'Automated tests are scripts that simulate real user interactions with web applications. They verify if the application works correctly without manual intervention.',
+          concepts: [
+            'Automated tests execute actions programmatically',
+            'They verify if the application responds as expected',
+            'They can be executed repeatedly without failure',
+            'They save time and reduce human errors',
+            'They allow early detection of problems'
+          ],
+          tips: [
+            'Start with simple tests before moving to complex scenarios',
+            'Use stable selectors (data-testid) instead of CSS classes',
+            'Write independent tests that don\'t depend on each other',
+            'Keep tests organized and well documented',
+            'Run tests regularly during development'
+          ]
+        },
+        selectors: {
+          title: 'Element Selectors',
+          explanation: 'Selectors are ways to locate specific elements on a web page. They are fundamental for interacting with buttons, text fields, links and other components.',
+          concepts: [
+            'CSS Selectors: based on classes, IDs and HTML hierarchy',
+            'XPath: powerful language for navigating XML/HTML structure',
+            'data-testid: special attributes created for testing',
+            'Visible text: locate elements by the text they contain',
+            'Hierarchy: use parent/child for nested elements'
+          ],
+          tips: [
+            'Prefer data-testid over CSS classes (more stable)',
+            'Use specific but not fragile selectors',
+            'Avoid position-based selectors (first, last)',
+            'Test your selectors before using them in tests',
+            'Document complex selectors to facilitate maintenance'
+          ]
+        },
+        assertions: {
+          title: 'Assertions and Validations',
+          explanation: 'Assertions are checks that confirm if the application behavior is correct. They compare the current state with the expected state.',
+          concepts: [
+            'toBeVisible(): checks if element is visible',
+            'toHaveText(): confirms if text is correct',
+            'toBeEnabled(): verifies if element is enabled',
+            'toHaveValue(): validates value in input fields',
+            'toHaveCount(): confirms number of elements'
+          ],
+          tips: [
+            'Use specific assertions instead of generic ones',
+            'Wait for elements to load before validating',
+            'Validate both positive and negative states',
+            'Combine multiple assertions for complete validations',
+            'Use descriptive messages in assertions'
+          ]
+        },
+        interactions: {
+          title: 'Element Interactions',
+          explanation: 'Interactions simulate actions that a real user would do in the application, such as clicking, typing, selecting options and navigating between pages.',
+          concepts: [
+            'click(): simulates click on buttons and links',
+            'type(): types text in input fields',
+            'selectOption(): selects options in dropdowns',
+            'hover(): simulates mouse hover over elements',
+            'dragAndDrop(): drags and drops elements'
+          ],
+          tips: [
+            'Wait for elements to be interactive before clicking',
+            'Use clear() before type() in fields with existing value',
+            'Simulate realistic interactions (pauses, speed)',
+            'Handle dynamic elements that may appear/disappear',
+            'Test interactions on different devices and screen sizes'
+          ]
+        },
+        waiting: {
+          title: 'Waiting Strategies',
+          explanation: 'Waits are essential for handling elements that load dynamically. They prevent timing failures and make tests more reliable.',
+          concepts: [
+            'waitForSelector(): waits for element to appear',
+            'waitForNavigation(): waits for navigation to complete',
+            'waitForResponse(): waits for network requests',
+            'waitForFunction(): waits for custom condition',
+            'waitForTimeout(): fixed time wait (last resort)'
+          ],
+          tips: [
+            'Prefer smart waits over fixed timeouts',
+            'Configure appropriate timeouts for each wait type',
+            'Use waitForSelector before interacting with elements',
+            'Wait for network requests when necessary',
+            'Avoid timeouts that are too long and make tests slow'
+          ]
+        }
+      }
+    },
+      commonMethods: {
+        title: 'Most Common Methods',
+        clickButton: 'Click Button',
+        clickButtonDesc: 'How to click buttons and validate the result',
+        selectDropdown: 'Select Dropdown',
+        selectDropdownDesc: 'How to select options in dropdown lists',
+        fillInput: 'Fill Input',
+        fillInputDesc: 'How to fill text fields',
+        validateVisible: 'Validate Element Visible',
+        validateVisibleDesc: 'How to check if an element is visible',
+        validateText: 'Validate Text',
+        validateTextDesc: 'How to verify if the text is correct',
+        navigate: 'Navigate',
+        navigateDesc: 'How to navigate between pages',
+      },
+      examples: {
+        title: 'Practical Examples',
+        playwright: 'Playwright',
+        cypress: 'Cypress',
+      },
+      nextSteps: 'Next Steps',
+      goToApiIntro: 'API Testing',
+      backToStart: 'Back to Start',
+    },
+    apiIntro: {
+      title: 'Introduction to API Testing',
+      subtitle: 'Learn the fundamentals of REST API testing',
+      description: 'This page teaches the basic concepts and most common methods for API testing using Playwright and Cypress.',
+      concepts: {
+        title: 'Fundamental Concepts',
+        restBasics: 'REST Fundamentals',
+        restBasicsDesc: 'Understand what REST is and how APIs work',
+        httpMethods: 'HTTP Methods',
+        httpMethodsDesc: 'GET, POST, PUT, DELETE and when to use each one',
+        statusCodes: 'Status Codes',
+        statusCodesDesc: 'Understand HTTP response codes (200, 404, 500, etc.)',
+        headers: 'Headers',
+        headersDesc: 'How to use and validate HTTP headers',
+      authentication: 'Authentication',
+      authenticationDesc: 'How to authenticate requests (Bearer token, API key, etc.)',
+      details: {
+        restBasics: {
+          title: 'REST API Fundamentals',
+          explanation: 'REST (Representational State Transfer) is an architectural style for developing web APIs. REST APIs use standard HTTP methods for CRUD operations on resources.',
+          concepts: [
+            'Resources are identified by unique URLs',
+            'HTTP methods define the operation (GET, POST, PUT, DELETE)',
+            'Stateless: each request is independent',
+            'JSON is the most common format for data',
+            'HTTP status codes indicate operation result'
+          ],
+          tips: [
+            'Use descriptive and consistent URLs for resources',
+            'Follow REST conventions for HTTP methods',
+            'Return appropriate status codes',
+            'Use JSON to structure response data',
+            'Implement API versioning when necessary'
+          ]
+        },
+        httpMethods: {
+          title: 'HTTP Methods and When to Use',
+          explanation: 'HTTP methods define the action that will be executed on a resource. Each method has a specific purpose and should be used correctly.',
+          concepts: [
+            'GET: retrieve data (read) - does not modify state',
+            'POST: create new resources - may modify state',
+            'PUT: complete resource update - replaces data',
+            'PATCH: partial update - modifies only specific fields',
+            'DELETE: remove resource - may modify state'
+          ],
+          tips: [
+            'Use GET only for read operations',
+            'POST is ideal for creating new resources',
+            'PUT replaces the entire resource',
+            'PATCH is more efficient for partial updates',
+            'DELETE removes the resource permanently'
+          ]
+        },
+        statusCodes: {
+          title: 'HTTP Status Codes',
+          explanation: 'HTTP status codes are 3-digit numbers that indicate the result of a request. They help understand if the operation was successful or if there was an error.',
+          concepts: [
+            '2xx: Success (200 OK, 201 Created, 204 No Content)',
+            '3xx: Redirection (301 Moved, 304 Not Modified)',
+            '4xx: Client error (400 Bad Request, 401 Unauthorized, 404 Not Found)',
+            '5xx: Server error (500 Internal Server Error, 503 Service Unavailable)',
+            'Specific codes indicate different types of problems'
+          ],
+          tips: [
+            '200: operation successful',
+            '201: resource created successfully',
+            '400: invalid data in request',
+            '401: authentication required',
+            '404: resource not found',
+            '500: internal server error'
+          ]
+        },
+        headers: {
+          title: 'HTTP Headers',
+          explanation: 'Headers are metadata that accompany HTTP requests and responses. They provide information about content, authentication, cache and other settings.',
+          concepts: [
+            'Content-Type: specifies data format (application/json)',
+            'Authorization: authentication credentials (Bearer token)',
+            'Accept: content types accepted by client',
+            'Cache-Control: cache directives',
+            'Custom headers: application-specific information'
+          ],
+          tips: [
+            'Always specify Content-Type in POST/PUT requests',
+            'Use Authorization header for authentication',
+            'Configure Accept to indicate expected format',
+            'Implement custom headers when necessary',
+            'Validate required headers in tests'
+          ]
+        },
+        authentication: {
+          title: 'API Authentication',
+          explanation: 'Authentication ensures that only authorized users can access protected resources. There are several strategies for implementing authentication in APIs.',
+          concepts: [
+            'API Key: simple key for identification',
+            'Bearer Token: access token (JWT, OAuth)',
+            'Basic Auth: username and password encoded in Base64',
+            'OAuth 2.0: standard for third-party authorization',
+            'JWT: self-contained tokens with user information'
+          ],
+          tips: [
+            'Use HTTPS to transmit credentials securely',
+            'Implement token expiration for security',
+            'Validate tokens on all protected requests',
+            'Use refresh tokens for access renewal',
+            'Implement rate limiting to prevent abuse'
+          ]
+        }
+      }
+    },
+      commonMethods: {
+        title: 'Most Common Methods',
+        getRequest: 'GET Requests',
+        getRequestDesc: 'How to make GET requests and validate data',
+        postRequest: 'POST Requests',
+        postRequestDesc: 'How to send data via POST',
+        validateResponse: 'Validate Response',
+        validateResponseDesc: 'How to validate the response body',
+        validateStatusCode: 'Validate Status Code',
+        validateStatusCodeDesc: 'How to check HTTP status codes',
+        validateHeaders: 'Validate Headers',
+        validateHeadersDesc: 'How to validate response headers',
+        validateData: 'Validate Data',
+        validateDataDesc: 'How to validate data structure and content',
+      },
+      examples: {
+        title: 'Practical Examples',
+        playwright: 'Playwright',
+        cypress: 'Cypress',
+      },
+      nextSteps: 'Next Steps',
+      goToWebIntro: 'Web Testing',
+      backToStart: 'Back to Start',
+    },
     components: {
       backButton: 'Back',
       contactForm: {
@@ -1154,7 +1836,7 @@ export const translations: Record<string, Translations> = {
     },
     challenges: {
       title: 'Défis',
-      subtitle: 'Pratiquez Playwright avec des défis pratiques',
+      subtitle: 'Pratiquez avec des défis pratiques',
       difficulty: {
         easy: 'Facile',
         medium: 'Moyen',
@@ -1315,6 +1997,273 @@ export const translations: Record<string, Translations> = {
       copyPixKey: 'Copier la Clé PIX',
       pixKeyCopied: 'Clé PIX copiée!',
       optionalSupport: 'Le soutien est optionnel et aide à maintenir le projet gratuit',
+    },
+    webIntro: {
+      title: 'Introduction aux Tests d\'Applications Web',
+      subtitle: 'Apprenez les concepts fondamentaux de l\'automatisation des tests web',
+      description: 'Cette page enseigne les concepts de base et les méthodes les plus courantes pour les tests d\'applications web en utilisant Playwright et Cypress.',
+      concepts: {
+        title: 'Concepts Fondamentaux',
+        basicConcepts: 'Concepts de Base',
+        basicConceptsDesc: 'Comprenez ce que sont les tests automatisés et comment ils fonctionnent',
+        selectors: 'Sélecteurs',
+        selectorsDesc: 'Apprenez à localiser les éléments sur la page (CSS, XPath, data-testid)',
+        assertions: 'Assertions',
+        assertionsDesc: 'Comment valider si les éléments sont corrects',
+        interactions: 'Interactions',
+        interactionsDesc: 'Comment simuler les actions utilisateur (clic, saisie, etc.)',
+      waiting: 'Attente',
+      waitingDesc: 'Comment attendre que les éléments se chargent ou que les conditions soient remplies',
+      details: {
+        basicConcepts: {
+          title: 'Concepts de Base des Tests Automatisés',
+          explanation: 'Les tests automatisés sont des scripts qui simulent les interactions d\'utilisateurs réels avec les applications web. Ils vérifient si l\'application fonctionne correctement sans intervention manuelle.',
+          concepts: [
+            'Les tests automatisés exécutent des actions par programmation',
+            'Ils vérifient si l\'application répond comme attendu',
+            'Ils peuvent être exécutés de manière répétée sans échec',
+            'Ils économisent du temps et réduisent les erreurs humaines',
+            'Ils permettent la détection précoce de problèmes'
+          ],
+          tips: [
+            'Commencez par des tests simples avant de passer aux scénarios complexes',
+            'Utilisez des sélecteurs stables (data-testid) au lieu des classes CSS',
+            'Écrivez des tests indépendants qui ne dépendent pas les uns des autres',
+            'Gardez les tests organisés et bien documentés',
+            'Exécutez les tests régulièrement pendant le développement'
+          ]
+        },
+        selectors: {
+          title: 'Sélecteurs d\'Éléments',
+          explanation: 'Les sélecteurs sont des moyens de localiser des éléments spécifiques sur une page web. Ils sont fondamentaux pour interagir avec des boutons, des champs de texte, des liens et d\'autres composants.',
+          concepts: [
+            'Sélecteurs CSS : basés sur les classes, IDs et hiérarchie HTML',
+            'XPath : langage puissant pour naviguer dans la structure XML/HTML',
+            'data-testid : attributs spéciaux créés pour les tests',
+            'Texte visible : localiser les éléments par le texte qu\'ils contiennent',
+            'Hiérarchie : utiliser parent/enfant pour les éléments imbriqués'
+          ],
+          tips: [
+            'Préférez data-testid aux classes CSS (plus stable)',
+            'Utilisez des sélecteurs spécifiques mais pas fragiles',
+            'Évitez les sélecteurs basés sur la position (premier, dernier)',
+            'Testez vos sélecteurs avant de les utiliser dans les tests',
+            'Documentez les sélecteurs complexes pour faciliter la maintenance'
+          ]
+        },
+        assertions: {
+          title: 'Assertions et Validations',
+          explanation: 'Les assertions sont des vérifications qui confirment si le comportement de l\'application est correct. Elles comparent l\'état actuel avec l\'état attendu.',
+          concepts: [
+            'toBeVisible() : vérifie si l\'élément est visible',
+            'toHaveText() : confirme si le texte est correct',
+            'toBeEnabled() : vérifie si l\'élément est activé',
+            'toHaveValue() : valide la valeur dans les champs de saisie',
+            'toHaveCount() : confirme le nombre d\'éléments'
+          ],
+          tips: [
+            'Utilisez des assertions spécifiques au lieu de génériques',
+            'Attendez que les éléments se chargent avant de valider',
+            'Validez à la fois les états positifs et négatifs',
+            'Combine multiple assertions pour des validations complètes',
+            'Utilisez des messages descriptifs dans les assertions'
+          ]
+        },
+        interactions: {
+          title: 'Interactions avec les Éléments',
+          explanation: 'Les interactions simulent des actions qu\'un utilisateur réel ferait dans l\'application, comme cliquer, taper, sélectionner des options et naviguer entre les pages.',
+          concepts: [
+            'click() : simule un clic sur des boutons et liens',
+            'type() : tape du texte dans les champs de saisie',
+            'selectOption() : sélectionne des options dans les listes déroulantes',
+            'hover() : simule le survol de la souris sur les éléments',
+            'dragAndDrop() : fait glisser et déposer des éléments'
+          ],
+          tips: [
+            'Attendez que les éléments soient interactifs avant de cliquer',
+            'Utilisez clear() avant type() dans les champs avec une valeur existante',
+            'Simulez des interactions réalistes (pauses, vitesse)',
+            'Traitez les éléments dynamiques qui peuvent apparaître/disparaître',
+            'Testez les interactions sur différents appareils et tailles d\'écran'
+          ]
+        },
+        waiting: {
+          title: 'Stratégies d\'Attente',
+          explanation: 'Les attentes sont essentielles pour gérer les éléments qui se chargent dynamiquement. Elles évitent les échecs de timing et rendent les tests plus fiables.',
+          concepts: [
+            'waitForSelector() : attend que l\'élément apparaisse',
+            'waitForNavigation() : attend que la navigation se termine',
+            'waitForResponse() : attend les requêtes réseau',
+            'waitForFunction() : attend une condition personnalisée',
+            'waitForTimeout() : attente de temps fixe (dernier recours)'
+          ],
+          tips: [
+            'Préférez les attentes intelligentes aux timeouts fixes',
+            'Configurez des timeouts appropriés pour chaque type d\'attente',
+            'Utilisez waitForSelector avant d\'interagir avec les éléments',
+            'Attendez les requêtes réseau quand nécessaire',
+            'Évitez les timeouts trop longs qui rendent les tests lents'
+          ]
+        }
+      }
+    },
+      commonMethods: {
+        title: 'Méthodes les Plus Courantes',
+        clickButton: 'Cliquer sur un Bouton',
+        clickButtonDesc: 'Comment cliquer sur des boutons et valider le résultat',
+        selectDropdown: 'Sélectionner Dropdown',
+        selectDropdownDesc: 'Comment sélectionner des options dans les listes déroulantes',
+        fillInput: 'Remplir Input',
+        fillInputDesc: 'Comment remplir les champs de texte',
+        validateVisible: 'Valider Élément Visible',
+        validateVisibleDesc: 'Comment vérifier si un élément est visible',
+        validateText: 'Valider Texte',
+        validateTextDesc: 'Comment vérifier si le texte est correct',
+        navigate: 'Naviguer',
+        navigateDesc: 'Comment naviguer entre les pages',
+      },
+      examples: {
+        title: 'Exemples Pratiques',
+        playwright: 'Playwright',
+        cypress: 'Cypress',
+      },
+      nextSteps: 'Prochaines Étapes',
+      goToApiIntro: 'Tests d\'API',
+      backToStart: 'Retour au Début',
+    },
+    apiIntro: {
+      title: 'Introduction aux Tests d\'API',
+      subtitle: 'Apprenez les concepts fondamentaux des tests d\'API REST',
+      description: 'Cette page enseigne les concepts de base et les méthodes les plus courantes pour les tests d\'API en utilisant Playwright et Cypress.',
+      concepts: {
+        title: 'Concepts Fondamentaux',
+        restBasics: 'Fondamentaux REST',
+        restBasicsDesc: 'Comprenez ce qu\'est REST et comment fonctionnent les APIs',
+        httpMethods: 'Méthodes HTTP',
+        httpMethodsDesc: 'GET, POST, PUT, DELETE et quand utiliser chacune',
+        statusCodes: 'Codes de Statut',
+        statusCodesDesc: 'Comprenez les codes de réponse HTTP (200, 404, 500, etc.)',
+        headers: 'Headers',
+        headersDesc: 'Comment utiliser et valider les headers HTTP',
+      authentication: 'Authentification',
+      authenticationDesc: 'Comment authentifier les requêtes (Bearer token, API key, etc.)',
+      details: {
+        restBasics: {
+          title: 'Fondamentaux des APIs REST',
+          explanation: 'REST (Representational State Transfer) est un style architectural pour le développement d\'APIs web. Les APIs REST utilisent des méthodes HTTP standard pour les opérations CRUD sur les ressources.',
+          concepts: [
+            'Les ressources sont identifiées par des URLs uniques',
+            'Les méthodes HTTP définissent l\'opération (GET, POST, PUT, DELETE)',
+            'Stateless : chaque requête est indépendante',
+            'JSON est le format le plus courant pour les données',
+            'Les codes de statut HTTP indiquent le résultat de l\'opération'
+          ],
+          tips: [
+            'Utilisez des URLs descriptives et cohérentes pour les ressources',
+            'Suivez les conventions REST pour les méthodes HTTP',
+            'Retournez des codes de statut appropriés',
+            'Utilisez JSON pour structurer les données de réponse',
+            'Implémentez le versioning de l\'API quand nécessaire'
+          ]
+        },
+        httpMethods: {
+          title: 'Méthodes HTTP et Quand les Utiliser',
+          explanation: 'Les méthodes HTTP définissent l\'action qui sera exécutée sur une ressource. Chaque méthode a un objectif spécifique et doit être utilisée correctement.',
+          concepts: [
+            'GET : récupérer des données (lire) - ne modifie pas l\'état',
+            'POST : créer de nouvelles ressources - peut modifier l\'état',
+            'PUT : mise à jour complète de ressource - remplace les données',
+            'PATCH : mise à jour partielle - modifie seulement des champs spécifiques',
+            'DELETE : supprimer ressource - peut modifier l\'état'
+          ],
+          tips: [
+            'Utilisez GET seulement pour les opérations de lecture',
+            'POST est idéal pour créer de nouvelles ressources',
+            'PUT remplace la ressource entière',
+            'PATCH est plus efficace pour les mises à jour partielles',
+            'DELETE supprime la ressource définitivement'
+          ]
+        },
+        statusCodes: {
+          title: 'Codes de Statut HTTP',
+          explanation: 'Les codes de statut HTTP sont des nombres à 3 chiffres qui indiquent le résultat d\'une requête. Ils aident à comprendre si l\'opération a réussi ou s\'il y a eu une erreur.',
+          concepts: [
+            '2xx : Succès (200 OK, 201 Created, 204 No Content)',
+            '3xx : Redirection (301 Moved, 304 Not Modified)',
+            '4xx : Erreur client (400 Bad Request, 401 Unauthorized, 404 Not Found)',
+            '5xx : Erreur serveur (500 Internal Server Error, 503 Service Unavailable)',
+            'Les codes spécifiques indiquent différents types de problèmes'
+          ],
+          tips: [
+            '200 : opération réussie',
+            '201 : ressource créée avec succès',
+            '400 : données invalides dans la requête',
+            '401 : authentification nécessaire',
+            '404 : ressource non trouvée',
+            '500 : erreur interne du serveur'
+          ]
+        },
+        headers: {
+          title: 'Headers HTTP',
+          explanation: 'Les headers sont des métadonnées qui accompagnent les requêtes et réponses HTTP. Ils fournissent des informations sur le contenu, l\'authentification, le cache et autres paramètres.',
+          concepts: [
+            'Content-Type : spécifie le format des données (application/json)',
+            'Authorization : credentials d\'authentification (Bearer token)',
+            'Accept : types de contenu acceptés par le client',
+            'Cache-Control : directives de cache',
+            'Headers personnalisés : informations spécifiques à l\'application'
+          ],
+          tips: [
+            'Spécifiez toujours Content-Type dans les requêtes POST/PUT',
+            'Utilisez le header Authorization pour l\'authentification',
+            'Configurez Accept pour indiquer le format attendu',
+            'Implémentez des headers personnalisés quand nécessaire',
+            'Validez les headers obligatoires dans les tests'
+          ]
+        },
+        authentication: {
+          title: 'Authentification des APIs',
+          explanation: 'L\'authentification garantit que seuls les utilisateurs autorisés peuvent accéder aux ressources protégées. Il existe plusieurs stratégies pour implémenter l\'authentification dans les APIs.',
+          concepts: [
+            'API Key : clé simple pour l\'identification',
+            'Bearer Token : token d\'accès (JWT, OAuth)',
+            'Basic Auth : nom d\'utilisateur et mot de passe encodés en Base64',
+            'OAuth 2.0 : standard pour l\'autorisation de tiers',
+            'JWT : tokens auto-contenus avec informations utilisateur'
+          ],
+          tips: [
+            'Utilisez HTTPS pour transmettre les credentials en sécurité',
+            'Implémentez l\'expiration des tokens pour la sécurité',
+            'Validez les tokens sur toutes les requêtes protégées',
+            'Utilisez des refresh tokens pour le renouvellement d\'accès',
+            'Implémentez le rate limiting pour prévenir les abus'
+          ]
+        }
+      }
+    },
+      commonMethods: {
+        title: 'Méthodes les Plus Courantes',
+        getRequest: 'Requêtes GET',
+        getRequestDesc: 'Comment faire des requêtes GET et valider les données',
+        postRequest: 'Requêtes POST',
+        postRequestDesc: 'Comment envoyer des données via POST',
+        validateResponse: 'Valider Réponse',
+        validateResponseDesc: 'Comment valider le corps de la réponse',
+        validateStatusCode: 'Valider Code de Statut',
+        validateStatusCodeDesc: 'Comment vérifier les codes de statut HTTP',
+        validateHeaders: 'Valider Headers',
+        validateHeadersDesc: 'Comment valider les headers de réponse',
+        validateData: 'Valider Données',
+        validateDataDesc: 'Comment valider la structure et le contenu des données',
+      },
+      examples: {
+        title: 'Exemples Pratiques',
+        playwright: 'Playwright',
+        cypress: 'Cypress',
+      },
+      nextSteps: 'Prochaines Étapes',
+      goToWebIntro: 'Tests Web',
+      backToStart: 'Retour au Début',
     },
     components: {
       backButton: 'Retour',

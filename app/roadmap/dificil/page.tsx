@@ -19,7 +19,6 @@ import {
 import { useState, useEffect } from 'react';
 import XPathTester from '@/components/XPathTester';
 import BackButton from '@/components/BackButton';
-import RoadmapChallengesButton from '@/components/RoadmapChallengesButton';
 import { useLocale } from '@/lib/locale-context';
 import { getTranslations } from '@/lib/translations';
 
@@ -77,9 +76,8 @@ export default function DificilPage() {
   return (
     <div data-testid="pp:dificil|page|container|root" style={{ padding: '40px 24px' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '20px' }}>
           <BackButton href="/desafios" testId="pp:dificil|btn|voltar" />
-          <RoadmapChallengesButton level={t.roadmap.levels.hard} testId="pp:dificil|btn|desafios" />
         </div>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>

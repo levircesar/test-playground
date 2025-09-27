@@ -252,108 +252,117 @@ export default function LandingPage() {
           
           <Row gutter={[32, 32]}>
             <Col xs={24} sm={12} md={8}>
-              <Card 
-                data-testid="pp:landing|como-funciona|card|ui"
-                style={{ 
-                  textAlign: 'center', 
-                  height: '100%',
-                  borderRadius: '16px',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
-                  border: 'none',
-                  transition: 'transform 0.3s ease'
-                }}
-                hoverable
-              >
-                <Space direction="vertical" size="large" style={{ width: '100%' }}>
-                  <div style={{
-                    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-                    borderRadius: '50%',
-                    width: '80px',
-                    height: '80px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto'
-                  }}>
-                    <RocketOutlined style={{ fontSize: '40px', color: 'white' }} />
-                  </div>
-                  <Title level={3} style={{ margin: 0 }}>{t.home.features.playwright}</Title>
-                  <Text style={{ fontSize: '16px', lineHeight: '1.6' }}>
-                    {t.home.features.playwrightDesc}
-                  </Text>
-                  <Badge count={t.challenges.difficulty.easy} style={{ backgroundColor: '#52c41a' }} />
-                </Space>
-              </Card>
+              <Link href="/introducao-web">
+                <Card 
+                  data-testid="pp:landing|como-funciona|card|ui"
+                  style={{ 
+                    textAlign: 'center', 
+                    height: '100%',
+                    borderRadius: '16px',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+                    border: 'none',
+                    transition: 'transform 0.3s ease',
+                    cursor: 'pointer'
+                  }}
+                  hoverable
+                >
+                  <Space direction="vertical" size="large" style={{ width: '100%' }}>
+                    <div style={{
+                      background: 'linear-gradient(135deg, #667eea, #764ba2)',
+                      borderRadius: '50%',
+                      width: '80px',
+                      height: '80px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto'
+                    }}>
+                      <RocketOutlined style={{ fontSize: '40px', color: 'white' }} />
+                    </div>
+                    <Title level={3} style={{ margin: 0 }}>{t.home.features.playwright}</Title>
+                    <Text style={{ fontSize: '16px', lineHeight: '1.6' }}>
+                      {t.home.features.playwrightDesc}
+                    </Text>
+                    <Badge count={t.challenges.difficulty.easy} style={{ backgroundColor: '#52c41a' }} />
+                  </Space>
+                </Card>
+              </Link>
             </Col>
             
             <Col xs={24} sm={12} md={8}>
-              <Card 
-                data-testid="pp:landing|como-funciona|card|upload"
-                style={{ 
-                  textAlign: 'center', 
-                  height: '100%',
-                  borderRadius: '16px',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
-                  border: 'none',
-                  transition: 'transform 0.3s ease'
-                }}
-                hoverable
-              >
-                <Space direction="vertical" size="large" style={{ width: '100%' }}>
-                  <div style={{
-                    background: 'linear-gradient(135deg, #52c41a, #73d13d)',
-                    borderRadius: '50%',
-                    width: '80px',
-                    height: '80px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto'
-                  }}>
-                    <UploadOutlined style={{ fontSize: '40px', color: 'white' }} />
-                  </div>
-                  <Title level={3} style={{ margin: 0 }}>{t.home.features.cypress}</Title>
-                  <Text style={{ fontSize: '16px', lineHeight: '1.6' }}>
-                    {t.home.features.cypressDesc}
-                  </Text>
-                  <Badge count={t.challenges.difficulty.medium} style={{ backgroundColor: '#fa8c16' }} />
-                </Space>
-              </Card>
+              <Link href="/introducao-api">
+                <Card 
+                  data-testid="pp:landing|como-funciona|card|upload"
+                  style={{ 
+                    textAlign: 'center', 
+                    height: '100%',
+                    borderRadius: '16px',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+                    border: 'none',
+                    transition: 'transform 0.3s ease',
+                    cursor: 'pointer'
+                  }}
+                  hoverable
+                >
+                  <Space direction="vertical" size="large" style={{ width: '100%' }}>
+                    <div style={{
+                      background: 'linear-gradient(135deg, #52c41a, #73d13d)',
+                      borderRadius: '50%',
+                      width: '80px',
+                      height: '80px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto'
+                    }}>
+                      <UploadOutlined style={{ fontSize: '40px', color: 'white' }} />
+                    </div>
+                    <Title level={3} style={{ margin: 0 }}>{t.home.features.cypress}</Title>
+                    <Text style={{ fontSize: '16px', lineHeight: '1.6' }}>
+                      {t.home.features.cypressDesc}
+                    </Text>
+                    <Badge count={t.challenges.difficulty.medium} style={{ backgroundColor: '#fa8c16' }} />
+                  </Space>
+                </Card>
+              </Link>
             </Col>
             
             <Col xs={24} sm={12} md={8}>
-              <Card 
-                data-testid="pp:landing|como-funciona|card|iframe"
-                style={{ 
-                  textAlign: 'center', 
-                  height: '100%',
-                  borderRadius: '16px',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
-                  border: 'none',
-                  transition: 'transform 0.3s ease'
-                }}
-                hoverable
-              >
-                <Space direction="vertical" size="large" style={{ width: '100%' }}>
-                  <div style={{
-                    background: 'linear-gradient(135deg, #fa8c16, #ffa940)',
-                    borderRadius: '50%',
-                    width: '80px',
-                    height: '80px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto'
-                  }}>
-                    <BorderOutlined style={{ fontSize: '40px', color: 'white' }} />
-                  </div>
-                  <Title level={3} style={{ margin: 0 }}>{t.home.features.e2e}</Title>
-                  <Text style={{ fontSize: '16px', lineHeight: '1.6' }}>
-                    {t.home.features.e2eDesc}
-                  </Text>
-                  <Badge count={t.challenges.difficulty.hard} style={{ backgroundColor: '#ff4d4f' }} />
-                </Space>
-              </Card>
+              <Link href="/comecar">
+                <Card 
+                  data-testid="pp:landing|como-funciona|card|iframe"
+                  style={{ 
+                    textAlign: 'center', 
+                    height: '100%',
+                    borderRadius: '16px',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+                    border: 'none',
+                    transition: 'transform 0.3s ease',
+                    cursor: 'pointer'
+                  }}
+                  hoverable
+                >
+                  <Space direction="vertical" size="large" style={{ width: '100%' }}>
+                    <div style={{
+                      background: 'linear-gradient(135deg, #fa8c16, #ffa940)',
+                      borderRadius: '50%',
+                      width: '80px',
+                      height: '80px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto'
+                    }}>
+                      <BorderOutlined style={{ fontSize: '40px', color: 'white' }} />
+                    </div>
+                    <Title level={3} style={{ margin: 0 }}>{t.home.features.e2e}</Title>
+                    <Text style={{ fontSize: '16px', lineHeight: '1.6' }}>
+                      {t.home.features.e2eDesc}
+                    </Text>
+                    <Badge count={t.challenges.difficulty.hard} style={{ backgroundColor: '#ff4d4f' }} />
+                  </Space>
+                </Card>
+              </Link>
             </Col>
           </Row>
         </div>
@@ -374,135 +383,147 @@ export default function LandingPage() {
           
           <Row gutter={[24, 24]}>
             <Col xs={24} sm={12} md={6}>
-              <Card 
-                data-testid="pp:landing|para-quem|card|qa-iniciante"
-                style={{ 
-                  borderRadius: '16px',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
-                  border: 'none',
-                  textAlign: 'center',
-                  height: '100%'
-                }}
-                hoverable
-              >
-                <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-                  <div style={{
-                    background: 'linear-gradient(135deg, #52c41a, #73d13d)',
-                    borderRadius: '50%',
-                    width: '60px',
-                    height: '60px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto'
-                  }}>
-                    <UserOutlined style={{ fontSize: '30px', color: 'white' }} />
-                  </div>
-                  <Title level={4} style={{ margin: 0, color: '#52c41a' }}>{t.home.audience.qaBeginner}</Title>
-                  <Text type="secondary" style={{ fontSize: '14px' }}>
-                    {t.home.audience.qaBeginnerDesc}
-                  </Text>
-                </Space>
-              </Card>
+              <Link href="/comecar">
+                <Card 
+                  data-testid="pp:landing|para-quem|card|qa-iniciante"
+                  style={{ 
+                    borderRadius: '16px',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
+                    border: 'none',
+                    textAlign: 'center',
+                    height: '100%',
+                    cursor: 'pointer'
+                  }}
+                  hoverable
+                >
+                  <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                    <div style={{
+                      background: 'linear-gradient(135deg, #52c41a, #73d13d)',
+                      borderRadius: '50%',
+                      width: '60px',
+                      height: '60px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto'
+                    }}>
+                      <UserOutlined style={{ fontSize: '30px', color: 'white' }} />
+                    </div>
+                    <Title level={4} style={{ margin: 0, color: '#52c41a' }}>{t.home.audience.qaBeginner}</Title>
+                    <Text type="secondary" style={{ fontSize: '14px' }}>
+                      {t.home.audience.qaBeginnerDesc}
+                    </Text>
+                  </Space>
+                </Card>
+              </Link>
             </Col>
             
             <Col xs={24} sm={12} md={6}>
-              <Card 
-                data-testid="pp:landing|para-quem|card|automacao"
-                style={{ 
-                  borderRadius: '16px',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
-                  border: 'none',
-                  textAlign: 'center',
-                  height: '100%'
-                }}
-                hoverable
-              >
-                <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-                  <div style={{
-                    background: 'linear-gradient(135deg, #1890ff, #40a9ff)',
-                    borderRadius: '50%',
-                    width: '60px',
-                    height: '60px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto'
-                  }}>
-                    <ThunderboltOutlined style={{ fontSize: '30px', color: 'white' }} />
-                  </div>
-                  <Title level={4} style={{ margin: 0, color: '#1890ff' }}>{t.home.audience.automation}</Title>
-                  <Text type="secondary" style={{ fontSize: '14px' }}>
-                    {t.home.audience.automationDesc}
-                  </Text>
-                </Space>
-              </Card>
+              <Link href="/comecar">
+                <Card 
+                  data-testid="pp:landing|para-quem|card|automacao"
+                  style={{ 
+                    borderRadius: '16px',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
+                    border: 'none',
+                    textAlign: 'center',
+                    height: '100%',
+                    cursor: 'pointer'
+                  }}
+                  hoverable
+                >
+                  <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                    <div style={{
+                      background: 'linear-gradient(135deg, #1890ff, #40a9ff)',
+                      borderRadius: '50%',
+                      width: '60px',
+                      height: '60px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto'
+                    }}>
+                      <ThunderboltOutlined style={{ fontSize: '30px', color: 'white' }} />
+                    </div>
+                    <Title level={4} style={{ margin: 0, color: '#1890ff' }}>{t.home.audience.automation}</Title>
+                    <Text type="secondary" style={{ fontSize: '14px' }}>
+                      {t.home.audience.automationDesc}
+                    </Text>
+                  </Space>
+                </Card>
+              </Link>
             </Col>
             
             <Col xs={24} sm={12} md={6}>
-              <Card 
-                data-testid="pp:landing|para-quem|card|api"
-                style={{ 
-                  borderRadius: '16px',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
-                  border: 'none',
-                  textAlign: 'center',
-                  height: '100%'
-                }}
-                hoverable
-              >
-                <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-                  <div style={{
-                    background: 'linear-gradient(135deg, #722ed1, #9254de)',
-                    borderRadius: '50%',
-                    width: '60px',
-                    height: '60px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto'
-                  }}>
-                    <ApiOutlined style={{ fontSize: '30px', color: 'white' }} />
-                  </div>
-                  <Title level={4} style={{ margin: 0, color: '#722ed1' }}>{t.home.audience.apiTesting}</Title>
-                  <Text type="secondary" style={{ fontSize: '14px' }}>
-                    {t.home.audience.apiTestingDesc}
-                  </Text>
-                </Space>
-              </Card>
+              <Link href="/comecar">
+                <Card 
+                  data-testid="pp:landing|para-quem|card|api"
+                  style={{ 
+                    borderRadius: '16px',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
+                    border: 'none',
+                    textAlign: 'center',
+                    height: '100%',
+                    cursor: 'pointer'
+                  }}
+                  hoverable
+                >
+                  <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                    <div style={{
+                      background: 'linear-gradient(135deg, #722ed1, #9254de)',
+                      borderRadius: '50%',
+                      width: '60px',
+                      height: '60px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto'
+                    }}>
+                      <ApiOutlined style={{ fontSize: '30px', color: 'white' }} />
+                    </div>
+                    <Title level={4} style={{ margin: 0, color: '#722ed1' }}>{t.home.audience.apiTesting}</Title>
+                    <Text type="secondary" style={{ fontSize: '14px' }}>
+                      {t.home.audience.apiTestingDesc}
+                    </Text>
+                  </Space>
+                </Card>
+              </Link>
             </Col>
             
             <Col xs={24} sm={12} md={6}>
-              <Card 
-                data-testid="pp:landing|para-quem|card|e2e"
-                style={{ 
-                  borderRadius: '16px',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
-                  border: 'none',
-                  textAlign: 'center',
-                  height: '100%'
-                }}
-                hoverable
-              >
-                <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-                  <div style={{
-                    background: 'linear-gradient(135deg, #fa8c16, #ffa940)',
-                    borderRadius: '50%',
-                    width: '60px',
-                    height: '60px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto'
-                  }}>
-                    <CheckCircleOutlined style={{ fontSize: '30px', color: 'white' }} />
-                  </div>
-                  <Title level={4} style={{ margin: 0, color: '#fa8c16' }}>{t.home.audience.e2e}</Title>
-                  <Text type="secondary" style={{ fontSize: '14px' }}>
-                    {t.home.audience.e2eDesc}
-                  </Text>
-                </Space>
-              </Card>
+              <Link href="/comecar">
+                <Card 
+                  data-testid="pp:landing|para-quem|card|e2e"
+                  style={{ 
+                    borderRadius: '16px',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
+                    border: 'none',
+                    textAlign: 'center',
+                    height: '100%',
+                    cursor: 'pointer'
+                  }}
+                  hoverable
+                >
+                  <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                    <div style={{
+                      background: 'linear-gradient(135deg, #fa8c16, #ffa940)',
+                      borderRadius: '50%',
+                      width: '60px',
+                      height: '60px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto'
+                    }}>
+                      <CheckCircleOutlined style={{ fontSize: '30px', color: 'white' }} />
+                    </div>
+                    <Title level={4} style={{ margin: 0, color: '#fa8c16' }}>{t.home.audience.e2e}</Title>
+                    <Text type="secondary" style={{ fontSize: '14px' }}>
+                      {t.home.audience.e2eDesc}
+                    </Text>
+                  </Space>
+                </Card>
+              </Link>
             </Col>
           </Row>
         </div>
