@@ -204,12 +204,6 @@ export default function AdminChallenges() {
 
   const columns = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-      width: 80,
-    },
-    {
       title: 'Título',
       dataIndex: 'titulo',
       key: 'titulo',
