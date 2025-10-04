@@ -21,9 +21,6 @@ export default function Footer() {
       }}
     >
       <Space direction="vertical" size="small">
-        <Text>
-          {t.footer.madeWith} <HeartOutlined style={{ color: '#ff4d4f' }} /> {t.footer.by} {t.footer.for} QA {t.footer.community}
-        </Text>
         
         <Space>
           <Link 

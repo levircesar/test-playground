@@ -8,13 +8,6 @@ export interface Translations {
     support: string;
   };
   
-  // Footer
-  footer: {
-    madeWith: string;
-    by: string;
-    for: string;
-    community: string;
-  };
   
   // Home page
   home: {
@@ -488,12 +481,6 @@ export const translations: Record<string, Translations> = {
       challenges: 'Desafios',
       videos: 'Vídeos',
       support: 'Apoiar',
-    },
-    footer: {
-      madeWith: 'Feito com',
-      by: 'por',
-      for: 'para a',
-      community: 'comunidade',
     },
     home: {
       title: 'Test Playground',
@@ -1187,12 +1174,6 @@ export const translations: Record<string, Translations> = {
       videos: 'Videos',
       support: 'Support',
     },
-    footer: {
-      madeWith: 'Made with',
-      by: 'by',
-      for: 'for the',
-      community: 'community',
-    },
     home: {
       title: 'Test Playground',
       subtitle: 'Testing environment for web and API learning',
@@ -1804,12 +1785,6 @@ export const translations: Record<string, Translations> = {
       challenges: 'Défis',
       videos: 'Vidéos',
       support: 'Soutenir',
-    },
-    footer: {
-      madeWith: 'Fait avec',
-      by: 'par',
-      for: 'pour la',
-      community: 'communauté',
     },
     home: {
       title: 'Test Playground',
