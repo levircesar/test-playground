@@ -4,6 +4,7 @@ export interface Translations {
     title: string;
     start: string;
     challenges: string;
+    videos: string;
     support: string;
   };
   
@@ -283,6 +284,20 @@ export interface Translations {
     };
   };
   
+  // Videos page
+  videos: {
+    title: string;
+    subtitle: string;
+    description: string;
+    noVideosAvailable: string;
+    videoDetails: string;
+    watchOnYoutube: string;
+    watchInNewTab: string;
+    totalVideos: string;
+    lastUpdate: string;
+    browserNotSupported: string;
+  };
+
   // Introduction pages
   webIntro: {
     title: string;
@@ -471,6 +486,7 @@ export const translations: Record<string, Translations> = {
       title: 'Test Playground',
       start: 'Começar',
       challenges: 'Desafios',
+      videos: 'Vídeos',
       support: 'Apoiar',
     },
     footer: {
@@ -1070,6 +1086,18 @@ export const translations: Record<string, Translations> = {
       goToWebIntro: 'Testes Web',
       backToStart: 'Voltar ao Início',
     },
+    videos: {
+      title: 'Biblioteca de Vídeos',
+      subtitle: 'Explore nossa coleção de vídeos educacionais e tutoriais',
+      description: 'Explore nossa coleção de vídeos educacionais e tutoriais de acordo com o idioma selecionado',
+      noVideosAvailable: 'Nenhum vídeo disponível no momento',
+      videoDetails: 'Detalhes do Vídeo',
+      watchOnYoutube: 'Assistir no YouTube',
+      watchInNewTab: 'Assistir em Nova Aba',
+      totalVideos: 'Total de vídeos',
+      lastUpdate: 'Última atualização',
+      browserNotSupported: 'Seu navegador não suporta o elemento de vídeo.',
+    },
     components: {
       backButton: 'Voltar',
       contactForm: {
@@ -1156,6 +1184,7 @@ export const translations: Record<string, Translations> = {
       title: 'Test Playground',
       start: 'Start',
       challenges: 'Challenges',
+      videos: 'Videos',
       support: 'Support',
     },
     footer: {
@@ -1675,6 +1704,18 @@ export const translations: Record<string, Translations> = {
       goToWebIntro: 'Web Testing',
       backToStart: 'Back to Start',
     },
+    videos: {
+      title: 'Video Library',
+      subtitle: 'Explore our collection of educational videos and tutorials',
+      description: 'Explore our collection of educational videos and tutorials according to the selected language',
+      noVideosAvailable: 'No videos available at the moment',
+      videoDetails: 'Video Details',
+      watchOnYoutube: 'Watch on YouTube',
+      watchInNewTab: 'Watch in New Tab',
+      totalVideos: 'Total videos',
+      lastUpdate: 'Last update',
+      browserNotSupported: 'Your browser does not support the video element.',
+    },
     components: {
       backButton: 'Back',
       contactForm: {
@@ -1761,6 +1802,7 @@ export const translations: Record<string, Translations> = {
       title: 'Test Playground',
       start: 'Commencer',
       challenges: 'Défis',
+      videos: 'Vidéos',
       support: 'Soutenir',
     },
     footer: {
@@ -2264,6 +2306,18 @@ export const translations: Record<string, Translations> = {
       nextSteps: 'Prochaines Étapes',
       goToWebIntro: 'Tests Web',
       backToStart: 'Retour au Début',
+    },
+    videos: {
+      title: 'Bibliothèque de Vidéos',
+      subtitle: 'Explorez notre collection de vidéos éducatives et tutoriels',
+      description: 'Explorez notre collection de vidéos éducatives et tutoriels selon la langue sélectionnée',
+      noVideosAvailable: 'Aucune vidéo disponible pour le moment',
+      videoDetails: 'Détails de la Vidéo',
+      watchOnYoutube: 'Regarder sur YouTube',
+      watchInNewTab: 'Regarder dans un Nouvel Onglet',
+      totalVideos: 'Total de vidéos',
+      lastUpdate: 'Dernière mise à jour',
+      browserNotSupported: 'Votre navigateur ne prend pas en charge l\'élément vidéo.',
     },
     components: {
       backButton: 'Retour',

@@ -1,6 +1,6 @@
 'use client';
 import { Layout, Typography, Space, Button, Select, Drawer, Menu, Avatar, Dropdown } from 'antd';
-import { GlobalOutlined, MenuOutlined, UserOutlined, LogoutOutlined, SettingOutlined } from '@ant-design/icons';
+import { GlobalOutlined, MenuOutlined, UserOutlined, LogoutOutlined, SettingOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useLocale } from '@/lib/locale-context';
@@ -81,6 +81,14 @@ export default function Header() {
       ),
     },
     {
+      key: 'videos',
+      label: (
+        <Link href="/videos" onClick={() => setMobileMenuOpen(false)}>
+          {t.header.videos}
+        </Link>
+      ),
+    },
+    {
       key: 'doar',
       label: (
         <Link href="/doar" onClick={() => setMobileMenuOpen(false)}>
@@ -123,6 +131,11 @@ export default function Header() {
             <Link href="/desafios">
               <Button type="default" data-testid="pp:layout|header|btn|desafios">
                 {t.header.challenges}
+              </Button>
+            </Link>
+            <Link href="/videos">
+              <Button type="default" icon={<PlayCircleOutlined />} data-testid="pp:layout|header|btn|videos">
+                {t.header.videos}
               </Button>
             </Link>
             <Link href="/doar">

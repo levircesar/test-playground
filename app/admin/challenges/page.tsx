@@ -30,7 +30,8 @@ import {
   DeleteOutlined, 
   LogoutOutlined,
   CodeOutlined,
-  TeamOutlined
+  TeamOutlined,
+  PlayCircleOutlined
 } from '@ant-design/icons';
 
 const { Title, Paragraph } = Typography;
@@ -132,6 +133,10 @@ export default function AdminChallenges() {
 
   const handleGoToUsers = () => {
     router.push('/admin/users');
+  };
+
+  const handleGoToVideos = () => {
+    router.push('/admin/videos');
   };
 
   const handleAddChallenge = () => {
@@ -315,6 +320,12 @@ export default function AdminChallenges() {
                       onClick={handleAddChallenge}
                     >
                       Novo Desafio
+                    </Button>
+                    <Button
+                      icon={<PlayCircleOutlined />}
+                      onClick={handleGoToVideos}
+                    >
+                      Gerenciar Vídeos
                     </Button>
                     <Button
                       icon={<TeamOutlined />}
